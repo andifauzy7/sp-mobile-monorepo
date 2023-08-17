@@ -30,7 +30,6 @@ or
 
 ## About
 
-<img src="resources/logo-little-castle.png" width='200'>
-<img src="resources/logo-sapa.png" width='200'>
+<img src="resources/logo-sapa.png" height='100'><img src="resources/logo-little-castle.png" height='100'>
 
-This project is maintained and funded by SAPA School Management.
+This project is maintained and funded by SAPA School Management & Little Castle.

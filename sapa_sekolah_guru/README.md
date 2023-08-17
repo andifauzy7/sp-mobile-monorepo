@@ -1,16 +1,36 @@
-# sapa_sekolah_guru
+# SAPA Mobile Flutter Monorepo
 
-A new Flutter project.
+This monorepo will be bootstrapped using melos. In short, this repositories contains multiple apps that shared the same codebase and reusable components in Flutter. The idea can be generalized for various use cases.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+- Install Flutter, you can follow instruction from [here](https://docs.flutter.dev/get-started/install)
 
-A few resources to get you started if this is your first Flutter project:
+- Clone the repository using SSH. If you haven't done github ssh setup, follow the instructions [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+> git@github.com:andifauzy7/sp-mobile-monorepo.git
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Setup Melos
+
+If you are not having `melos` setup, heading to: [here](https://pub.dev/packages/melos) for the config,
+then you can start bootstrap with:
+
+```bash
+> melos bs
+```
+
+or
+
+```bash
+> melos bootstrap
+```
+
+## About
+
+<img src="resources/logo-little-castle.png" width='200'>
+<img src="resources/logo-sapa.png" width='200'>
+
+This project is maintained and funded by SAPA School Management.

@@ -36,6 +36,13 @@ class SPTextStyles {
       color: SPColors.colorEB5757,
     ),
   );
+  static TextStyle text10W400808080 = GoogleFonts.dmSans(
+    textStyle: TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w400,
+      color: SPColors.color808080,
+    ),
+  );
 
   // Text 12
   /// Text 12 W400
@@ -149,6 +156,16 @@ class SPTextStyles {
       fontSize: 16,
       fontWeight: FontWeight.w400,
       color: SPColors.color808080,
+    ),
+  );
+
+  // Text 18
+  /// Text 18 W400
+  static TextStyle text18W400303030 = GoogleFonts.dmSans(
+    textStyle: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w400,
+      color: SPColors.color303030,
     ),
   );
 

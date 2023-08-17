@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:sapa_sekolah_guru/injection/injection.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/splash_page.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: GetIt.instance.get<Alice>().getNavigatorKey(),
         theme: ThemeData(
           primarySwatch: getMaterialColor(
-            const Color(0xFFFFE5C0),
+            SPColors.colorFFE5C0,
           ),
         ),
         home: const SplashPage(),

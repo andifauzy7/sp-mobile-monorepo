@@ -42,6 +42,14 @@ class $AssetsIconGen {
   /// File path: assets/icon/edit.svg
   SvgGenImage get edit => const SvgGenImage('assets/icon/edit.svg');
 
+  /// File path: assets/icon/empty-checkbox.svg
+  SvgGenImage get emptyCheckbox =>
+      const SvgGenImage('assets/icon/empty-checkbox.svg');
+
+  /// File path: assets/icon/false-checkbox.svg
+  SvgGenImage get falseCheckbox =>
+      const SvgGenImage('assets/icon/false-checkbox.svg');
+
   /// File path: assets/icon/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icon/filter.svg');
 
@@ -68,6 +76,10 @@ class $AssetsIconGen {
   /// File path: assets/icon/timer.svg
   SvgGenImage get timer => const SvgGenImage('assets/icon/timer.svg');
 
+  /// File path: assets/icon/true-checkbox.svg
+  SvgGenImage get trueCheckbox =>
+      const SvgGenImage('assets/icon/true-checkbox.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         arrowCircleLeft,
@@ -78,6 +90,8 @@ class $AssetsIconGen {
         calendar,
         consultation,
         edit,
+        emptyCheckbox,
+        falseCheckbox,
         filter,
         history,
         home,
@@ -85,12 +99,17 @@ class $AssetsIconGen {
         notification,
         profile,
         searchNormal,
-        timer
+        timer,
+        trueCheckbox
       ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/attendance_image.png
+  AssetGenImage get attendanceImage =>
+      const AssetGenImage('assets/images/attendance_image.png');
 
   /// File path: assets/images/forgot_password_background.png
   AssetGenImage get forgotPasswordBackground =>
@@ -107,6 +126,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/image_success.png
   AssetGenImage get imageSuccess =>
       const AssetGenImage('assets/images/image_success.png');
+
+  /// File path: assets/images/lesson_image.png
+  AssetGenImage get lessonImage =>
+      const AssetGenImage('assets/images/lesson_image.png');
 
   /// File path: assets/images/lesson_plan_background.png
   AssetGenImage get lessonPlanBackground =>
@@ -134,10 +157,12 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        attendanceImage,
         forgotPasswordBackground,
         forgotPasswordOrnament,
         imageFailure,
         imageSuccess,
+        lessonImage,
         lessonPlanBackground,
         loginBackground,
         loginOrnament,

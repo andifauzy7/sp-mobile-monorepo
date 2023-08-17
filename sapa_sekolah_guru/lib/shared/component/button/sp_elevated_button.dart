@@ -3,6 +3,7 @@ import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 enum SPElevatedButtonType {
   primary,
+  secondary,
   disabled,
 }
 
@@ -14,6 +15,10 @@ extension SPElevatedButtonExtension on SPElevatedButtonType {
       case SPElevatedButtonType.disabled:
         return MaterialStateProperty.all<Color>(
           Colors.black.withOpacity(0.03),
+        );
+      case SPElevatedButtonType.secondary:
+        return MaterialStateProperty.all<Color>(
+          Colors.white,
         );
     }
   }

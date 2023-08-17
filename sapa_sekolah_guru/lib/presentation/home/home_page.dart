@@ -5,6 +5,7 @@ import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/presentation/home/widget/profile_page.dart';
 import 'package:sapa_sekolah_guru/presentation/lesson_plan/lesson_plan_page.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/splash_page.dart';
+import 'package:sapa_sekolah_guru/presentation/student_presence/student_presence_page.dart';
 import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
 import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
@@ -27,6 +28,16 @@ class _HomePageState extends State<HomePage> {
         context,
         MaterialPageRoute<void>(
           builder: (BuildContext context) => const LessonPlanPage(),
+        ),
+      );
+
+  void _navigateToStudentPresence(
+    BuildContext context,
+  ) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const StudentPresencePage(),
         ),
       );
 
@@ -255,33 +266,111 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        const Center(child: Text('Laporan')),
         SafeArea(
           child: Container(
+            color: SPColors.colorFAFAFA,
             padding: const EdgeInsets.all(24),
-            child: Wrap(
+            child: Column(
               children: [
-                Column(
-                  children: [
-                    SPIconButton(
-                      url: Assets.icon.edit.path,
-                      onTap: () => _navigateToLessonPlan(context),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      'Lesson\nPlan',
-                      textAlign: TextAlign.center,
-                      style: SPTextStyles.text14W400303030,
-                    ),
-                  ],
+                Center(
+                  child: Text(
+                    'Menu List',
+                    style: SPTextStyles.text18W400303030,
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Expanded(
+                  child: GridView.count(
+                    primary: false,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    crossAxisCount: 2,
+                    children: <Widget>[
+                      GestureDetector(
+                        onTap: () => _navigateToStudentPresence(context),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                            color: Colors.white,
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Image.asset(
+                                  Assets.images.attendanceImage.path,
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  'Absensi',
+                                  style: SPTextStyles.text14W400303030,
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  'Absensi Siswa',
+                                  style: SPTextStyles.text10W400808080,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => _navigateToLessonPlan(context),
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                            color: Colors.white,
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Image.asset(
+                                  Assets.images.lessonImage.path,
+                                  width: 50,
+                                  height: 50,
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  'Lesson Plan',
+                                  style: SPTextStyles.text14W400303030,
+                                ),
+                                const SizedBox(
+                                  height: 4,
+                                ),
+                                Text(
+                                  'Buat Plan',
+                                  style: SPTextStyles.text10W400808080,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
         ),
-        const Center(child: Text('Absensi')),
         ProfilePage(
           onLogout: () => _navigateToSplash(context),
         ),
@@ -297,26 +386,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         PersistentBottomNavBarItem(
-          icon: SvgPicture.asset(
-            Assets.icon.history.path,
-            colorFilter: const ColorFilter.mode(
-              Colors.white,
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
-        PersistentBottomNavBarItem(
           icon: SvgPicture.asset(Assets.icon.filter.path),
           activeColorPrimary: Colors.white,
-        ),
-        PersistentBottomNavBarItem(
-          icon: SvgPicture.asset(
-            Assets.icon.calendar.path,
-            colorFilter: const ColorFilter.mode(
-              Colors.white,
-              BlendMode.srcIn,
-            ),
-          ),
         ),
         PersistentBottomNavBarItem(
           icon: SvgPicture.asset(

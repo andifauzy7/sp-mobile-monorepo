@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
+import 'package:sapa_sekolah_guru/presentation/home/widget/menu_card.dart';
 import 'package:sapa_sekolah_guru/presentation/home/widget/profile_page.dart';
 import 'package:sapa_sekolah_guru/presentation/lesson_plan/lesson_plan_page.dart';
+import 'package:sapa_sekolah_guru/presentation/permission/permission_page.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/splash_page.dart';
 import 'package:sapa_sekolah_guru/presentation/student_presence/student_presence_page.dart';
 import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
@@ -51,6 +53,16 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
+  void _navigateToPermission(
+    BuildContext context,
+  ) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const PermissionPage(),
+        ),
+      );
+
   @override
   void initState() {
     _controller = PersistentTabController(initialIndex: 0);
@@ -88,11 +100,29 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
-                      SPIconButton(url: Assets.icon.consultation.path),
+                      SizedBox(
+                        width: 40,
+                        height: 40,
+                        child: SPIconButton(
+                          url: Assets.icon.notification.path,
+                        ),
+                      ),
                       const SizedBox(
                         width: 8,
                       ),
-                      SPIconButton(url: Assets.icon.notification.path),
+                      ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                        child: SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: Image.network(
+                            "https://cdn.antaranews.com/cache/1200x800/2022/05/10/Screen-Shot-2022-05-09-at-10.04.13-AM_copy_1024x682.png",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(
@@ -289,79 +319,35 @@ class _HomePageState extends State<HomePage> {
                     crossAxisCount: 2,
                     children: <Widget>[
                       GestureDetector(
+                        onTap: () => {},
+                        child: MenuCard(
+                          title: 'Absensi',
+                          description: 'Absensi Guru',
+                          imageUrl: Assets.images.attendanceImage.path,
+                        ),
+                      ),
+                      GestureDetector(
                         onTap: () => _navigateToStudentPresence(context),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                            color: Colors.white,
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Image.asset(
-                                  Assets.images.attendanceImage.path,
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  'Absensi',
-                                  style: SPTextStyles.text14W400303030,
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  'Absensi Siswa',
-                                  style: SPTextStyles.text10W400808080,
-                                ),
-                              ],
-                            ),
-                          ),
+                        child: MenuCard(
+                          title: 'Absensi',
+                          description: 'Absensi Murid',
+                          imageUrl: Assets.images.attendanceStudentImage.path,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => _navigateToPermission(context),
+                        child: MenuCard(
+                          title: 'Izin Murid',
+                          description: 'Memberikan Izin\nKepada Murid',
+                          imageUrl: Assets.images.permissionImage.path,
                         ),
                       ),
                       GestureDetector(
                         onTap: () => _navigateToLessonPlan(context),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                            color: Colors.white,
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Image.asset(
-                                  Assets.images.lessonImage.path,
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  'Lesson Plan',
-                                  style: SPTextStyles.text14W400303030,
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  'Buat Plan',
-                                  style: SPTextStyles.text10W400808080,
-                                ),
-                              ],
-                            ),
-                          ),
+                        child: MenuCard(
+                          title: 'Lesson Plan',
+                          description: 'Buat Plan',
+                          imageUrl: Assets.images.lessonImage.path,
                         ),
                       ),
                     ],

@@ -14,6 +14,9 @@ import 'package:flutter/services.dart';
 class $AssetsIconGen {
   const $AssetsIconGen();
 
+  /// File path: assets/icon/add-square.svg
+  SvgGenImage get addSquare => const SvgGenImage('assets/icon/add-square.svg');
+
   /// File path: assets/icon/arrow-circle-left.svg
   SvgGenImage get arrowCircleLeft =>
       const SvgGenImage('assets/icon/arrow-circle-left.svg');
@@ -82,6 +85,7 @@ class $AssetsIconGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
+        addSquare,
         arrowCircleLeft,
         arrowCircleRight,
         arrowDown,
@@ -110,6 +114,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/attendance_image.png
   AssetGenImage get attendanceImage =>
       const AssetGenImage('assets/images/attendance_image.png');
+
+  /// File path: assets/images/attendance_student_image.png
+  AssetGenImage get attendanceStudentImage =>
+      const AssetGenImage('assets/images/attendance_student_image.png');
 
   /// File path: assets/images/forgot_password_background.png
   AssetGenImage get forgotPasswordBackground =>
@@ -143,6 +151,10 @@ class $AssetsImagesGen {
   AssetGenImage get loginOrnament =>
       const AssetGenImage('assets/images/login_ornament.png');
 
+  /// File path: assets/images/permission_image.png
+  AssetGenImage get permissionImage =>
+      const AssetGenImage('assets/images/permission_image.png');
+
   /// File path: assets/images/splash_background.png
   AssetGenImage get splashBackground =>
       const AssetGenImage('assets/images/splash_background.png');
@@ -158,6 +170,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         attendanceImage,
+        attendanceStudentImage,
         forgotPasswordBackground,
         forgotPasswordOrnament,
         imageFailure,
@@ -166,6 +179,7 @@ class $AssetsImagesGen {
         lessonPlanBackground,
         loginBackground,
         loginOrnament,
+        permissionImage,
         splashBackground,
         splashOrnament,
         splashWelcome

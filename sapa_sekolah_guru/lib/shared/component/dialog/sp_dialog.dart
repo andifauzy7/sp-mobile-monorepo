@@ -56,9 +56,8 @@ class SPDialog {
               padding: const EdgeInsets.all(
                 16,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+              child: ListView(
+                shrinkWrap: true,
                 children: children,
               ),
             ),

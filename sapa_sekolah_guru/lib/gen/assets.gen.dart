@@ -31,6 +31,10 @@ class $AssetsIconGen {
   /// File path: assets/icon/arrow-left.svg
   SvgGenImage get arrowLeft => const SvgGenImage('assets/icon/arrow-left.svg');
 
+  /// File path: assets/icon/arrow-right.svg
+  SvgGenImage get arrowRight =>
+      const SvgGenImage('assets/icon/arrow-right.svg');
+
   /// File path: assets/icon/calendar-picker.svg
   SvgGenImage get calendarPicker =>
       const SvgGenImage('assets/icon/calendar-picker.svg');
@@ -90,6 +94,7 @@ class $AssetsIconGen {
         arrowCircleRight,
         arrowDown,
         arrowLeft,
+        arrowRight,
         calendarPicker,
         calendar,
         consultation,
@@ -155,6 +160,10 @@ class $AssetsImagesGen {
   AssetGenImage get permissionImage =>
       const AssetGenImage('assets/images/permission_image.png');
 
+  /// File path: assets/images/report_image.png
+  AssetGenImage get reportImage =>
+      const AssetGenImage('assets/images/report_image.png');
+
   /// File path: assets/images/splash_background.png
   AssetGenImage get splashBackground =>
       const AssetGenImage('assets/images/splash_background.png');
@@ -180,6 +189,7 @@ class $AssetsImagesGen {
         loginBackground,
         loginOrnament,
         permissionImage,
+        reportImage,
         splashBackground,
         splashOrnament,
         splashWelcome

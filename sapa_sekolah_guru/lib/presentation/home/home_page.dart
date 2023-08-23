@@ -6,6 +6,7 @@ import 'package:sapa_sekolah_guru/presentation/home/widget/menu_card.dart';
 import 'package:sapa_sekolah_guru/presentation/home/widget/profile_page.dart';
 import 'package:sapa_sekolah_guru/presentation/lesson_plan/lesson_plan_page.dart';
 import 'package:sapa_sekolah_guru/presentation/permission/permission_page.dart';
+import 'package:sapa_sekolah_guru/presentation/report/report_page.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/splash_page.dart';
 import 'package:sapa_sekolah_guru/presentation/student_presence/student_presence_page.dart';
 import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
@@ -30,6 +31,16 @@ class _HomePageState extends State<HomePage> {
         context,
         MaterialPageRoute<void>(
           builder: (BuildContext context) => const LessonPlanPage(),
+        ),
+      );
+
+  void _navigateToReportPage(
+    BuildContext context,
+  ) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const ReportPage(),
         ),
       );
 
@@ -318,6 +329,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisSpacing: 8,
                     crossAxisCount: 2,
                     children: <Widget>[
+                      /*
                       GestureDetector(
                         onTap: () => {},
                         child: MenuCard(
@@ -325,12 +337,12 @@ class _HomePageState extends State<HomePage> {
                           description: 'Absensi Guru',
                           imageUrl: Assets.images.attendanceImage.path,
                         ),
-                      ),
+                      ),*/
                       GestureDetector(
                         onTap: () => _navigateToStudentPresence(context),
                         child: MenuCard(
                           title: 'Absensi',
-                          description: 'Absensi Murid',
+                          description: 'Absensi Siswa',
                           imageUrl: Assets.images.attendanceStudentImage.path,
                         ),
                       ),
@@ -348,6 +360,14 @@ class _HomePageState extends State<HomePage> {
                           title: 'Lesson Plan',
                           description: 'Buat Plan',
                           imageUrl: Assets.images.lessonImage.path,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => _navigateToReportPage(context),
+                        child: MenuCard(
+                          title: 'Laporan',
+                          description: 'Berisi Laporan\nPeriodik',
+                          imageUrl: Assets.images.reportImage.path,
                         ),
                       ),
                     ],

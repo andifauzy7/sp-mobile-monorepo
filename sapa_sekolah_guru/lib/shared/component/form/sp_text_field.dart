@@ -10,7 +10,7 @@ class SPTextField extends StatefulWidget {
   final TextEditingController? controller;
   final int? maxLines;
   final bool obscureText;
-  final Widget? suffix;
+  final Widget? suffix, prefix;
   const SPTextField({
     Key? key,
     required this.hintText,
@@ -20,6 +20,7 @@ class SPTextField extends StatefulWidget {
     this.onChanged,
     this.maxLines = 1,
     this.suffix,
+    this.prefix,
     this.enabled,
   }) : super(key: key);
 
@@ -62,6 +63,12 @@ class _SPTextFieldState extends State<SPTextField> {
               isDense: true,
               fillColor: Colors.white,
               hintText: widget.hintText,
+              prefixIcon: widget.prefix != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: widget.prefix,
+                    )
+                  : null,
               suffixIcon: widget.suffix != null
                   ? Padding(
                       padding: const EdgeInsets.all(16.0),

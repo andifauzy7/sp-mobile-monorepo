@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
+import 'package:sapa_sekolah_guru/presentation/forgot_password/forgot_password_page.dart';
 import 'package:sapa_sekolah_guru/presentation/home/widget/menu_card.dart';
 import 'package:sapa_sekolah_guru/presentation/home/widget/profile_page.dart';
 import 'package:sapa_sekolah_guru/presentation/lesson_plan/lesson_plan_page.dart';
@@ -41,6 +42,16 @@ class _HomePageState extends State<HomePage> {
         context,
         MaterialPageRoute<void>(
           builder: (BuildContext context) => const ReportPage(),
+        ),
+      );
+
+  void _navigateToForgotPasswordPage(
+    BuildContext context,
+  ) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const ForgotPasswordPage(),
         ),
       );
 
@@ -315,7 +326,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Center(
                   child: Text(
-                    'Menu List',
+                    'Menu',
                     style: SPTextStyles.text18W400303030,
                   ),
                 ),
@@ -324,20 +335,14 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   child: GridView.count(
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
                     primary: false,
                     crossAxisSpacing: 8,
                     mainAxisSpacing: 8,
                     crossAxisCount: 2,
                     children: <Widget>[
-                      /*
-                      GestureDetector(
-                        onTap: () => {},
-                        child: MenuCard(
-                          title: 'Absensi',
-                          description: 'Absensi Guru',
-                          imageUrl: Assets.images.attendanceImage.path,
-                        ),
-                      ),*/
                       GestureDetector(
                         onTap: () => _navigateToStudentPresence(context),
                         child: MenuCard(
@@ -368,6 +373,14 @@ class _HomePageState extends State<HomePage> {
                           title: 'Laporan',
                           description: 'Berisi Laporan\nPeriodik',
                           imageUrl: Assets.images.reportImage.path,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => _navigateToForgotPasswordPage(context),
+                        child: MenuCard(
+                          title: 'Ubah Sandi',
+                          description: 'Ubah Kata\nSandi',
+                          imageUrl: Assets.images.forgotPasswordBackground.path,
                         ),
                       ),
                     ],

@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sapa_sekolah_guru/bloc/login/login_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
-import 'package:sapa_sekolah_guru/presentation/forgot_password/forgot_password_page.dart';
 import 'package:sapa_sekolah_guru/presentation/home/home_page.dart';
 import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
 import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
 import 'package:sapa_sekolah_guru/shared/component/form/sp_validator.dart';
+import 'package:sapa_sekolah_guru/shared/component/other/sp_container_image.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 import 'package:sapa_sekolah_guru/shared/component/toast/sp_toast.dart';
@@ -46,16 +46,6 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
     });
   }
 
-  void _navigateToForgotPassword(
-    BuildContext context,
-  ) =>
-      Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => const ForgotPasswordPage(),
-        ),
-      );
-
   void _navigateToHome(
     BuildContext context,
   ) =>
@@ -88,19 +78,11 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
         backgroundColor: SPColors.colorFAFAFA,
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    Assets.images.loginOrnament.path,
-                  ),
-                ),
-              ),
+            child: SPContainerImage(
+              imageUrl: Assets.images.loginOrnament.path,
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 32,
-                  ),
+                  const SizedBox(height: 32),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.4,
                     child: Stack(
@@ -134,17 +116,13 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const SizedBox(height: 24),
                   Text(
                     'Kontrol siswa lebih mudah\nmelalui Aplikasi SAPA Sekolah',
                     textAlign: TextAlign.center,
                     style: SPTextStyles.text16W400303030,
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const SizedBox(height: 24),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
@@ -156,9 +134,7 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
                       onChanged: (_) => _setEnableButton(),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
@@ -171,6 +147,7 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
                       onChanged: (_) => _setEnableButton(),
                     ),
                   ),
+                  /*
                   const SizedBox(
                     height: 10,
                   ),
@@ -188,12 +165,12 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
                         ),
                       ),
                     ),
-                  ),
+                  ),*/
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 24,
-                      vertical: 32,
+                      vertical: 24,
                     ),
                     child: SPElevatedButton(
                       type: _isEnable

@@ -9,11 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 const String keyToken = "CACHE_KEY_TOKEN";
 const String keyUserId = "CACHE_USER_ID";
+const String keyUserName = "CACHE_USER_NAME";
 
 abstract class AuthRepository {
   Future<Either<Failure, bool>> login(String username, String password);
   Future<Either<Failure, bool>> isTokenExist();
   Future<Either<Failure, bool>> logout();
+  Future<Either<Failure, String>> getName();
   Future<Either<Failure, bool>> changePassword(
     String oldPassword,
     String newPassword,
@@ -50,6 +52,10 @@ class AuthRepositoryImpl implements AuthRepository {
         await sharedPreferences.setString(
           keyUserId,
           result.data?.userId ?? '',
+        );
+        await sharedPreferences.setString(
+          keyUserName,
+          result.data?.nama ?? '',
         );
         if (result.success ?? false) {
           return const Right(true);
@@ -114,5 +120,10 @@ class AuthRepositoryImpl implements AuthRepository {
     } catch (e) {
       return Left(ServerFailure(message: e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failure, String>> getName() async {
+    return Right(sharedPreferences.getString(keyUserName) ?? '');
   }
 }

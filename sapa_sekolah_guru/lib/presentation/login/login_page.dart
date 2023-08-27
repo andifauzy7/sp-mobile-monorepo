@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sapa_sekolah_guru/bloc/login/login_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
-import 'package:sapa_sekolah_guru/presentation/home/home_page.dart';
+import 'package:sapa_sekolah_guru/presentation/main/main_page.dart';
 import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
 import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
@@ -46,13 +46,13 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
     });
   }
 
-  void _navigateToHome(
+  void _navigateToMain(
     BuildContext context,
   ) =>
       Navigator.pushReplacement(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => const HomePage(),
+          builder: (BuildContext context) => const MainPage(),
         ),
       );
 
@@ -71,7 +71,7 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
 
         if (state is LoginSuccess) {
           Navigator.pop(context);
-          _navigateToHome(context);
+          _navigateToMain(context);
         }
       },
       child: Scaffold(

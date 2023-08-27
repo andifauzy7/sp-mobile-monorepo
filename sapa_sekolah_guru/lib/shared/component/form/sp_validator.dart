@@ -16,4 +16,13 @@ class SPValidator {
     }
     return null;
   }
+
+  static String? validateReTypePassword(String? value, String password) {
+    if (value?.isEmpty ?? false) {
+      return "Tidak boleh kosong";
+    } else if (password != value) {
+      return "Password tidak sama";
+    }
+    return null;
+  }
 }

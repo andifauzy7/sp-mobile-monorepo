@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart';
 import 'package:sapa_sekolah_guru/presentation/lesson_plan/widget/lesson_pick_calendar.dart';
 import 'package:sapa_sekolah_guru/presentation/lesson_plan/widget/lesson_plan_list_widget.dart';
 
@@ -23,6 +25,9 @@ class _LessonPlanWidgetState extends State<LessonPlanWidget> {
             () {
               index = 1;
               dateTime = selected;
+              BlocProvider.of<GetLessonPlansBloc>(context).add(
+                GetLessonPlansEvent(lessonDate: selected),
+              );
             },
           ),
         ),

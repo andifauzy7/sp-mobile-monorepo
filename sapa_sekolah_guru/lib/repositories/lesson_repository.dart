@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:sapa_sekolah_guru/model/activities_response_model.dart';
 import 'package:sapa_sekolah_guru/model/add_activity_response_model.dart';
 import 'package:sapa_sekolah_guru/model/add_lesson_response_model.dart';
+import 'package:sapa_sekolah_guru/model/lesson_plans_response_model.dart';
 import 'package:sapa_sekolah_guru/model/lessons_response_model.dart';
 import 'package:sapa_sekolah_guru/repositories/auth_repository.dart';
 import 'package:sapa_sekolah_guru/shared/core/failure/failure.dart';
@@ -13,6 +14,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class LessonRepository {
   Future<Either<Failure, List<LessonModel>>> getLessons();
   Future<Either<Failure, List<ActivityModel>>> getActivities();
+  Future<Either<Failure, List<LessonPlanModel>>> getLessonPlans(
+      String lessonDate);
   Future<Either<Failure, bool>> addLesson(String lesson);
   Future<Either<Failure, bool>> addActivity(String activity);
 }
@@ -142,6 +145,41 @@ class LessonRepositoryImpl implements LessonRepository {
         final result = AddActivityResponseModel.fromJson(response.data);
         if (result.success ?? false) {
           return const Right(true);
+        } else {
+          return Left(
+            ServerFailure(message: result.message),
+          );
+        }
+      } else {
+        return Left(
+          ServerFailure(message: response.data['message']),
+        );
+      }
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<LessonPlanModel>>> getLessonPlans(
+    String lessonDate,
+  ) async {
+    final token = sharedPreferences.getString(keyToken);
+    final userId = sharedPreferences.getString(keyUserId);
+    final data = FormData.fromMap({
+      "token": token,
+      "user_id": userId,
+      "lesson_date": lessonDate,
+    });
+    try {
+      final response = await dio.post(
+        'teacher/lessonplanlist.php',
+        data: data,
+      );
+      if (response.statusCode == 200) {
+        final result = LessonPlansResponseModel.fromJson(response.data);
+        if (result.success ?? false) {
+          return Right(result.data ?? []);
         } else {
           return Left(
             ServerFailure(message: result.message),

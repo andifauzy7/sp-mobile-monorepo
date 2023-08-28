@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart';
+import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/presentation/lesson_plan/widget/activity_list_widget.dart';
@@ -109,7 +110,11 @@ class _LessonPlanPageState extends State<LessonPlanPage>
                   child: IndexedStack(
                     index: index,
                     children: [
-                      const LessonPlanWidget(),
+                      BlocProvider(
+                        create: (context) =>
+                            GetIt.instance.get<GetLessonPlansBloc>(),
+                        child: const LessonPlanWidget(),
+                      ),
                       BlocProvider(
                         create: (_) => GetIt.instance.get<GetLessonsBloc>()
                           ..add(

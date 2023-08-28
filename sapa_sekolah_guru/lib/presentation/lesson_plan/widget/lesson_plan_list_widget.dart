@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
+import 'package:sapa_sekolah_guru/model/lesson_plans_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/add_planning/add_planning_page.dart';
 import 'package:sapa_sekolah_guru/presentation/detail_planning/detail_planning_page.dart';
 import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
+import 'package:sapa_sekolah_guru/shared/component/other/sp_failure_widget.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
@@ -39,59 +43,92 @@ class LessonPlanListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            GestureDetector(
-              onTap: onTapDate,
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    Assets.icon.calendarPicker.path,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    DateFormat('EEEE d MMMM, y', 'id_ID').format(dateTime),
-                    style: SPTextStyles.text12W400303030,
-                    textAlign: TextAlign.right,
-                  ),
-                ],
+    return RefreshIndicator(
+      onRefresh: () {
+        BlocProvider.of<GetLessonPlansBloc>(context).add(
+          GetLessonPlansEvent(lessonDate: dateTime),
+        );
+        return Future.value(null);
+      },
+      child: Column(
+        children: [
+          Row(
+            children: [
+              GestureDetector(
+                onTap: onTapDate,
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      Assets.icon.calendarPicker.path,
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      DateFormat('EEEE d MMMM, y', 'id_ID').format(dateTime),
+                      style: SPTextStyles.text12W400303030,
+                      textAlign: TextAlign.right,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const Spacer(),
-          ],
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        Expanded(
-          child: ListView.separated(
-            itemCount: 10,
-            separatorBuilder: (context, index) => const SizedBox(
-              height: 16,
-            ),
-            itemBuilder: (context, index) => GestureDetector(
-              onTap: () => _navigateToDetailPlanning(context),
-              child: _renderCard(),
+              const Spacer(),
+            ],
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Expanded(
+            child: BlocBuilder<GetLessonPlansBloc, GetLessonPlansState>(
+              builder: (context, state) {
+                if (state is GetLessonPlansError) {
+                  return SPFailureWidget(
+                    message: state.message,
+                  );
+                }
+
+                if (state is GetLessonPlansSuccess) {
+                  if (state.lessonPlans.isEmpty) {
+                    return const SPFailureWidget(
+                      message: 'Data kosong',
+                    );
+                  }
+
+                  return ListView.separated(
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
+                    itemCount: state.lessonPlans.length,
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 16,
+                    ),
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () => _navigateToDetailPlanning(context),
+                      child: _renderCard(state.lessonPlans[index]),
+                    ),
+                  );
+                }
+
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
           ),
-        ),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.only(bottom: 16, top: 12),
-          child: SPElevatedButton(
-            onPressed: () => _navigateToAddPlanning(context),
-            text: 'Buat Planning',
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.only(bottom: 16, top: 12),
+            child: SPElevatedButton(
+              onPressed: () => _navigateToAddPlanning(context),
+              text: 'Buat Planning',
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
-  Widget _renderCard() {
+  Widget _renderCard(LessonPlanModel lessonPlan) {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
@@ -115,11 +152,13 @@ class LessonPlanListWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Ananda Aulia',
+                      lessonPlan.studentName ?? '-',
                       style: SPTextStyles.text12W500303030,
                     ),
                     Text(
-                      'Senin 23 Agu, 2023 | 07:30-08:30',
+                      DateFormat('EEEE d MMMM, y', 'id_ID').format(
+                        DateTime.parse(lessonPlan.lessonplanDate ?? ''),
+                      ),
                       style: SPTextStyles.text10W400B3B3B3,
                     ),
                   ],
@@ -147,7 +186,10 @@ class LessonPlanListWidget extends StatelessWidget {
             height: 8,
           ),
           Text(
-            'Language, Culture',
+            (lessonPlan.lessonList ?? [])
+                .map((e) => (e.subjectName ?? ''))
+                .toList()
+                .join(", "),
             style: SPTextStyles.text12W500303030,
           ),
         ],

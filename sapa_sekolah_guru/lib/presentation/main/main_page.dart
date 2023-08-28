@@ -11,8 +11,6 @@ import 'package:sapa_sekolah_guru/presentation/permission/permission_page.dart';
 import 'package:sapa_sekolah_guru/presentation/report/report_page.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/splash_page.dart';
 import 'package:sapa_sekolah_guru/presentation/student_presence/student_presence_page.dart';
-import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
-import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 

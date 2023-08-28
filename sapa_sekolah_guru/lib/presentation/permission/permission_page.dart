@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
+import 'package:sapa_sekolah_guru/bloc/add_permit/add_permit_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart';
@@ -10,7 +10,6 @@ import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/presentation/permission/widget/create_permission.dart';
 import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
-import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
 import 'package:sapa_sekolah_guru/shared/component/other/sp_failure_widget.dart';
 import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
@@ -52,8 +51,16 @@ class _PermissionPageBody extends StatelessWidget {
                     GetPermitTypeEvent(),
                   ),
               ),
+              BlocProvider(
+                create: (_) => GetIt.instance.get<AddPermitBloc>(),
+              ),
             ],
-            child: const CreatePermission(),
+            child: CreatePermission(
+              onSuccess: () =>
+                  BlocProvider.of<GetStudentPermitsBloc>(context).add(
+                GetStudentPermitsEvent(),
+              ),
+            ),
           ),
         ],
       );

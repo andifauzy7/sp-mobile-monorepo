@@ -3,6 +3,7 @@ import 'package:sapa_sekolah_guru/shared/component/styles/sp_shadow.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class SPTextField extends StatefulWidget {
+  final VoidCallback? onTap;
   final bool? enabled;
   final String hintText;
   final String? Function(String? value)? validator;
@@ -22,6 +23,7 @@ class SPTextField extends StatefulWidget {
     this.suffix,
     this.prefix,
     this.enabled,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -44,66 +46,69 @@ class _SPTextFieldState extends State<SPTextField> {
             color: Colors.white,
             boxShadow: SPShadow.shadowFAFAFA,
           ),
-          child: TextFormField(
-            enabled: widget.enabled,
-            obscureText: widget.obscureText,
-            controller: widget.controller,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            onChanged: (value) {
-              if (widget.onChanged != null) {
-                widget.onChanged!(value);
-              }
-              if (widget.validator != null) {
-                _errorText = widget.validator!(value);
-              }
-            },
-            maxLines: widget.maxLines,
-            style: SPTextStyles.text14W400303030,
-            decoration: InputDecoration(
-              isDense: true,
-              fillColor: Colors.white,
-              hintText: widget.hintText,
-              prefixIcon: widget.prefix != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: widget.prefix,
-                    )
-                  : null,
-              suffixIcon: widget.suffix != null
-                  ? Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: widget.suffix,
-                    )
-                  : null,
-              hintStyle: SPTextStyles.text14W400B3B3B3,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
+          child: GestureDetector(
+            onTap: widget.onTap,
+            child: TextFormField(
+              enabled: widget.enabled,
+              obscureText: widget.obscureText,
+              controller: widget.controller,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              onChanged: (value) {
+                if (widget.onChanged != null) {
+                  widget.onChanged!(value);
+                }
+                if (widget.validator != null) {
+                  _errorText = widget.validator!(value);
+                }
+              },
+              maxLines: widget.maxLines,
+              style: SPTextStyles.text14W400303030,
+              decoration: InputDecoration(
+                isDense: true,
+                fillColor: Colors.white,
+                hintText: widget.hintText,
+                prefixIcon: widget.prefix != null
+                    ? Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: widget.prefix,
+                      )
+                    : null,
+                suffixIcon: widget.suffix != null
+                    ? Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: widget.suffix,
+                      )
+                    : null,
+                hintStyle: SPTextStyles.text14W400B3B3B3,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                  ),
                 ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                  ),
                 ),
-              ),
-              disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                  ),
                 ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                  ),
                 ),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16),
+                  borderSide: const BorderSide(
+                    color: Colors.transparent,
+                  ),
                 ),
               ),
             ),

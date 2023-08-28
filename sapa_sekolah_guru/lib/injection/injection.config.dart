@@ -24,8 +24,10 @@ import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart'
 import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart'
     as _i20;
 import 'package:sapa_sekolah_guru/bloc/get_name/get_name_bloc.dart' as _i10;
-import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart'
     as _i21;
+import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart'
+    as _i22;
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart'
     as _i11;
 import 'package:sapa_sekolah_guru/bloc/login/login_bloc.dart' as _i13;
@@ -36,7 +38,7 @@ import 'package:sapa_sekolah_guru/repositories/auth_repository.dart' as _i8;
 import 'package:sapa_sekolah_guru/repositories/lesson_repository.dart' as _i12;
 import 'package:sapa_sekolah_guru/repositories/permit_repository.dart' as _i15;
 import 'package:sapa_sekolah_guru/repositories/student_repository.dart' as _i7;
-import 'package:sapa_sekolah_guru/shared/core/core_module.dart' as _i22;
+import 'package:sapa_sekolah_guru/shared/core/core_module.dart' as _i23;
 import 'package:shared_preferences/shared_preferences.dart' as _i6;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -95,10 +97,12 @@ extension GetItInjectableX on _i1.GetIt {
         _i19.GetActivitiesBloc(lessonRepository: gh<_i12.LessonRepository>()));
     gh.factory<_i20.GetLessonsBloc>(() =>
         _i20.GetLessonsBloc(lessonRepository: gh<_i12.LessonRepository>()));
-    gh.factory<_i21.GetStudentPermitsBloc>(() => _i21.GetStudentPermitsBloc(
+    gh.factory<_i21.GetPermitTypeBloc>(() =>
+        _i21.GetPermitTypeBloc(permitRepository: gh<_i15.PermitRepository>()));
+    gh.factory<_i22.GetStudentPermitsBloc>(() => _i22.GetStudentPermitsBloc(
         permitRepository: gh<_i15.PermitRepository>()));
     return this;
   }
 }
 
-class _$CoreModule extends _i22.CoreModule {}
+class _$CoreModule extends _i23.CoreModule {}

@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
+import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart';
+import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
+import 'package:sapa_sekolah_guru/presentation/permission/widget/create_permission.dart';
 import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
 import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
@@ -35,46 +38,22 @@ class _PermissionPageBody extends StatelessWidget {
       await SPDialog.showDefault(
         context,
         children: [
-          Text(
-            'Pemberian Izin Murid',
-            style: SPTextStyles.text14W400303030,
-          ),
-          const SizedBox(height: 12),
-          SPTextField(
-            hintText: 'Tambah Murid',
-            enabled: false,
-            suffix: SvgPicture.asset(
-              Assets.icon.addSquare.path,
-            ),
-          ),
-          const SizedBox(height: 10),
-          SPTextField(
-            hintText: 'Tipe Izin',
-            enabled: false,
-            suffix: SvgPicture.asset(
-              Assets.icon.addSquare.path,
-            ),
-          ),
-          const SizedBox(height: 10),
-          SPTextField(
-            hintText: '05/07/23',
-            enabled: false,
-            suffix: SvgPicture.asset(
-              Assets.icon.calendarPicker.path,
-            ),
-          ),
-          const SizedBox(height: 10),
-          const SPTextField(
-            hintText: 'Tambah keterangan',
-            maxLines: 4,
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
-            width: double.infinity,
-            child: SPElevatedButton(
-              text: 'Submit',
-              onPressed: () {},
-            ),
+          MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => GetIt.instance.get<GetStudentsBloc>()
+                  ..add(
+                    GetStudentsEvent(),
+                  ),
+              ),
+              BlocProvider(
+                create: (_) => GetIt.instance.get<GetPermitTypeBloc>()
+                  ..add(
+                    GetPermitTypeEvent(),
+                  ),
+              ),
+            ],
+            child: const CreatePermission(),
           ),
         ],
       );

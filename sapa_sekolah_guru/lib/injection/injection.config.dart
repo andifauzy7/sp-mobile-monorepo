@@ -15,33 +15,37 @@ import 'package:flutter/material.dart' as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:sapa_sekolah_guru/bloc/add_activity/add_activity_bloc.dart'
-    as _i17;
-import 'package:sapa_sekolah_guru/bloc/add_lesson/add_lesson_bloc.dart' as _i18;
-import 'package:sapa_sekolah_guru/bloc/add_permit/add_permit_bloc.dart' as _i19;
+    as _i19;
+import 'package:sapa_sekolah_guru/bloc/add_lesson/add_lesson_bloc.dart' as _i20;
+import 'package:sapa_sekolah_guru/bloc/add_permit/add_permit_bloc.dart' as _i21;
 import 'package:sapa_sekolah_guru/bloc/change_password/change_password_bloc.dart'
-    as _i9;
+    as _i10;
 import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart'
-    as _i20;
-import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
-    as _i21;
-import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart'
     as _i22;
-import 'package:sapa_sekolah_guru/bloc/get_name/get_name_bloc.dart' as _i10;
-import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
     as _i23;
-import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart'
     as _i24;
+import 'package:sapa_sekolah_guru/bloc/get_name/get_name_bloc.dart' as _i11;
+import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart'
+    as _i25;
+import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart'
+    as _i26;
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart'
-    as _i11;
-import 'package:sapa_sekolah_guru/bloc/login/login_bloc.dart' as _i13;
-import 'package:sapa_sekolah_guru/bloc/logout/logout_bloc.dart' as _i14;
+    as _i13;
+import 'package:sapa_sekolah_guru/bloc/get_students_attendance/get_students_attendance_bloc.dart'
+    as _i12;
+import 'package:sapa_sekolah_guru/bloc/login/login_bloc.dart' as _i15;
+import 'package:sapa_sekolah_guru/bloc/logout/logout_bloc.dart' as _i16;
 import 'package:sapa_sekolah_guru/presentation/splash/cubit/splash_cubit.dart'
-    as _i16;
-import 'package:sapa_sekolah_guru/repositories/auth_repository.dart' as _i8;
-import 'package:sapa_sekolah_guru/repositories/lesson_repository.dart' as _i12;
-import 'package:sapa_sekolah_guru/repositories/permit_repository.dart' as _i15;
+    as _i18;
+import 'package:sapa_sekolah_guru/repositories/attendance_repository.dart'
+    as _i8;
+import 'package:sapa_sekolah_guru/repositories/auth_repository.dart' as _i9;
+import 'package:sapa_sekolah_guru/repositories/lesson_repository.dart' as _i14;
+import 'package:sapa_sekolah_guru/repositories/permit_repository.dart' as _i17;
 import 'package:sapa_sekolah_guru/repositories/student_repository.dart' as _i7;
-import 'package:sapa_sekolah_guru/shared/core/core_module.dart' as _i25;
+import 'package:sapa_sekolah_guru/shared/core/core_module.dart' as _i27;
 import 'package:shared_preferences/shared_preferences.dart' as _i6;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -68,48 +72,56 @@ extension GetItInjectableX on _i1.GetIt {
           dio: gh<_i4.Dio>(),
           sharedPreferences: gh<_i6.SharedPreferences>(),
         ));
-    gh.lazySingleton<_i8.AuthRepository>(() => _i8.AuthRepositoryImpl(
+    gh.lazySingleton<_i8.AttendanceRepository>(
+        () => _i8.AttendanceRepositoryImpl(
+              dio: gh<_i4.Dio>(),
+              sharedPreferences: gh<_i6.SharedPreferences>(),
+            ));
+    gh.lazySingleton<_i9.AuthRepository>(() => _i9.AuthRepositoryImpl(
           dio: gh<_i4.Dio>(),
           sharedPreferences: gh<_i6.SharedPreferences>(),
         ));
-    gh.factory<_i9.ChangePasswordBloc>(
-        () => _i9.ChangePasswordBloc(authRepository: gh<_i8.AuthRepository>()));
-    gh.factory<_i10.GetNameBloc>(
-        () => _i10.GetNameBloc(authRepository: gh<_i8.AuthRepository>()));
-    gh.factory<_i11.GetStudentsBloc>(() =>
-        _i11.GetStudentsBloc(studentRepository: gh<_i7.StudentRepository>()));
-    gh.lazySingleton<_i12.LessonRepository>(() => _i12.LessonRepositoryImpl(
+    gh.factory<_i10.ChangePasswordBloc>(() =>
+        _i10.ChangePasswordBloc(authRepository: gh<_i9.AuthRepository>()));
+    gh.factory<_i11.GetNameBloc>(
+        () => _i11.GetNameBloc(authRepository: gh<_i9.AuthRepository>()));
+    gh.factory<_i12.GetStudentsAttendanceBloc>(() =>
+        _i12.GetStudentsAttendanceBloc(
+            attendanceRepository: gh<_i8.AttendanceRepository>()));
+    gh.factory<_i13.GetStudentsBloc>(() =>
+        _i13.GetStudentsBloc(studentRepository: gh<_i7.StudentRepository>()));
+    gh.lazySingleton<_i14.LessonRepository>(() => _i14.LessonRepositoryImpl(
           dio: gh<_i4.Dio>(),
           sharedPreferences: gh<_i6.SharedPreferences>(),
         ));
-    gh.factory<_i13.LoginBloc>(
-        () => _i13.LoginBloc(authRepository: gh<_i8.AuthRepository>()));
-    gh.factory<_i14.LogoutBloc>(
-        () => _i14.LogoutBloc(authRepository: gh<_i8.AuthRepository>()));
-    gh.lazySingleton<_i15.PermitRepository>(() => _i15.PermitRepositoryImpl(
+    gh.factory<_i15.LoginBloc>(
+        () => _i15.LoginBloc(authRepository: gh<_i9.AuthRepository>()));
+    gh.factory<_i16.LogoutBloc>(
+        () => _i16.LogoutBloc(authRepository: gh<_i9.AuthRepository>()));
+    gh.lazySingleton<_i17.PermitRepository>(() => _i17.PermitRepositoryImpl(
           dio: gh<_i4.Dio>(),
           sharedPreferences: gh<_i6.SharedPreferences>(),
         ));
-    gh.factory<_i16.SplashCubit>(
-        () => _i16.SplashCubit(authRepository: gh<_i8.AuthRepository>()));
-    gh.factory<_i17.AddActivityBloc>(() =>
-        _i17.AddActivityBloc(lessonRepository: gh<_i12.LessonRepository>()));
-    gh.factory<_i18.AddLessonBloc>(() =>
-        _i18.AddLessonBloc(lessonRepository: gh<_i12.LessonRepository>()));
-    gh.factory<_i19.AddPermitBloc>(() =>
-        _i19.AddPermitBloc(permitRepository: gh<_i15.PermitRepository>()));
-    gh.factory<_i20.GetActivitiesBloc>(() =>
-        _i20.GetActivitiesBloc(lessonRepository: gh<_i12.LessonRepository>()));
-    gh.factory<_i21.GetLessonPlansBloc>(() =>
-        _i21.GetLessonPlansBloc(lessonRepository: gh<_i12.LessonRepository>()));
-    gh.factory<_i22.GetLessonsBloc>(() =>
-        _i22.GetLessonsBloc(lessonRepository: gh<_i12.LessonRepository>()));
-    gh.factory<_i23.GetPermitTypeBloc>(() =>
-        _i23.GetPermitTypeBloc(permitRepository: gh<_i15.PermitRepository>()));
-    gh.factory<_i24.GetStudentPermitsBloc>(() => _i24.GetStudentPermitsBloc(
-        permitRepository: gh<_i15.PermitRepository>()));
+    gh.factory<_i18.SplashCubit>(
+        () => _i18.SplashCubit(authRepository: gh<_i9.AuthRepository>()));
+    gh.factory<_i19.AddActivityBloc>(() =>
+        _i19.AddActivityBloc(lessonRepository: gh<_i14.LessonRepository>()));
+    gh.factory<_i20.AddLessonBloc>(() =>
+        _i20.AddLessonBloc(lessonRepository: gh<_i14.LessonRepository>()));
+    gh.factory<_i21.AddPermitBloc>(() =>
+        _i21.AddPermitBloc(permitRepository: gh<_i17.PermitRepository>()));
+    gh.factory<_i22.GetActivitiesBloc>(() =>
+        _i22.GetActivitiesBloc(lessonRepository: gh<_i14.LessonRepository>()));
+    gh.factory<_i23.GetLessonPlansBloc>(() =>
+        _i23.GetLessonPlansBloc(lessonRepository: gh<_i14.LessonRepository>()));
+    gh.factory<_i24.GetLessonsBloc>(() =>
+        _i24.GetLessonsBloc(lessonRepository: gh<_i14.LessonRepository>()));
+    gh.factory<_i25.GetPermitTypeBloc>(() =>
+        _i25.GetPermitTypeBloc(permitRepository: gh<_i17.PermitRepository>()));
+    gh.factory<_i26.GetStudentPermitsBloc>(() => _i26.GetStudentPermitsBloc(
+        permitRepository: gh<_i17.PermitRepository>()));
     return this;
   }
 }
 
-class _$CoreModule extends _i25.CoreModule {}
+class _$CoreModule extends _i27.CoreModule {}

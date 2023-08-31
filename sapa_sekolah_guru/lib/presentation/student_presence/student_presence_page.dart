@@ -10,12 +10,15 @@ class StudentPresencePage extends StatelessWidget {
   const StudentPresencePage({super.key});
 
   void _navigateToUpdateStudentPresence(
-    BuildContext context,
-  ) =>
+    BuildContext context, {
+    required DateTime dateTime,
+  }) =>
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => const UpdateStudentPresencePage(),
+          builder: (BuildContext context) => UpdateStudentPresencePage(
+            dateTime: dateTime,
+          ),
         ),
       );
 
@@ -133,7 +136,10 @@ class StudentPresencePage extends StatelessWidget {
                         ),
                         child: SPCalendar(
                           onSelect: (selected) => {
-                            _navigateToUpdateStudentPresence(context),
+                            _navigateToUpdateStudentPresence(
+                              context,
+                              dateTime: selected,
+                            ),
                           },
                         ),
                       ),

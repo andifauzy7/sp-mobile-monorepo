@@ -53,10 +53,6 @@ class $AssetsIconGen {
   SvgGenImage get emptyCheckbox =>
       const SvgGenImage('assets/icon/empty-checkbox.svg');
 
-  /// File path: assets/icon/false-checkbox.svg
-  SvgGenImage get falseCheckbox =>
-      const SvgGenImage('assets/icon/false-checkbox.svg');
-
   /// File path: assets/icon/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icon/filter.svg');
 
@@ -100,7 +96,6 @@ class $AssetsIconGen {
         consultation,
         edit,
         emptyCheckbox,
-        falseCheckbox,
         filter,
         history,
         home,

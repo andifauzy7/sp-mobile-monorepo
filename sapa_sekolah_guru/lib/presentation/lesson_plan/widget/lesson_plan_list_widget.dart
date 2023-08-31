@@ -32,12 +32,15 @@ class LessonPlanListWidget extends StatelessWidget {
       );
 
   void _navigateToAddPlanning(
-    BuildContext context,
-  ) =>
+    BuildContext context, {
+    required VoidCallback onSuccess,
+  }) =>
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => const AddPlanningPage(),
+          builder: (BuildContext context) => AddPlanningPage(
+            onSuccess: onSuccess,
+          ),
         ),
       );
 
@@ -119,7 +122,11 @@ class LessonPlanListWidget extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.only(bottom: 16, top: 12),
             child: SPElevatedButton(
-              onPressed: () => _navigateToAddPlanning(context),
+              onPressed: () => _navigateToAddPlanning(context, onSuccess: () {
+                BlocProvider.of<GetLessonPlansBloc>(context).add(
+                  GetLessonPlansEvent(lessonDate: dateTime),
+                );
+              }),
               text: 'Buat Planning',
             ),
           ),

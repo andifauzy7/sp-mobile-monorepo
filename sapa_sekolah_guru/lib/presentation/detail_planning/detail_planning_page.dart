@@ -1,23 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
-import 'package:sapa_sekolah_guru/presentation/add_planning/add_planning_page.dart';
-import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class DetailPlanningPage extends StatelessWidget {
   const DetailPlanningPage({super.key});
-
-  void _navigateToAddPlanning(
-    BuildContext context,
-  ) =>
-      Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => const AddPlanningPage(),
-        ),
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -174,19 +162,6 @@ class DetailPlanningPage extends StatelessWidget {
                         ],
                       ),
                     ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width / 2,
-                    child: SPElevatedButton(
-                      onPressed: () => _navigateToAddPlanning(context),
-                      text: 'Edit',
-                    ),
                   ),
                 ),
               ],

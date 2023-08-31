@@ -6,10 +6,12 @@ import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 class StudentPresenceRow extends StatefulWidget {
   final String name;
   final bool isPresence;
+  final Function(bool isPresence) onChanged;
   const StudentPresenceRow({
     super.key,
     required this.name,
     required this.isPresence,
+    required this.onChanged,
   });
 
   @override
@@ -61,9 +63,12 @@ class _StudentPresenceRowState extends State<StudentPresenceRow> {
         Expanded(
           flex: 1,
           child: GestureDetector(
-            onTap: () => setState(() {
-              isSelected = !isSelected;
-            }),
+            onTap: () {
+              setState(() {
+                isSelected = !isSelected;
+              });
+              widget.onChanged(isSelected);
+            },
             child: isSelected == true
                 ? SvgPicture.asset(
                     Assets.icon.trueCheckbox.path,
@@ -75,6 +80,5 @@ class _StudentPresenceRowState extends State<StudentPresenceRow> {
         ),
       ],
     );
-    ;
   }
 }

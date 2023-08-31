@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sapa_sekolah_guru/model/student_attendance_submit_response_model.dart';
 import 'package:sapa_sekolah_guru/model/students_attendance_response_model.dart';
 import 'package:sapa_sekolah_guru/repositories/auth_repository.dart';
 import 'package:sapa_sekolah_guru/shared/core/failure/failure.dart';
@@ -10,6 +13,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class AttendanceRepository {
   Future<Either<Failure, List<StudentAttendanceModel>>> getStudentsAttendance(
     String lessonDate,
+  );
+  Future<Either<Failure, bool>> submitStudentAttendance(
+    String dateLog,
+    List<StudentAttendanceModel> presenceData,
   );
 }
 
@@ -42,6 +49,52 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
         final result = StudentsAttendanceResponseModel.fromJson(response.data);
         if (result.success ?? false) {
           return Right(result.data ?? []);
+        } else {
+          return Left(
+            ServerFailure(message: result.message),
+          );
+        }
+      } else {
+        return Left(
+          ServerFailure(message: response.data['message']),
+        );
+      }
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> submitStudentAttendance(
+    String dateLog,
+    List<StudentAttendanceModel> presenceData,
+  ) async {
+    try {
+      final token = sharedPreferences.getString(keyToken);
+      final userId = sharedPreferences.getString(keyUserId);
+      final data = FormData.fromMap({
+        "token": token,
+        "user_id": userId,
+        "date_log": dateLog,
+        "presence_data": json.encode(
+          presenceData
+              .map((e) => {
+                    "student_id": e.studentId.toString(),
+                    "presence": e.ispresence,
+                  })
+              .toList(),
+        ),
+      });
+      final response = await dio.post(
+        'teacher/submitstudentattendance.php',
+        data: data,
+      );
+      if (response.statusCode == 200) {
+        final result = StudentAttendanceSubmitResponseModel.fromJson(
+          response.data,
+        );
+        if (result.success ?? false) {
+          return const Right(true);
         } else {
           return Left(
             ServerFailure(message: result.message),

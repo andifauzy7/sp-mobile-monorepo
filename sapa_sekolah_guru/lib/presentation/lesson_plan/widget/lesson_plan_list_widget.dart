@@ -21,18 +21,26 @@ class LessonPlanListWidget extends StatelessWidget {
     required this.onTapDate,
   });
 
-  void _navigateToDetailPlanning(
+  Future<void> _navigateToDetailPlanning(
     BuildContext context, {
     required String id,
-  }) =>
-      Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => DetailPlanningPage(
-            id: id,
-          ),
+  }) async {
+    var needRefresh = await Navigator.push<bool>(
+      context,
+      MaterialPageRoute<bool>(
+        builder: (BuildContext context) => DetailPlanningPage(
+          id: id,
         ),
+      ),
+    );
+
+    if (needRefresh == true) {
+      // ignore: use_build_context_synchronously
+      BlocProvider.of<GetLessonPlansBloc>(context).add(
+        GetLessonPlansEvent(lessonDate: dateTime),
       );
+    }
+  }
 
   void _navigateToAddPlanning(
     BuildContext context, {

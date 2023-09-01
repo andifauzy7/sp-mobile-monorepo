@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:sapa_sekolah_guru/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
+import 'package:sapa_sekolah_guru/model/lesson_plan_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/add_planning/add_planning_page.dart';
 import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/other/sp_failure_widget.dart';
@@ -38,12 +39,14 @@ class _DetailPlanningPageBody extends StatelessWidget {
   void _navigateToAddPlanning(
     BuildContext context, {
     required VoidCallback onSuccess,
+    required LessonPlanDetailModel lessonPlan,
   }) =>
       Navigator.push(
         context,
         MaterialPageRoute<void>(
           builder: (BuildContext context) => AddPlanningPage(
             onSuccess: onSuccess,
+            lessonPlan: lessonPlan,
           ),
         ),
       );
@@ -262,18 +265,32 @@ class _DetailPlanningPageBody extends StatelessWidget {
                       },
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.only(bottom: 16, top: 12),
-                    child: SPElevatedButton(
-                      onPressed: () =>
-                          _navigateToAddPlanning(context, onSuccess: () {
-                        BlocProvider.of<GetLessonPlanDetailBloc>(context).add(
-                          GetLessonPlanDetailEvent(id: id),
+                  BlocBuilder<GetLessonPlanDetailBloc,
+                      GetLessonPlanDetailState>(
+                    builder: (context, state) {
+                      if (state is GetLessonPlanDetailSuccess) {
+                        return Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.only(bottom: 16, top: 12),
+                          child: SPElevatedButton(
+                            onPressed: () => _navigateToAddPlanning(
+                              context,
+                              lessonPlan: state.lessonPlan,
+                              onSuccess: () {
+                                BlocProvider.of<GetLessonPlanDetailBloc>(
+                                        context)
+                                    .add(
+                                  GetLessonPlanDetailEvent(id: id),
+                                );
+                              },
+                            ),
+                            text: 'Tambah Planning',
+                          ),
                         );
-                      }),
-                      text: 'Tambah Planning',
-                    ),
+                      }
+
+                      return const SizedBox.shrink();
+                    },
                   ),
                 ],
               ),

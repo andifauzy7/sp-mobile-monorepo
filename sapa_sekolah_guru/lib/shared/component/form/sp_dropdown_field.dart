@@ -4,6 +4,7 @@ import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class SPDropdownField extends StatelessWidget {
   final String hintText;
+  final String? value;
   final Widget? suffix, prefix;
   final List<String> items;
   final Function(String? value)? onChanged;
@@ -14,6 +15,7 @@ class SPDropdownField extends StatelessWidget {
     this.prefix,
     required this.items,
     this.onChanged,
+    this.value,
   });
 
   @override
@@ -28,6 +30,7 @@ class SPDropdownField extends StatelessWidget {
       ),
       child: ButtonTheme(
         child: DropdownButtonFormField<String>(
+          value: value,
           isExpanded: true,
           icon: const SizedBox.shrink(),
           autovalidateMode: AutovalidateMode.onUserInteraction,

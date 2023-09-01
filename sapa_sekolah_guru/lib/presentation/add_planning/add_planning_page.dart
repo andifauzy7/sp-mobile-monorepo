@@ -9,6 +9,8 @@ import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/activities_response_model.dart';
+import 'package:sapa_sekolah_guru/model/lesson_plan_detail_response_model.dart';
+import 'package:sapa_sekolah_guru/model/students_response_model.dart';
 import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
 import 'package:sapa_sekolah_guru/shared/component/form/sp_dropdown_field.dart';
@@ -18,12 +20,12 @@ import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class AddPlanningPage extends StatelessWidget {
-  final String? lessonPlanId;
+  final LessonPlanDetailModel? lessonPlan;
   final VoidCallback onSuccess;
   const AddPlanningPage({
     super.key,
     required this.onSuccess,
-    this.lessonPlanId,
+    this.lessonPlan,
   });
 
   @override
@@ -52,15 +54,15 @@ class AddPlanningPage extends StatelessWidget {
           create: (context) => GetIt.instance.get<AddLessonPlanBloc>(),
         ),
       ],
-      child: _AddPlanningPageBody(onSuccess, lessonPlanId),
+      child: _AddPlanningPageBody(onSuccess, lessonPlan),
     );
   }
 }
 
 class _AddPlanningPageBody extends StatefulWidget {
-  final String? lessonPlanId;
+  final LessonPlanDetailModel? lessonPlan;
   final VoidCallback onSuccess;
-  const _AddPlanningPageBody(this.onSuccess, this.lessonPlanId);
+  const _AddPlanningPageBody(this.onSuccess, this.lessonPlan);
 
   @override
   State<_AddPlanningPageBody> createState() => _AddPlanningPageBodyState();
@@ -75,6 +77,8 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
   List<ActivityModel> activitiesId = [];
   bool _isEnable = false;
 
+  bool get isEdit => widget.lessonPlan?.lessonplanId != null;
+
   void _setEnableButton() {
     bool studentPass = studentId.isNotEmpty;
     bool lessonPass = lessonId.isNotEmpty;
@@ -85,6 +89,17 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
       _isEnable =
           studentPass && lessonPass && activitiesPass && notePass && datePass;
     });
+  }
+
+  @override
+  void initState() {
+    if (isEdit) {
+      dateTime = DateTime.parse(widget.lessonPlan?.lessonplanDate ?? '');
+      dateController.text = DateFormat('EEEE d MMMM, y', 'id_ID').format(
+        dateTime ?? DateTime.now(),
+      );
+    }
+    super.initState();
   }
 
   @override
@@ -154,7 +169,9 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                             height: 24,
                           ),
                           Text(
-                            'Buat Planning Harian',
+                            isEdit
+                                ? 'Tambah Planning Harian'
+                                : 'Buat Planning Harian',
                             style: SPTextStyles.text16W400303030,
                           ),
                           const SizedBox(
@@ -166,8 +183,23 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                                 return Text(state.message);
                               }
                               if (state is GetStudentsSuccess) {
+                                List<StudentModel> filtered = state.students;
+                                if (isEdit) {
+                                  filtered = state.students
+                                      .where(
+                                        (element) =>
+                                            element.studentName ==
+                                            widget.lessonPlan?.studentName,
+                                      )
+                                      .toList();
+                                  studentId =
+                                      filtered.first.studentId.toString();
+                                }
                                 return SPDropdownField(
-                                  items: state.students
+                                  value: (isEdit)
+                                      ? filtered.first.studentName
+                                      : null,
+                                  items: filtered
                                       .map((e) => e.studentName ?? '')
                                       .toList(),
                                   hintText: 'Pilih Murid',
@@ -176,7 +208,7 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                                   ),
                                   onChanged: (value) {
                                     setState(() {
-                                      studentId = state.students
+                                      studentId = filtered
                                           .where((element) =>
                                               element.studentName == value)
                                           .first
@@ -203,20 +235,22 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                               Assets.icon.calendarPicker.path,
                             ),
                             onTap: () async {
-                              DateTime? result = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.utc(2010, 10, 16),
-                                lastDate: DateTime.now(),
-                              );
-
-                              if (result != null) {
-                                dateTime = result;
-                                dateController.text =
-                                    DateFormat('EEEE d MMMM, y', 'id_ID')
-                                        .format(
-                                  result,
+                              if (!isEdit) {
+                                DateTime? result = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.utc(2010, 10, 16),
+                                  lastDate: DateTime.now(),
                                 );
+
+                                if (result != null) {
+                                  dateTime = result;
+                                  dateController.text =
+                                      DateFormat('EEEE d MMMM, y', 'id_ID')
+                                          .format(
+                                    result,
+                                  );
+                                }
                               }
                             },
                           ),
@@ -339,7 +373,9 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                           {
                             BlocProvider.of<AddLessonPlanBloc>(context).add(
                               AddLessonPlanEvent(
-                                lessonPlanId: widget.lessonPlanId,
+                                lessonPlanId: isEdit
+                                    ? widget.lessonPlan!.lessonplanId.toString()
+                                    : null,
                                 studentId: studentId,
                                 datePlan: dateTime!,
                                 lessonId: lessonId,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
-import 'package:sapa_sekolah_guru/bloc/get_name/get_name_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_students_attendance/get_students_attendance_bloc.dart';
+import 'package:sapa_sekolah_guru/bloc/get_teacher/get_teacher_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/submit_student_attendance/submit_student_attendance_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/students_attendance_response_model.dart';
@@ -35,9 +35,9 @@ class UpdateStudentPresencePage extends StatelessWidget {
             ),
         ),
         BlocProvider(
-          create: (context) => GetIt.instance.get<GetNameBloc>()
+          create: (context) => GetIt.instance.get<GetTeacherBloc>()
             ..add(
-              GetNameEvent(),
+              GetTeacherEvent(),
             ),
         ),
         BlocProvider(
@@ -187,15 +187,21 @@ class _UpdateStudentPresencePageBodyState
                                             style:
                                                 SPTextStyles.text14W400B3B3B3,
                                           ),
-                                          BlocBuilder<GetNameBloc,
-                                              GetNameState>(
+                                          BlocBuilder<GetTeacherBloc,
+                                              GetTeacherState>(
                                             builder: (context, state) {
+                                              String name = "Teacher";
+                                              if (state is GetTeacherSuccess) {
+                                                name = state
+                                                        .teacher.employeeName ??
+                                                    name;
+                                              }
                                               return Text(
-                                                (state is GetNameSuccess)
-                                                    ? state.name
-                                                    : '...',
+                                                name,
                                                 style: SPTextStyles
                                                     .text14W400303030,
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
                                               );
                                             },
                                           ),

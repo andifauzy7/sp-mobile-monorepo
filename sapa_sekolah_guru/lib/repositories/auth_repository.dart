@@ -3,19 +3,19 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sapa_sekolah_guru/model/change_password_response_model.dart';
 import 'package:sapa_sekolah_guru/model/login_response_model.dart';
+import 'package:sapa_sekolah_guru/model/teacher_response_model.dart';
 import 'package:sapa_sekolah_guru/shared/core/failure/failure.dart';
 import 'package:sapa_sekolah_guru/shared/core/failure/server_failure.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String keyToken = "CACHE_KEY_TOKEN";
 const String keyUserId = "CACHE_USER_ID";
-const String keyUserName = "CACHE_USER_NAME";
 
 abstract class AuthRepository {
   Future<Either<Failure, bool>> login(String username, String password);
   Future<Either<Failure, bool>> isTokenExist();
   Future<Either<Failure, bool>> logout();
-  Future<Either<Failure, String>> getName();
+  Future<Either<Failure, TeacherModel>> getTeacher();
   Future<Either<Failure, bool>> changePassword(
     String oldPassword,
     String newPassword,
@@ -52,10 +52,6 @@ class AuthRepositoryImpl implements AuthRepository {
         await sharedPreferences.setString(
           keyUserId,
           result.data?.userId ?? '',
-        );
-        await sharedPreferences.setString(
-          keyUserName,
-          result.data?.nama ?? '',
         );
         if (result.success ?? false) {
           return const Right(true);
@@ -123,7 +119,34 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> getName() async {
-    return Right(sharedPreferences.getString(keyUserName) ?? '');
+  Future<Either<Failure, TeacherModel>> getTeacher() async {
+    final token = sharedPreferences.getString(keyToken);
+    final userId = sharedPreferences.getString(keyUserId);
+    final data = FormData.fromMap({
+      "token": token,
+      "user_id": userId,
+    });
+    try {
+      final response = await dio.post(
+        'teacher/teacherdata.php',
+        data: data,
+      );
+      if (response.statusCode == 200) {
+        final result = TeacherResponseModel.fromJson(response.data);
+        if (result.success ?? false) {
+          return Right(result.data!.first);
+        } else {
+          return Left(
+            ServerFailure(message: result.message),
+          );
+        }
+      } else {
+        return Left(
+          ServerFailure(message: response.data['message']),
+        );
+      }
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
   }
 }

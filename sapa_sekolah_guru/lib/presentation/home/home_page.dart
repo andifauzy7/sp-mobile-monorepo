@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
-import 'package:sapa_sekolah_guru/bloc/get_name/get_name_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:sapa_sekolah_guru/bloc/get_teacher/get_teacher_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
+import 'package:sapa_sekolah_guru/shared/component/image/sp_cached_network_image.dart';
 import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
@@ -15,9 +17,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetIt.instance.get<GetNameBloc>()
+      create: (context) => GetIt.instance.get<GetTeacherBloc>()
         ..add(
-          GetNameEvent(),
+          GetTeacherEvent(),
         ),
       child: Container(
         color: SPColors.colorFAFAFA,
@@ -33,17 +35,16 @@ class HomePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          BlocBuilder<GetNameBloc, GetNameState>(
+                          BlocBuilder<GetTeacherBloc, GetTeacherState>(
                             builder: (context, state) {
-                              if (state is GetNameSuccess &&
-                                  state.name.isNotEmpty) {
-                                return Text(
-                                  'Hallo ${state.name}',
-                                  style: SPTextStyles.text12W400636363,
-                                );
+                              String name = 'Teacher';
+                              if (state is GetTeacherSuccess) {
+                                name = state.teacher.employeeName ?? name;
                               }
                               return Text(
-                                'Hallo ...',
+                                'Hallo $name',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: SPTextStyles.text12W400636363,
                               );
                             },
@@ -62,24 +63,22 @@ class HomePage extends StatelessWidget {
                         url: Assets.icon.notification.path,
                       ),
                     ),
-                    /*
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            ClipRRect(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              child: SizedBox(
-                                width: 40,
-                                height: 40,
-                                child: Image.network(
-                                  "https://cdn.antaranews.com/cache/1200x800/2022/05/10/Screen-Shot-2022-05-09-at-10.04.13-AM_copy_1024x682.png",
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            */
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    BlocBuilder<GetTeacherBloc, GetTeacherState>(
+                      builder: (context, state) {
+                        String url = "";
+                        if (state is GetTeacherSuccess) {
+                          url = state.teacher.employeePhoto ?? url;
+                        }
+                        return SPCachedNetworkImage(
+                          width: 40,
+                          height: 40,
+                          imageUrl: url,
+                        );
+                      },
+                    ),
                   ],
                 ),
                 const SizedBox(
@@ -138,23 +137,25 @@ class HomePage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            BlocBuilder<GetNameBloc, GetNameState>(
+                            BlocBuilder<GetTeacherBloc, GetTeacherState>(
                               builder: (context, state) {
-                                if (state is GetNameSuccess &&
-                                    state.name.isNotEmpty) {
-                                  return Text(
-                                    state.name,
-                                    style: SPTextStyles.text14W400303030,
-                                  );
+                                String name = 'Teacher';
+                                if (state is GetTeacherSuccess) {
+                                  name = state.teacher.employeeName ?? name;
                                 }
+
                                 return Text(
-                                  '...',
+                                  name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   style: SPTextStyles.text14W400303030,
                                 );
                               },
                             ),
                             Text(
-                              '02 Juli, 2023',
+                              DateFormat('d MMMM, y', 'id_ID').format(
+                                DateTime.now(),
+                              ),
                               style: SPTextStyles.text10W400B3B3B3,
                             ),
                           ],

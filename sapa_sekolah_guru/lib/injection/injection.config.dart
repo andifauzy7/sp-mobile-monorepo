@@ -28,15 +28,16 @@ import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.da
     as _i25;
 import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart'
     as _i26;
-import 'package:sapa_sekolah_guru/bloc/get_name/get_name_bloc.dart' as _i11;
 import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart'
     as _i27;
 import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart'
     as _i28;
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart'
-    as _i13;
-import 'package:sapa_sekolah_guru/bloc/get_students_attendance/get_students_attendance_bloc.dart'
     as _i12;
+import 'package:sapa_sekolah_guru/bloc/get_students_attendance/get_students_attendance_bloc.dart'
+    as _i11;
+import 'package:sapa_sekolah_guru/bloc/get_teacher/get_teacher_bloc.dart'
+    as _i13;
 import 'package:sapa_sekolah_guru/bloc/login/login_bloc.dart' as _i15;
 import 'package:sapa_sekolah_guru/bloc/logout/logout_bloc.dart' as _i16;
 import 'package:sapa_sekolah_guru/bloc/submit_student_attendance/submit_student_attendance_bloc.dart'
@@ -87,13 +88,13 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i10.ChangePasswordBloc>(() =>
         _i10.ChangePasswordBloc(authRepository: gh<_i9.AuthRepository>()));
-    gh.factory<_i11.GetNameBloc>(
-        () => _i11.GetNameBloc(authRepository: gh<_i9.AuthRepository>()));
-    gh.factory<_i12.GetStudentsAttendanceBloc>(() =>
-        _i12.GetStudentsAttendanceBloc(
+    gh.factory<_i11.GetStudentsAttendanceBloc>(() =>
+        _i11.GetStudentsAttendanceBloc(
             attendanceRepository: gh<_i8.AttendanceRepository>()));
-    gh.factory<_i13.GetStudentsBloc>(() =>
-        _i13.GetStudentsBloc(studentRepository: gh<_i7.StudentRepository>()));
+    gh.factory<_i12.GetStudentsBloc>(() =>
+        _i12.GetStudentsBloc(studentRepository: gh<_i7.StudentRepository>()));
+    gh.factory<_i13.GetTeacherBloc>(
+        () => _i13.GetTeacherBloc(authRepository: gh<_i9.AuthRepository>()));
     gh.lazySingleton<_i14.LessonRepository>(() => _i14.LessonRepositoryImpl(
           dio: gh<_i4.Dio>(),
           sharedPreferences: gh<_i6.SharedPreferences>(),

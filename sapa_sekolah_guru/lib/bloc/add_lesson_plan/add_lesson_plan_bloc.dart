@@ -16,7 +16,7 @@ class AddLessonPlanBloc extends Bloc<AddLessonPlanEvent, AddLessonPlanState> {
     on<AddLessonPlanEvent>((event, emit) async {
       emit(AddLessonPlanLoading());
       final result = await lessonRepository.addLessonPlan(
-        '',
+        event.lessonPlanId,
         event.studentId,
         DateFormat("yyyy-MM-dd").format(event.datePlan),
         event.lessonId,

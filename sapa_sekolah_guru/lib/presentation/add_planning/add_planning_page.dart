@@ -18,8 +18,13 @@ import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class AddPlanningPage extends StatelessWidget {
+  final String? lessonPlanId;
   final VoidCallback onSuccess;
-  const AddPlanningPage({super.key, required this.onSuccess});
+  const AddPlanningPage({
+    super.key,
+    required this.onSuccess,
+    this.lessonPlanId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +52,15 @@ class AddPlanningPage extends StatelessWidget {
           create: (context) => GetIt.instance.get<AddLessonPlanBloc>(),
         ),
       ],
-      child: _AddPlanningPageBody(onSuccess),
+      child: _AddPlanningPageBody(onSuccess, lessonPlanId),
     );
   }
 }
 
 class _AddPlanningPageBody extends StatefulWidget {
+  final String? lessonPlanId;
   final VoidCallback onSuccess;
-  const _AddPlanningPageBody(this.onSuccess);
+  const _AddPlanningPageBody(this.onSuccess, this.lessonPlanId);
 
   @override
   State<_AddPlanningPageBody> createState() => _AddPlanningPageBodyState();
@@ -333,6 +339,7 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                           {
                             BlocProvider.of<AddLessonPlanBloc>(context).add(
                               AddLessonPlanEvent(
+                                lessonPlanId: widget.lessonPlanId,
                                 studentId: studentId,
                                 datePlan: dateTime!,
                                 lessonId: lessonId,

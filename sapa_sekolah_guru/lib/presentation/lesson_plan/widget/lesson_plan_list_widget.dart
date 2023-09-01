@@ -22,12 +22,15 @@ class LessonPlanListWidget extends StatelessWidget {
   });
 
   void _navigateToDetailPlanning(
-    BuildContext context,
-  ) =>
+    BuildContext context, {
+    required String id,
+  }) =>
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => const DetailPlanningPage(),
+          builder: (BuildContext context) => DetailPlanningPage(
+            id: id,
+          ),
         ),
       );
 
@@ -106,7 +109,10 @@ class LessonPlanListWidget extends StatelessWidget {
                       height: 16,
                     ),
                     itemBuilder: (context, index) => GestureDetector(
-                      onTap: () => _navigateToDetailPlanning(context),
+                      onTap: () => _navigateToDetailPlanning(
+                        context,
+                        id: state.lessonPlans[index].lessonplanId.toString(),
+                      ),
                       child: _renderCard(state.lessonPlans[index]),
                     ),
                   );

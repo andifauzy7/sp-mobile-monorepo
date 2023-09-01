@@ -156,15 +156,6 @@ class _MainPageState extends State<MainPage> {
                             imageUrl: Assets.images.reportImage.path,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () => _navigateToForgotPasswordPage(context),
-                          child: MenuCard(
-                            title: 'Ubah Sandi',
-                            description: 'Ubah Kata\nSandi',
-                            imageUrl:
-                                Assets.images.forgotPasswordBackground.path,
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -174,6 +165,7 @@ class _MainPageState extends State<MainPage> {
           ),
           ProfilePage(
             onLogout: () => _navigateToSplash(context),
+            onChangePassword: () => _navigateToForgotPasswordPage(context),
           ),
         ],
         items: [

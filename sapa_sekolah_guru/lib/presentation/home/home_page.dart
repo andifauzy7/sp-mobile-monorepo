@@ -189,6 +189,7 @@ class HomePage extends StatelessWidget {
                         'Pelajaran Hari Ini',
                         style: SPTextStyles.text16W400808080,
                       ),
+                      /*
                       const SizedBox(
                         height: 8,
                       ),
@@ -214,7 +215,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ],
-                      ),
+                      ),*/
                       const SizedBox(
                         height: 8,
                       ),
@@ -246,7 +247,9 @@ class HomePage extends StatelessWidget {
                                   style: SPTextStyles.text12W400636363,
                                 ),
                                 Text(
-                                  'Kelas 7B, 02 Agu, 2023',
+                                  'Kelas 7B, ${DateFormat('d MMMM, y', 'id_ID').format(
+                                    DateTime.now(),
+                                  )}',
                                   style: SPTextStyles.text10W400B3B3B3,
                                 ),
                               ],

@@ -7,10 +7,11 @@ import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class ProfilePage extends StatelessWidget {
-  final VoidCallback onLogout;
+  final VoidCallback onLogout, onChangePassword;
   const ProfilePage({
     super.key,
     required this.onLogout,
+    required this.onChangePassword,
   });
 
   @override
@@ -23,14 +24,15 @@ class ProfilePage extends StatelessWidget {
             onLogout();
           }
         },
-        child: const _ProfilePageBody(),
+        child: _ProfilePageBody(onChangePassword),
       ),
     );
   }
 }
 
 class _ProfilePageBody extends StatelessWidget {
-  const _ProfilePageBody();
+  final VoidCallback onChangePassword;
+  const _ProfilePageBody(this.onChangePassword);
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,29 @@ class _ProfilePageBody extends StatelessWidget {
           child: Column(
             children: [
               GestureDetector(
+                onTap: () => onChangePassword(),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(16),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Ubah Password',
+                        style: SPTextStyles.text12W400303030,
+                      ),
+                      SvgPicture.asset(Assets.icon.arrowRight.path)
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              GestureDetector(
                 onTap: () => BlocProvider.of<LogoutBloc>(context).add(
                   LogoutEvent(),
                 ),
@@ -63,7 +88,7 @@ class _ProfilePageBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Logout',
+                        'Keluar',
                         style: SPTextStyles.text12W400EB5757,
                       ),
                       SvgPicture.asset(Assets.icon.logout.path)

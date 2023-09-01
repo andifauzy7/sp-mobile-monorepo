@@ -22,9 +22,18 @@ class SPCachedNetworkImage extends StatelessWidget {
       borderRadius: BorderRadius.all(
         Radius.circular(radius),
       ),
-      child: SizedBox(
+      child: Container(
         width: width,
         height: height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(radius),
+          ),
+          border: Border.all(
+            width: 2,
+            color: SPColors.colorFFE5C0,
+          ),
+        ),
         child: CachedNetworkImage(
           imageUrl: imageUrl,
           fit: BoxFit.cover,

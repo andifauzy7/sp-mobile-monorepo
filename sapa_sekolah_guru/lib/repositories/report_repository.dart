@@ -17,7 +17,7 @@ abstract class ReportRepository {
     String reportId,
   );
   Future<Either<Failure, bool>> updateDailyReport(
-    String reportDailyId,
+    String? reportDailyId,
     String reportDate,
     String studentId,
     String completeWork,
@@ -110,7 +110,7 @@ class ReportRepositoryImpl implements ReportRepository {
 
   @override
   Future<Either<Failure, bool>> updateDailyReport(
-    String reportDailyId,
+    String? reportDailyId,
     String reportDate,
     String studentId,
     String completeWork,
@@ -124,7 +124,7 @@ class ReportRepositoryImpl implements ReportRepository {
     final data = FormData.fromMap({
       "token": token,
       "user_id": userId,
-      "report_daily_id": reportDailyId,
+      "report_daily_id": reportDailyId ?? '',
       "report_date": reportDate,
       "student_id": studentId,
       "complete_work": completeWork,

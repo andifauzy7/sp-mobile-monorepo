@@ -1,7 +1,7 @@
 part of 'update_daily_report_bloc.dart';
 
 class UpdateDailyReportEvent {
-  final String reportDailyId;
+  final String? reportDailyId;
   final String reportDate;
   final String studentId;
   final String completeWork;
@@ -11,7 +11,7 @@ class UpdateDailyReportEvent {
   final String improvement;
 
   UpdateDailyReportEvent({
-    required this.reportDailyId,
+    this.reportDailyId,
     required this.reportDate,
     required this.studentId,
     required this.completeWork,

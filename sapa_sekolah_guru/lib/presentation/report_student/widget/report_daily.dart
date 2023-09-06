@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
+import 'package:sapa_sekolah_guru/presentation/add_daily_report/add_daily_report_page.dart';
 import 'package:sapa_sekolah_guru/presentation/report_daily_detail/report_daily_detail.dart';
 import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/other/sp_failure_widget.dart';
@@ -29,6 +30,27 @@ class ReportDaily extends StatelessWidget {
           ),
         ),
       );
+
+  void _navigateToAddDailyReportPage(
+    BuildContext context, {
+    required StudentModel student,
+  }) async {
+    var result = await Navigator.push(
+      context,
+      MaterialPageRoute<bool>(
+        builder: (BuildContext context) => AddDailyReportPage(
+          student: student,
+        ),
+      ),
+    );
+
+    if (result == true) {
+      // ignore: use_build_context_synchronously
+      BlocProvider.of<GetDailyReportsBloc>(context).add(
+        GetDailyReportsEvent(studentId: student.studentId.toString()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +127,10 @@ class ReportDaily extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.only(top: 12),
             child: SPElevatedButton(
-              onPressed: () => {},
+              onPressed: () => _navigateToAddDailyReportPage(
+                context,
+                student: student,
+              ),
               text: 'Buat Laporan Harian',
             ),
           ),

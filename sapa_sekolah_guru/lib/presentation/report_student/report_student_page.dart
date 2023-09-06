@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
+import 'package:sapa_sekolah_guru/model/students_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/report_student/widget/report_daily.dart';
 import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class ReportStudentPage extends StatefulWidget {
-  const ReportStudentPage({super.key});
+  final StudentModel student;
+  const ReportStudentPage({
+    super.key,
+    required this.student,
+  });
 
   @override
   State<ReportStudentPage> createState() => _ReportStudentPageState();
@@ -105,24 +113,18 @@ class _ReportStudentPageState extends State<ReportStudentPage>
                   ),
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nama',
-                              style: SPTextStyles.text12W400B3B3B3,
-                            ),
-                            Text(
-                              'Fernai Bitly',
-                              style: SPTextStyles.text14W400303030,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text(
-                        'Kelas 7B',
-                        style: SPTextStyles.text12W400B3B3B3,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Nama',
+                            style: SPTextStyles.text12W400B3B3B3,
+                          ),
+                          Text(
+                            widget.student.studentName ?? '-',
+                            style: SPTextStyles.text14W400303030,
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -133,15 +135,26 @@ class _ReportStudentPageState extends State<ReportStudentPage>
                 Expanded(
                   child: IndexedStack(
                     index: index,
-                    children: const [
-                      ReportDaily(),
-                      Center(
+                    children: [
+                      BlocProvider(
+                        create: (context) => GetIt.instance
+                            .get<GetDailyReportsBloc>()
+                          ..add(
+                            GetDailyReportsEvent(
+                              studentId: widget.student.studentId.toString(),
+                            ),
+                          ),
+                        child: ReportDaily(
+                          student: widget.student,
+                        ),
+                      ),
+                      const Center(
                         child: Text(
                           'Laporan Bulanan\nAkan Datang',
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      Center(
+                      const Center(
                         child: Text(
                           'Laporan Montessori\nAkan Datang',
                           textAlign: TextAlign.center,

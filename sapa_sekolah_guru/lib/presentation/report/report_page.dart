@@ -39,12 +39,15 @@ class _ReportPageBodyState extends State<_ReportPageBody> {
   List<StudentModel> studentFiltered = [];
 
   void _navigateToReportStudentPage(
-    BuildContext context,
-  ) =>
+    BuildContext context, {
+    required StudentModel student,
+  }) =>
       Navigator.push(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => const ReportStudentPage(),
+          builder: (BuildContext context) => ReportStudentPage(
+            student: student,
+          ),
         ),
       );
 
@@ -129,8 +132,10 @@ class _ReportPageBodyState extends State<_ReportPageBody> {
                                       height: 12,
                                     ),
                                     itemBuilder: (_, index) => GestureDetector(
-                                      onTap: () =>
-                                          _navigateToReportStudentPage(context),
+                                      onTap: () => _navigateToReportStudentPage(
+                                        context,
+                                        student: studentFiltered[index],
+                                      ),
                                       child: Container(
                                         padding: const EdgeInsets.all(16),
                                         decoration: const BoxDecoration(

@@ -29,46 +29,46 @@ class _StudentPresenceRowState extends State<StudentPresenceRow> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          flex: 2,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.name,
-                style: SPTextStyles.text10W400303030,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text(
-                // group
-                "",
-                style: SPTextStyles.text10W400B3B3B3,
-              ),
-            ],
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isSelected = !isSelected;
+        });
+        widget.onChanged(isSelected);
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.name,
+                  style: SPTextStyles.text10W400303030,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  // group
+                  "",
+                  style: SPTextStyles.text10W400B3B3B3,
+                ),
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Text(
-            isSelected == true ? "Hadir" : "Belum Hadir",
-            style: SPTextStyles.text10W400303030,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          Expanded(
+            flex: 1,
+            child: Text(
+              isSelected == true ? "Hadir" : "Belum Hadir",
+              style: SPTextStyles.text10W400303030,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: GestureDetector(
-            onTap: () {
-              setState(() {
-                isSelected = !isSelected;
-              });
-              widget.onChanged(isSelected);
-            },
+          Expanded(
+            flex: 1,
             child: isSelected == true
                 ? SvgPicture.asset(
                     Assets.icon.trueCheckbox.path,
@@ -77,8 +77,8 @@ class _StudentPresenceRowState extends State<StudentPresenceRow> {
                     Assets.icon.emptyCheckbox.path,
                   ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

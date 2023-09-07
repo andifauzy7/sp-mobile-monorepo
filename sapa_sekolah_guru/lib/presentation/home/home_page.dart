@@ -10,9 +10,14 @@ import 'package:sapa_sekolah_guru/shared/component/image/sp_cached_network_image
 import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
 import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
+import 'package:sapa_sekolah_guru/shared/component/toast/sp_toast.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  void _comingSoonMessage() => SPToast.showToast(
+        message: 'Fitur akan segera hadir',
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +55,11 @@ class HomePage extends StatelessWidget {
                             },
                           ),
                           Text(
-                            'Good Morning',
+                            DateTime.now().hour <= 12
+                                ? 'Selamat Pagi'
+                                : DateTime.now().hour < 18
+                                    ? 'Selamat Siang'
+                                    : 'Selamat Malam',
                             style: SPTextStyles.text20W400303030,
                           ),
                         ],
@@ -60,6 +69,7 @@ class HomePage extends StatelessWidget {
                       width: 40,
                       height: 40,
                       child: SPIconButton(
+                        onTap: () => _comingSoonMessage(),
                         url: Assets.icon.notification.path,
                       ),
                     ),
@@ -87,6 +97,7 @@ class HomePage extends StatelessWidget {
                 Row(
                   children: [
                     SPIconButton(
+                      onTap: () => _comingSoonMessage(),
                       url: Assets.icon.filter.path,
                       color: Colors.white,
                     ),
@@ -124,51 +135,54 @@ class HomePage extends StatelessWidget {
                       Radius.circular(16),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      SPIconButton(
-                        url: Assets.icon.edit.path,
-                        color: SPColors.color6FCF97,
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BlocBuilder<GetTeacherBloc, GetTeacherState>(
-                              builder: (context, state) {
-                                String name = 'Teacher';
-                                if (state is GetTeacherSuccess) {
-                                  name = state.teacher.employeeName ?? name;
-                                }
-
-                                return Text(
-                                  name,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: SPTextStyles.text14W400303030,
-                                );
-                              },
-                            ),
-                            Text(
-                              DateFormat('d MMMM, y', 'id_ID').format(
-                                DateTime.now(),
-                              ),
-                              style: SPTextStyles.text10W400B3B3B3,
-                            ),
-                          ],
+                  child: GestureDetector(
+                    onTap: () => _comingSoonMessage(),
+                    child: Row(
+                      children: [
+                        SPIconButton(
+                          url: Assets.icon.edit.path,
+                          color: SPColors.color6FCF97,
                         ),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        'Absen',
-                        style: SPTextStyles.text12W4006FCF97,
-                      ),
-                    ],
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BlocBuilder<GetTeacherBloc, GetTeacherState>(
+                                builder: (context, state) {
+                                  String name = 'Teacher';
+                                  if (state is GetTeacherSuccess) {
+                                    name = state.teacher.employeeName ?? name;
+                                  }
+
+                                  return Text(
+                                    name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: SPTextStyles.text14W400303030,
+                                  );
+                                },
+                              ),
+                              Text(
+                                DateFormat('d MMMM, y', 'id_ID').format(
+                                  DateTime.now(),
+                                ),
+                                style: SPTextStyles.text10W400B3B3B3,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Text(
+                          'Absen',
+                          style: SPTextStyles.text12W4006FCF97,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -188,6 +202,10 @@ class HomePage extends StatelessWidget {
                       Text(
                         'Pelajaran Hari Ini',
                         style: SPTextStyles.text16W400808080,
+                      ),
+                      Text(
+                        'Segera hadir',
+                        style: SPTextStyles.text12W400636363,
                       ),
                       /*
                       const SizedBox(
@@ -215,7 +233,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ],
-                      ),*/
+                      ),
                       const SizedBox(
                         height: 8,
                       ),
@@ -257,6 +275,7 @@ class HomePage extends StatelessWidget {
                           )
                         ],
                       ),
+                      */
                     ],
                   ),
                 ),

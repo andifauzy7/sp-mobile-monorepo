@@ -169,10 +169,10 @@ class _CreatePermissionState extends State<CreatePermission> {
                               startDate = args.startDate!;
                               endDate = args.endDate!;
                               String formatStart =
-                                  DateFormat("MM/dd/yy").format(
+                                  DateFormat("dd/MM/yy").format(
                                 startDate,
                               );
-                              String formatEnd = DateFormat("MM/dd/yy").format(
+                              String formatEnd = DateFormat("dd/MM/yy").format(
                                 endDate,
                               );
                               dateController.text = '$formatStart - $formatEnd';

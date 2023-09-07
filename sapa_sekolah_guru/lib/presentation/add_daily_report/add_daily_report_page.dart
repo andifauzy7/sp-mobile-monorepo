@@ -246,11 +246,20 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                     });
                                   }
                                 },
-                                child: Text(
-                                  DateFormat('d MMMM y', 'id_ID').format(
-                                    dateTime,
-                                  ),
-                                  style: SPTextStyles.text14W400303030,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      DateFormat('d MMMM y', 'id_ID').format(
+                                        dateTime,
+                                      ),
+                                      style: SPTextStyles.text14W400303030,
+                                    ),
+                                    SvgPicture.asset(
+                                      Assets.icon.calendarPicker.path,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

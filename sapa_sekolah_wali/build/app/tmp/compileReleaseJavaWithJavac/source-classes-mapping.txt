@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/sapa/sapa_sekolah_wali/BuildConfig.java
- com.sapa.sapa_sekolah_wali.BuildConfig

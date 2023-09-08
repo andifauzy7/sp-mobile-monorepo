@@ -1,4 +1,4 @@
-com.sapasantri.parent
+com.sapa.sapa_sekolah_wali
 attr activityAction
 attr activityName
 attr alpha

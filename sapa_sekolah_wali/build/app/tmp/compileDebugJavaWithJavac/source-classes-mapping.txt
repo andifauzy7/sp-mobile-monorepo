@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/sapasantri/parent/BuildConfig.java
- com.sapasantri.parent.BuildConfig

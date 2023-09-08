@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sapasantri.parent"
+    package="com.sapa.sapa_sekolah_wali"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -12,11 +12,12 @@
 
     <application
         android:name="android.app.Application"
+        android:allowBackup="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:icon="@mipmap/ic_launcher"
-        android:label="Sapa Sekolah" >
+        android:label="SAPA Wali" >
         <activity
-            android:name="com.sapasantri.parent.MainActivity"
+            android:name="com.sapa.sapa_sekolah_wali.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"

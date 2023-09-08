@@ -2,9 +2,10 @@
     package="com.sapa.sapa_sekolah_wali">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="Sapa Sekolah"
+        android:label="SAPA Wali"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+       android:allowBackup="false">
         <activity
             android:name=".MainActivity"
             android:exported="true"

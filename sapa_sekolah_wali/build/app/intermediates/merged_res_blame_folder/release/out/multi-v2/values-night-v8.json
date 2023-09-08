@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Volumes/Midasforce/AndroidStudioProjects/sapa-santri-main/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "/Volumes/Midasforce/AndroidStudioProjects/sp-mobile-monorepo/sapa_sekolah_wali/build/app/intermediates/incremental/mergeReleaseResources/merged.dir/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Volumes/Midasforce/AndroidStudioProjects/sapa-santri-main/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Volumes/Midasforce/AndroidStudioProjects/sp-mobile-monorepo/sapa_sekolah_wali/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

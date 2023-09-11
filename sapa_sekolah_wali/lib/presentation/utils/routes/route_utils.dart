@@ -10,6 +10,8 @@ import 'package:sapa_sekolah_wali/presentation/pages/bill/list_teacher_page.dart
 import 'package:sapa_sekolah_wali/presentation/pages/global/onboarding_page.dart';
 import 'package:sapa_sekolah_wali/presentation/pages/global/splash_page.dart';
 import 'package:sapa_sekolah_wali/presentation/pages/home/home_page.dart';
+import 'package:sapa_sekolah_wali/presentation/pages/lesson_plan/lesson_plan_detail_page.dart';
+import 'package:sapa_sekolah_wali/presentation/pages/lesson_plan/lesson_plan_list_page.dart';
 import 'package:sapa_sekolah_wali/presentation/pages/report/add_parent_opinion_page.dart';
 import 'package:sapa_sekolah_wali/presentation/pages/report/daily_report_page.dart';
 import 'package:sapa_sekolah_wali/presentation/pages/report/monthly_report_page.dart';
@@ -25,9 +27,11 @@ class RouteName {
   static const String login = '/login';
   static const String home = '/home';
   static const String studySchedule = '/study-schedule';
+  static const String listLessonPlan = '/list-lesson-plan';
   static const String listBill = '/list-bill';
   static const String listChild = '/list-child';
   static const String listTeacher = '/list-teacher';
+  static const String detailLessonPlan = '/detail-lesson-plan';
   static const String detailBill = '/detail-bill';
   static const String detailChild = '/detail-child';
   static const String detailTeacher = '/detail-teacher';
@@ -52,8 +56,12 @@ class RouterUtils {
     RouteName.listChild: (arguments) =>
         ListChildPage(direction: (arguments as String?)),
     RouteName.listTeacher: (arguments) => const ListTeacherPage(),
+    RouteName.listLessonPlan: (arguments) =>
+        LessonPlanListPage(studentId: (arguments as int?)),
     RouteName.listBill: (arguments) =>
         ListBillPage(studentId: (arguments as int?)),
+    RouteName.detailLessonPlan: (arguments) =>
+        LessonPlanDetailPage(lessonPlanId: (arguments as String)),
     RouteName.detailChild: (arguments) =>
         DetailChildPage(studentId: (arguments as int)),
     RouteName.detailTeacher: (arguments) => const DetailTeacherPage(),

@@ -209,7 +209,13 @@ class _ListChildPageState extends State<ListChildPage> {
                                           }
 
                                           if (widget.direction ==
-                                              'lesson-plan') {}
+                                              'lesson-plan') {
+                                            Navigator.pushNamed(
+                                              context,
+                                              RouteName.listLessonPlan,
+                                              arguments: e.studentId,
+                                            );
+                                          }
 
                                           if (widget.direction == 'payment') {
                                             Navigator.pushNamed(

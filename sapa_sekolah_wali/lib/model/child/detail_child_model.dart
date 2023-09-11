@@ -18,7 +18,7 @@ class DetailChildModel {
   final String? gender;
   final String? tempatLahir;
   final String? tanggalLahir;
-  final int? nik;
+  final String? nik;
   final String? religion;
   final String? address;
   final String? studentPhoto;

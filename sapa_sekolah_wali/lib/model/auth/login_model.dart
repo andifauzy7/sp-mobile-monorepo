@@ -9,7 +9,7 @@ class LoginModel extends BaseModel {
 
   final String? nama;
   final String? token;
-  final String? userId;
+  final int? userId;
 
   static LoginModel fromJson(Map<String, dynamic> json) => LoginModel(
         nama: json["nama"],

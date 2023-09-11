@@ -1,13 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 import 'package:sapa_sekolah_wali/application/bloc/news/news_bloc.dart';
 import 'package:sapa_sekolah_wali/dependency.dart';
-import 'package:sapa_sekolah_wali/presentation/components/global/card/activity_card.dart';
-import 'package:sapa_sekolah_wali/presentation/components/global/card/news_card.dart';
-import 'package:sapa_sekolah_wali/presentation/components/global/card/shimmer_card.dart';
+import 'package:sapa_sekolah_wali/presentation/pages/home/widget/sp_toast.dart';
 import 'package:sapa_sekolah_wali/presentation/utils/routes/route_utils.dart';
 
 class HomePage extends StatefulWidget {
@@ -121,7 +117,8 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: [
+                  children: const [
+                    /*
                     Container(
                       height: 36,
                       width: 36,
@@ -136,14 +133,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(
                       width: 8,
-                    ),
-                    const Text(
+                    ),*/
+                    Text(
                       'Hi, ',
                       style: TextStyle(
                         fontSize: 16,
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Parents',
                       style: TextStyle(
                         fontSize: 16,
@@ -206,42 +203,70 @@ class _HomePageState extends State<HomePage> {
                       ),
                       const SizedBox(width: 8),
                       ActivityCardRow(
+                        color: const Color(0xff607D8B),
+                        label: 'Lesson\nPlan',
+                        icon: Icons.edit_document,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            RouteName.listChild,
+                            arguments: 'lesson-plan',
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      ActivityCardRow(
                         color: const Color(0xff9C27B0),
                         label: 'Laporan\nHarian',
                         icon: Icons.edit_document,
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          RouteName.listChild,
-                          arguments: 'daily-report',
-                        ),
+                        onTap: () {
+                          SPToast.showToast(message: 'Fitur segera rilis');
+                          /*
+                          Navigator.pushNamed(
+                            context,
+                            RouteName.listChild,
+                            arguments: 'daily-report',
+                          );*/
+                        },
                       ),
                       const SizedBox(width: 8),
                       ActivityCardRow(
                         color: const Color(0xff4CAF50),
                         label: 'Laporan\nBulanan',
                         icon: Icons.edit_document,
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          RouteName.listChild,
-                          arguments: 'monthly-report',
-                        ),
+                        onTap: () {
+                          SPToast.showToast(message: 'Fitur segera rilis');
+                          /*
+                          Navigator.pushNamed(
+                            context,
+                            RouteName.listChild,
+                            arguments: 'monthly-report',
+                          );*/
+                        },
                       ),
                       const SizedBox(width: 8),
                       ActivityCardRow(
                         color: const Color(0xffE91E63),
                         label: 'Monte-\nssori',
                         icon: Icons.document_scanner,
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          RouteName.listChild,
-                          arguments: 'montessori-report',
-                        ),
+                        onTap: () {
+                          SPToast.showToast(message: 'Fitur segera rilis');
+                          /*
+                          Navigator.pushNamed(
+                            context,
+                            RouteName.listChild,
+                            arguments: 'montessori-report',
+                          );*/
+                        },
                       ),
                       const SizedBox(width: 8),
-                      const ActivityCardRow(
-                        color: Color(0xff607D8B),
+                      ActivityCardRow(
+                        color: const Color(0xff607D8B),
                         label: 'Rekap\nAbsen',
                         icon: Icons.access_time,
+                        onTap: () {
+                          SPToast.showToast(message: 'Fitur segera rilis');
+                        },
                       ),
                     ],
                   ),

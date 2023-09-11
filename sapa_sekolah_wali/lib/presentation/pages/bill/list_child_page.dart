@@ -208,6 +208,9 @@ class _ListChildPageState extends State<ListChildPage> {
                                             );
                                           }
 
+                                          if (widget.direction ==
+                                              'lesson-plan') {}
+
                                           if (widget.direction == 'payment') {
                                             Navigator.pushNamed(
                                               context,

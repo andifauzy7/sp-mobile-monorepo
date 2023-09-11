@@ -30,8 +30,8 @@ class AuthRepositoryImpl implements AuthRepository {
       if (response.data['success']) {
         final result = LoginModel.fromJson(response.data['data']);
         sp.setString('token', result.token!);
-        sp.setString('user_id', result.userId!);
-        return Right(result as BaseModel);
+        sp.setString('user_id', result.userId!.toString());
+        return Right(result);
       } else {
         return Left(ExceptionModel(response.data['message']));
       }

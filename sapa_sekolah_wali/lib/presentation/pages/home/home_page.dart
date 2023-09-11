@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:encrypted_shared_preferences/encrypted_shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sapa_sekolah_wali/application/bloc/news/news_bloc.dart';
@@ -17,6 +18,14 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   final NewsBloc newsBloc = getIt<NewsBloc>();
+
+  void _navigateToSplash(
+    BuildContext context,
+  ) =>
+      Navigator.pushReplacementNamed(
+        context,
+        RouteName.splash,
+      );
 
   @override
   void initState() {
@@ -58,6 +67,7 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                   ),
                 ),
+                /*
                 const SizedBox(height: 32),
                 InkWell(
                   onTap: () {
@@ -70,10 +80,23 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                     ),
                   ),
-                ),
+                ),*/
                 const SizedBox(height: 32),
-                const Text('Keluar',
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
+                InkWell(
+                  onTap: () async {
+                    final esp = EncryptedSharedPreferences();
+                    await esp.clear();
+                    // ignore: use_build_context_synchronously
+                    _navigateToSplash(context);
+                  },
+                  child: const Text(
+                    'Keluar',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

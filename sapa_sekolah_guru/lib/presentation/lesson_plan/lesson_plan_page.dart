@@ -26,7 +26,7 @@ class _LessonPlanPageState extends State<LessonPlanPage>
 
   final _tabs = [
     const Tab(text: 'Lesson Plan'),
-    const Tab(text: 'Lesson List'),
+    const Tab(text: 'Area'),
     const Tab(text: 'Activity List'),
   ];
 

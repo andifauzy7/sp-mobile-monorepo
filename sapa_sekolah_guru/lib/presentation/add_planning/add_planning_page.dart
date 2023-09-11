@@ -267,7 +267,7 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                                   items: state.lessons
                                       .map((e) => e.subjectName ?? '')
                                       .toList(),
-                                  hintText: 'Pilih Daftar Pelajaran',
+                                  hintText: 'Pilih Area',
                                   suffix: SvgPicture.asset(
                                     Assets.icon.arrowDown.path,
                                   ),

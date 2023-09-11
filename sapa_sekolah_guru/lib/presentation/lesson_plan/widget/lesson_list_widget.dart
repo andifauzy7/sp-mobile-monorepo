@@ -52,7 +52,7 @@ class LessonListWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'List Daftar Pelajaran',
+                    'List Area',
                     style: SPTextStyles.text12W400303030,
                   ),
                   const SizedBox(

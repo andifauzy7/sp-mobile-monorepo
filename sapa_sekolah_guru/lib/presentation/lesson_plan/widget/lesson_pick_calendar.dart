@@ -100,6 +100,11 @@ class LessonPickCalendar extends StatelessWidget {
               ),
             ),
             child: SPCalendar(
+              lastDay: DateTime(
+                DateTime.now().year,
+                DateTime.now().month + 6,
+                DateTime.now().day,
+              ),
               onSelect: onSelect,
             ),
           ),

@@ -153,6 +153,7 @@ class StudentPresencePage extends StatelessWidget {
                             ),
                           ),
                           child: SPCalendar(
+                            lastDay: DateTime.now(),
                             onSelect: (selected) => {
                               _navigateToUpdateStudentPresence(
                                 context,

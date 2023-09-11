@@ -7,10 +7,12 @@ import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class SPCalendar extends StatefulWidget {
+  final DateTime lastDay;
   final Function(DateTime selected) onSelect;
   const SPCalendar({
     super.key,
     required this.onSelect,
+    required this.lastDay,
   });
 
   @override
@@ -23,7 +25,7 @@ class _SPCalendarState extends State<SPCalendar> {
   Widget build(BuildContext context) {
     return TableCalendar(
       firstDay: DateTime.utc(2010, 10, 16),
-      lastDay: DateTime.now(),
+      lastDay: widget.lastDay,
       focusedDay: currentDate,
       currentDay: currentDate,
       headerStyle: HeaderStyle(

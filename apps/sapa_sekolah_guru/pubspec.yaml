@@ -12,11 +12,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   # Components
   sapa_component:
-    path: ../packages/sapa_component/
+    path: ../../packages/sapa_component/
 
   # Core
   sapa_core:
-    path: ../packages/sapa_core/
+    path: ../../packages/sapa_core/
 
 dev_dependencies:
   injectable_generator:  

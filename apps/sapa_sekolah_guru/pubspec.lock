@@ -835,14 +835,14 @@ packages:
   sapa_component:
     dependency: "direct main"
     description:
-      path: "../packages/sapa_component"
+      path: "../../packages/sapa_component"
       relative: true
     source: path
     version: "0.0.1"
   sapa_core:
     dependency: "direct main"
     description:
-      path: "../packages/sapa_core"
+      path: "../../packages/sapa_core"
       relative: true
     source: path
     version: "0.0.1"

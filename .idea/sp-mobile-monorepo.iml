@@ -74,6 +74,12 @@
       <excludeFolder url="file://$MODULE_DIR$/sapa_sekolah_wali/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/sapa_sekolah_wali/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/sapa_sekolah_wali/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/sapa_core/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/sapa_core/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/sapa_core/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/sapa_component/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/sapa_component/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/sapa_component/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 33, extension level 4 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

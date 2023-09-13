@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/change_password/change_password_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/splash_page.dart';
-import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
-import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
-import 'package:sapa_sekolah_guru/shared/component/form/sp_validator.dart';
-import 'package:sapa_sekolah_guru/shared/component/other/sp_container_image.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
-import 'package:sapa_sekolah_guru/shared/component/toast/sp_toast.dart';
+import 'package:sapa_component/button/sp_elevated_button.dart';
+import 'package:sapa_component/dialog/sp_dialog.dart';
+import 'package:sapa_component/form/sp_text_field.dart';
+import 'package:sapa_component/form/sp_validator.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
+import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/toast/sp_toast.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);

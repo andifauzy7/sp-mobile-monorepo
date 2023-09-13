@@ -21,6 +21,7 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> checkSession() async {
     final isLoged = await sessionRepository.checkSession();
+    // ignore: use_build_context_synchronously
     if (isLoged) Navigator.pushReplacementNamed(context, RouteName.home);
   }
 

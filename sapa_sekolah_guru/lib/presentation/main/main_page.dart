@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/presentation/forgot_password/forgot_password_page.dart';
 import 'package:sapa_sekolah_guru/presentation/home/home_page.dart';
@@ -11,8 +12,6 @@ import 'package:sapa_sekolah_guru/presentation/permission/permission_page.dart';
 import 'package:sapa_sekolah_guru/presentation/report/report_page.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/splash_page.dart';
 import 'package:sapa_sekolah_guru/presentation/student_presence/student_presence_page.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

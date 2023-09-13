@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+import 'package:sapa_component/calendar/sp_calendar.dart';
+import 'package:sapa_component/image/sp_cached_network_image.dart';
+import 'package:sapa_component/other/sp_icon_button.dart';
+import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_teacher/get_teacher_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/teacher_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/update_student_presence/update_student_presence_page.dart';
-import 'package:sapa_sekolah_guru/shared/component/calendar/sp_calendar.dart';
-import 'package:sapa_sekolah_guru/shared/component/image/sp_cached_network_image.dart';
-import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class StudentPresencePage extends StatelessWidget {
   const StudentPresencePage({super.key});

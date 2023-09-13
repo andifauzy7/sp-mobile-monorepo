@@ -1,5 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/model/permit_type_response_model.dart';
 import 'package:sapa_sekolah_guru/repositories/permit_repository.dart';
 

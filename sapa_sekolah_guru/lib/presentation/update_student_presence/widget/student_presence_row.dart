@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class StudentPresenceRow extends StatefulWidget {
   final String name;

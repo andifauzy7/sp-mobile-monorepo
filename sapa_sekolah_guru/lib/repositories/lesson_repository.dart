@@ -1,8 +1,7 @@
 import 'dart:convert';
-
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
+import 'package:sapa_core/failure/failure.dart';
+import 'package:sapa_core/failure/server_failure.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/model/activities_response_model.dart';
 import 'package:sapa_sekolah_guru/model/add_activity_response_model.dart';
 import 'package:sapa_sekolah_guru/model/add_lesson_plan_response_model.dart';
@@ -12,9 +11,6 @@ import 'package:sapa_sekolah_guru/model/lesson_plan_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/model/lesson_plans_response_model.dart';
 import 'package:sapa_sekolah_guru/model/lessons_response_model.dart';
 import 'package:sapa_sekolah_guru/repositories/auth_repository.dart';
-import 'package:sapa_sekolah_guru/shared/core/failure/failure.dart';
-import 'package:sapa_sekolah_guru/shared/core/failure/server_failure.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LessonRepository {
   Future<Either<Failure, List<LessonModel>>> getLessons();

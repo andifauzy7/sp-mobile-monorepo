@@ -1,12 +1,6 @@
-import 'package:alice/alice.dart';
-import 'package:alice/core/alice_dio_interceptor.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:sapa_sekolah_guru/shared/core/interceptor/error_interceptor.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sapa_core/interceptor/error_interceptor.dart';
+import 'package:sapa_core/sapa_core.dart';
 
 @module
 abstract class CoreModule {

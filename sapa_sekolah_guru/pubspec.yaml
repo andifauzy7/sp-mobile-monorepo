@@ -9,29 +9,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.2
   # Components
-  google_fonts: ^4.0.4
-  fluttertoast: ^8.1.1
-  flutter_svg: ^2.0.5
-  persistent_bottom_nav_bar: ^5.0.2
-  table_calendar: ^3.0.9
-  intl: ^0.18.1
-  syncfusion_flutter_datepicker: ^20.4.38
-  cached_network_image: ^3.2.3
-  flutter_slidable: ^3.0.0
+  sapa_component:
+    path: ../packages/sapa_component/
 
   # Core
-  dio: ^4.0.6
-  pretty_dio_logger: ^1.1.1
-  shared_preferences: ^2.2.0
-  get_it: ^7.6.0
-  injectable: ^2.1.2
-  flutter_bloc: ^8.1.3
-  alice: ^0.3.1
-  equatable: ^2.0.5
-  dartz: ^0.10.1
+  sapa_core:
+    path: ../packages/sapa_core/
 
 dev_dependencies:
   injectable_generator:  

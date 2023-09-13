@@ -1,0 +1,42 @@
+name: sapa_component
+description: A new Flutter project.
+version: 0.0.1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Components
+  google_fonts: ^4.0.4
+  fluttertoast: ^8.1.1
+  flutter_svg: ^2.0.5
+  persistent_bottom_nav_bar: ^5.0.2
+  table_calendar: ^3.0.9
+  intl: ^0.18.1
+  cached_network_image: ^3.2.3
+  syncfusion_flutter_datepicker: ^20.4.38
+  flutter_slidable: ^3.0.0
+
+dev_dependencies:
+  build_runner: 
+  flutter_gen_runner:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter_gen:
+  integrations:
+    flutter_svg: true
+  assets:
+    outputs:
+        class_name: SPAssets
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/shape/
+    - assets/icon/

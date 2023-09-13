@@ -1,12 +1,9 @@
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
+import 'package:sapa_core/failure/failure.dart';
+import 'package:sapa_core/failure/server_failure.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/model/change_password_response_model.dart';
 import 'package:sapa_sekolah_guru/model/login_response_model.dart';
 import 'package:sapa_sekolah_guru/model/teacher_response_model.dart';
-import 'package:sapa_sekolah_guru/shared/core/failure/failure.dart';
-import 'package:sapa_sekolah_guru/shared/core/failure/server_failure.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 const String keyToken = "CACHE_KEY_TOKEN";
 const String keyUserId = "CACHE_USER_ID";

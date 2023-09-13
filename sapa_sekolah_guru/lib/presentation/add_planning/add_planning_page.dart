@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get_it/get_it.dart';
-import 'package:intl/intl.dart';
+import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/add_lesson_plan/add_lesson_plan_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart';
@@ -11,13 +9,13 @@ import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/activities_response_model.dart';
 import 'package:sapa_sekolah_guru/model/lesson_plan_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
-import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
-import 'package:sapa_sekolah_guru/shared/component/form/sp_dropdown_field.dart';
-import 'package:sapa_sekolah_guru/shared/component/form/sp_text_field.dart';
-import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
+import 'package:sapa_component/button/sp_elevated_button.dart';
+import 'package:sapa_component/dialog/sp_dialog.dart';
+import 'package:sapa_component/form/sp_dropdown_field.dart';
+import 'package:sapa_component/form/sp_text_field.dart';
+import 'package:sapa_component/other/sp_icon_button.dart';
+import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
 
 class AddPlanningPage extends StatelessWidget {
   final LessonPlanDetailModel? lessonPlan;
@@ -240,7 +238,11 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                                   context: context,
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime.utc(2010, 10, 16),
-                                  lastDate: DateTime.now(),
+                                  lastDate: DateTime(
+                                    DateTime.now().year,
+                                    DateTime.now().month + 6,
+                                    DateTime.now().day,
+                                  ),
                                 );
 
                                 if (result != null) {

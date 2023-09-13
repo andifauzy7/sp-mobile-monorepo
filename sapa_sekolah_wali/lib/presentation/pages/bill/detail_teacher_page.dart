@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sapa_sekolah_wali/application/bloc/child/child_bloc.dart';
 import 'package:sapa_sekolah_wali/dependency.dart';
-import 'package:sapa_sekolah_wali/presentation/components/global/card/shimmer_card.dart';
 
 class DetailTeacherPage extends StatefulWidget {
   const DetailTeacherPage({

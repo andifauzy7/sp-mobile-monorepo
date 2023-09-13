@@ -1,13 +1,10 @@
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
+import 'package:sapa_core/failure/failure.dart';
+import 'package:sapa_core/failure/server_failure.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/model/daily_report_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/model/daily_reports_response_model.dart';
 import 'package:sapa_sekolah_guru/model/update_daily_report_response_model.dart';
 import 'package:sapa_sekolah_guru/repositories/auth_repository.dart';
-import 'package:sapa_sekolah_guru/shared/core/failure/failure.dart';
-import 'package:sapa_sekolah_guru/shared/core/failure/server_failure.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ReportRepository {
   Future<Either<Failure, List<DailyReportModel>>> getDailyReports(

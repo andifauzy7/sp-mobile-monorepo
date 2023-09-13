@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
 
 class MenuCard extends StatelessWidget {
   final String title;

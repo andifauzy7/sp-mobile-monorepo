@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/presentation/main/main_page.dart';
 import 'package:sapa_sekolah_guru/presentation/login/login_page.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/cubit/splash_cubit.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);

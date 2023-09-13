@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get_it/get_it.dart';
-import 'package:intl/intl.dart';
+import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/update_daily_report/update_daily_report_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
-import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
-import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
+import 'package:sapa_component/button/sp_elevated_button.dart';
+import 'package:sapa_component/dialog/sp_dialog.dart';
+import 'package:sapa_component/other/sp_icon_button.dart';
+import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
 
 class AddDailyReportPage extends StatelessWidget {
   final StudentModel student;

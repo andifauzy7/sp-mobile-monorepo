@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:get_it/get_it.dart';
-import 'package:intl/intl.dart';
+import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/delete_lesson_plan/delete_lesson_plan_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/lesson_plan_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/add_planning/add_planning_page.dart';
-import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
-import 'package:sapa_sekolah_guru/shared/component/other/sp_failure_widget.dart';
-import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
+import 'package:sapa_component/button/sp_elevated_button.dart';
+import 'package:sapa_component/dialog/sp_dialog.dart';
+import 'package:sapa_component/other/sp_failure_widget.dart';
+import 'package:sapa_component/other/sp_icon_button.dart';
+import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
 
 class DetailPlanningPage extends StatelessWidget {
   final String id;

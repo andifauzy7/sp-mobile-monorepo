@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:intl/intl.dart';
+import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_students_attendance/get_students_attendance_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_teacher/get_teacher_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/submit_student_attendance/submit_student_attendance_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/students_attendance_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/update_student_presence/widget/student_presence_row.dart';
-import 'package:sapa_sekolah_guru/shared/component/button/sp_elevated_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/dialog/sp_dialog.dart';
-import 'package:sapa_sekolah_guru/shared/component/other/sp_failure_widget.dart';
-import 'package:sapa_sekolah_guru/shared/component/other/sp_icon_button.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_colors.dart';
-import 'package:sapa_sekolah_guru/shared/component/styles/sp_text_styles.dart';
+import 'package:sapa_component/button/sp_elevated_button.dart';
+import 'package:sapa_component/dialog/sp_dialog.dart';
+import 'package:sapa_component/other/sp_failure_widget.dart';
+import 'package:sapa_component/other/sp_icon_button.dart';
+import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
 
 class UpdateStudentPresencePage extends StatelessWidget {
   final DateTime dateTime;

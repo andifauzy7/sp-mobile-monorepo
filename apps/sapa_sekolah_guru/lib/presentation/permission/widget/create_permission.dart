@@ -4,13 +4,14 @@ import 'package:sapa_component/dialog/sp_dialog.dart';
 import 'package:sapa_component/form/sp_dropdown_field.dart';
 import 'package:sapa_component/form/sp_text_field.dart';
 import 'package:sapa_component/form/sp_validator.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/add_permit/add_permit_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 
 class CreatePermission extends StatefulWidget {
   final VoidCallback onSuccess;
@@ -85,7 +86,8 @@ class _CreatePermissionState extends State<CreatePermission> {
                       state.students.map((e) => e.studentName ?? '').toList(),
                   hintText: 'Tambah Murid',
                   suffix: SvgPicture.asset(
-                    Assets.icon.addSquare.path,
+                    SPAssets.icon.addSquare.path,
+                    package: spComponentPackage,
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -115,7 +117,8 @@ class _CreatePermissionState extends State<CreatePermission> {
                       .toList(),
                   hintText: 'Tipe Izin',
                   suffix: SvgPicture.asset(
-                    Assets.icon.addSquare.path,
+                    SPAssets.icon.addSquare.path,
+                    package: spComponentPackage,
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -138,7 +141,8 @@ class _CreatePermissionState extends State<CreatePermission> {
             hintText: 'Pilih Tanggal',
             enabled: false,
             suffix: SvgPicture.asset(
-              Assets.icon.calendarPicker.path,
+              SPAssets.icon.calendarPicker.path,
+              package: spComponentPackage,
             ),
             onTap: () async {
               await showDialog<Widget>(

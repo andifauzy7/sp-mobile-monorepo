@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/animation/sp_switcher_animation.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/add_activity/add_activity_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart';
@@ -41,11 +43,12 @@ class ActivityListWidget extends StatelessWidget {
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(16),
                 ),
+                boxShadow: SPShadow.shadowGrey,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,36 +57,41 @@ class ActivityListWidget extends StatelessWidget {
                     'List Daftar Aktivitas',
                     style: SPTextStyles.text12W400303030,
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  const SizedBox(height: 16),
                   Expanded(
                     child: BlocBuilder<GetActivitiesBloc, GetActivitiesState>(
                       builder: (context, state) {
+                        Widget renderWidget = const Center(
+                          child: CircularProgressIndicator(),
+                        );
                         if (state is GetActivitiesSuccess) {
-                          return ListView.separated(
-                            physics: const BouncingScrollPhysics(
-                              parent: AlwaysScrollableScrollPhysics(),
-                            ),
-                            itemCount: state.activities.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(
-                              height: 16,
-                            ),
-                            itemBuilder: (context, index) => _renderCard(
-                              lesson:
-                                  state.activities[index].activityName ?? '-',
-                            ),
-                          );
+                          if (state.activities.isEmpty) {
+                            renderWidget = const SPFailureWidget(
+                              message: 'Data kosong',
+                            );
+                          } else {
+                            renderWidget = ListView.separated(
+                              physics: const BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics(),
+                              ),
+                              itemCount: state.activities.length,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                height: 16,
+                              ),
+                              itemBuilder: (context, index) => _renderCard(
+                                lesson:
+                                    state.activities[index].activityName ?? '-',
+                              ),
+                            );
+                          }
                         }
                         if (state is GetActivitiesError) {
-                          return SPFailureWidget(
+                          renderWidget = SPFailureWidget(
                             message: state.message,
                           );
                         }
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
+                        return SPSwitcherAnimation(child: renderWidget);
                       },
                     ),
                   )
@@ -117,6 +125,7 @@ class ActivityListWidget extends StatelessWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(16),
         ),
+        boxShadow: SPShadow.shadowGrey,
       ),
       child: Text(
         lesson,

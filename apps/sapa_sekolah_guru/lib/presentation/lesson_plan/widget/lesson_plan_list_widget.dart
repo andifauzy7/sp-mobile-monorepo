@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/animation/sp_switcher_animation.dart';
+import 'package:sapa_component/card/card_lesson_plan.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
-import 'package:sapa_sekolah_guru/model/lesson_plans_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/add_planning/add_planning_page.dart';
 import 'package:sapa_sekolah_guru/presentation/detail_planning/detail_planning_page.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
-import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 
 class LessonPlanListWidget extends StatelessWidget {
@@ -72,11 +73,10 @@ class LessonPlanListWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      Assets.icon.calendarPicker.path,
+                      SPAssets.icon.calendarPicker.path,
+                      package: spComponentPackage,
                     ),
-                    const SizedBox(
-                      width: 4,
-                    ),
+                    const SizedBox(width: 4),
                     Text(
                       DateFormat('EEEE d MMMM, y', 'id_ID').format(dateTime),
                       style: SPTextStyles.text12W400303030,
@@ -88,46 +88,53 @@ class LessonPlanListWidget extends StatelessWidget {
               const Spacer(),
             ],
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           Expanded(
             child: BlocBuilder<GetLessonPlansBloc, GetLessonPlansState>(
               builder: (context, state) {
+                Widget renderWidget = const Center(
+                  child: CircularProgressIndicator(),
+                );
                 if (state is GetLessonPlansError) {
-                  return SPFailureWidget(
+                  renderWidget = SPFailureWidget(
                     message: state.message,
                   );
                 }
 
                 if (state is GetLessonPlansSuccess) {
                   if (state.lessonPlans.isEmpty) {
-                    return const SPFailureWidget(
+                    renderWidget = const SPFailureWidget(
                       message: 'Data kosong',
                     );
-                  }
-
-                  return ListView.separated(
-                    physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics(),
-                    ),
-                    itemCount: state.lessonPlans.length,
-                    separatorBuilder: (context, index) => const SizedBox(
-                      height: 16,
-                    ),
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () => _navigateToDetailPlanning(
-                        context,
-                        id: state.lessonPlans[index].lessonplanId.toString(),
+                  } else {
+                    renderWidget = ListView.separated(
+                      physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics(),
                       ),
-                      child: _renderCard(state.lessonPlans[index]),
-                    ),
-                  );
+                      itemCount: state.lessonPlans.length,
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 16,
+                      ),
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () => _navigateToDetailPlanning(
+                          context,
+                          id: state.lessonPlans[index].lessonplanId.toString(),
+                        ),
+                        child: CardLessonPlan(
+                          studentName:
+                              state.lessonPlans[index].studentName ?? '-',
+                          date: state.lessonPlans[index].lessonplanDate ??
+                              DateTime.now().toString(),
+                          lessons: (state.lessonPlans[index].lessonList ?? [])
+                              .map((e) => (e.subjectName ?? ''))
+                              .toList()
+                              .join(", "),
+                        ),
+                      ),
+                    );
+                  }
                 }
-
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return SPSwitcherAnimation(child: renderWidget);
               },
             ),
           ),
@@ -142,75 +149,6 @@ class LessonPlanListWidget extends StatelessWidget {
               }),
               text: 'Buat Planning',
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _renderCard(LessonPlanModel lessonPlan) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 12,
-      ),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(
-          Radius.circular(16),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      lessonPlan.studentName ?? '-',
-                      style: SPTextStyles.text12W500303030,
-                    ),
-                    Text(
-                      DateFormat('EEEE d MMMM, y', 'id_ID').format(
-                        DateTime.parse(lessonPlan.lessonplanDate ?? ''),
-                      ),
-                      style: SPTextStyles.text10W400B3B3B3,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 6,
-                  horizontal: 12,
-                ),
-                decoration: BoxDecoration(
-                  color: SPColors.colorFFE5C0.withOpacity(0.25),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(20),
-                  ),
-                ),
-                child: Text(
-                  'Lihat Detail',
-                  style: SPTextStyles.text8W400B3B3B3,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          Text(
-            (lessonPlan.lessonList ?? [])
-                .map((e) => (e.subjectName ?? ''))
-                .toList()
-                .join(", "),
-            style: SPTextStyles.text12W500303030,
           ),
         ],
       ),

@@ -93,7 +93,9 @@ class __StudentDetailPageBodyState extends State<_StudentDetailPageBody> {
                                   ),
                                 ),
                                 child: SingleChildScrollView(
-                                  physics: const BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(
+                                    parent: AlwaysScrollableScrollPhysics(),
+                                  ),
                                   child: Column(
                                     children: [
                                       const SizedBox(height: 8),

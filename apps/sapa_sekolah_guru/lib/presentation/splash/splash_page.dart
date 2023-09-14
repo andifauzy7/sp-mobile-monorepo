@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/presentation/main/main_page.dart';
 import 'package:sapa_sekolah_guru/presentation/login/login_page.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/cubit/splash_cubit.dart';
@@ -51,7 +52,8 @@ class SplashPage extends StatelessWidget {
                   image: DecorationImage(
                     fit: BoxFit.fill,
                     image: AssetImage(
-                      Assets.images.splashBackground.path,
+                      SPAssets.images.splashBackground.path,
+                      package: spComponentPackage,
                     ),
                   ),
                 ),
@@ -61,7 +63,8 @@ class SplashPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
-                      Assets.images.splashOrnament.path,
+                      SPAssets.images.dotOrnament.path,
+                      package: spComponentPackage,
                     ),
                   ),
                 ),
@@ -78,7 +81,8 @@ class SplashPage extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
-                            Assets.images.splashWelcome.path,
+                            SPAssets.images.splashWelcome.path,
+                            package: spComponentPackage,
                           ),
                         ),
                       ),

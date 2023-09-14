@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/animation/sp_switcher_animation.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/add_lesson/add_lesson_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart';
@@ -41,11 +43,12 @@ class LessonListWidget extends StatelessWidget {
           Expanded(
             child: Container(
               padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.all(
+                borderRadius: const BorderRadius.all(
                   Radius.circular(16),
                 ),
+                boxShadow: SPShadow.shadowGrey,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,35 +57,40 @@ class LessonListWidget extends StatelessWidget {
                     'List Area',
                     style: SPTextStyles.text12W400303030,
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  const SizedBox(height: 16),
                   Expanded(
                     child: BlocBuilder<GetLessonsBloc, GetLessonsState>(
                       builder: (context, state) {
+                        Widget renderWidget = const Center(
+                          child: CircularProgressIndicator(),
+                        );
                         if (state is GetLessonsSuccess) {
-                          return ListView.separated(
-                            physics: const BouncingScrollPhysics(
-                              parent: AlwaysScrollableScrollPhysics(),
-                            ),
-                            itemCount: state.lessons.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(
-                              height: 16,
-                            ),
-                            itemBuilder: (context, index) => _renderCard(
-                              lesson: state.lessons[index].subjectName ?? '-',
-                            ),
-                          );
+                          if (state.lessons.isEmpty) {
+                            renderWidget = const SPFailureWidget(
+                              message: 'Data kosong',
+                            );
+                          } else {
+                            renderWidget = ListView.separated(
+                              physics: const BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics(),
+                              ),
+                              itemCount: state.lessons.length,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                height: 16,
+                              ),
+                              itemBuilder: (context, index) => _renderCard(
+                                lesson: state.lessons[index].subjectName ?? '-',
+                              ),
+                            );
+                          }
                         }
                         if (state is GetLessonsError) {
-                          return SPFailureWidget(
+                          renderWidget = SPFailureWidget(
                             message: state.message,
                           );
                         }
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
+                        return SPSwitcherAnimation(child: renderWidget);
                       },
                     ),
                   )
@@ -116,6 +124,7 @@ class LessonListWidget extends StatelessWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(16),
         ),
+        boxShadow: SPShadow.shadowGrey,
       ),
       child: Text(
         lesson,

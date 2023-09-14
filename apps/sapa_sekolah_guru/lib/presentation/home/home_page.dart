@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_teacher/get_teacher_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_component/form/sp_text_field.dart';
 import 'package:sapa_component/image/sp_cached_network_image.dart';
 import 'package:sapa_component/other/sp_icon_button.dart';
@@ -68,12 +68,10 @@ class HomePage extends StatelessWidget {
                       height: 40,
                       child: SPIconButton(
                         onTap: () => _comingSoonMessage(),
-                        url: Assets.icon.notification.path,
+                        url: SPAssets.icon.notification.path,
                       ),
                     ),
-                    const SizedBox(
-                      width: 8,
-                    ),
+                    const SizedBox(width: 8),
                     BlocBuilder<GetTeacherBloc, GetTeacherState>(
                       builder: (context, state) {
                         String url = "";
@@ -89,14 +87,12 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 32,
-                ),
+                const SizedBox(height: 32),
                 Row(
                   children: [
                     SPIconButton(
                       onTap: () => _comingSoonMessage(),
-                      url: Assets.icon.filter.path,
+                      url: SPAssets.icon.filter.path,
                       color: Colors.white,
                     ),
                     const SizedBox(
@@ -106,22 +102,18 @@ class HomePage extends StatelessWidget {
                       child: SPTextField(
                         hintText: 'Search',
                         suffix: SvgPicture.asset(
-                          Assets.icon.searchNormal.path,
+                          SPAssets.icon.searchNormal.path,
                         ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 32,
-                ),
+                const SizedBox(height: 32),
                 Text(
                   'Absensi Guru',
                   style: SPTextStyles.text16W400303030,
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
@@ -138,12 +130,10 @@ class HomePage extends StatelessWidget {
                     child: Row(
                       children: [
                         SPIconButton(
-                          url: Assets.icon.edit.path,
+                          url: SPAssets.icon.edit.path,
                           color: SPColors.color6FCF97,
                         ),
-                        const SizedBox(
-                          width: 16,
-                        ),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -172,9 +162,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          width: 16,
-                        ),
+                        const SizedBox(width: 16),
                         Text(
                           'Absen',
                           style: SPTextStyles.text12W4006FCF97,
@@ -183,9 +171,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
@@ -277,9 +263,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_teacher/get_teacher_bloc.dart';
 import 'package:sapa_sekolah_guru/model/teacher_response_model.dart';
@@ -25,11 +26,12 @@ class LessonPickCalendar extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(16),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(16),
               ),
+              boxShadow: SPShadow.shadowGrey,
             ),
             child: BlocBuilder<GetTeacherBloc, GetTeacherState>(
               builder: (context, state) {
@@ -49,9 +51,7 @@ class LessonPickCalendar extends StatelessWidget {
                       height: 40,
                       imageUrl: teacherModel.employeePhoto ?? '',
                     ),
-                    const SizedBox(
-                      width: 8,
-                    ),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,23 +80,20 @@ class LessonPickCalendar extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           Text(
             'Silahkan Pilih Tanggal',
             style: SPTextStyles.text16W400303030,
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(16),
               ),
+              boxShadow: SPShadow.shadowGrey,
             ),
             child: SPCalendar(
               lastDay: DateTime(

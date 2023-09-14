@@ -6,7 +6,7 @@ part 'login_state.dart';
 
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthRepositoryTemp authRepository;
+  final AuthRepository authRepository;
   LoginBloc({required this.authRepository}) : super(LoginInitial()) {
     on<LoginEvent>((event, emit) async {
       emit(LoginLoading());

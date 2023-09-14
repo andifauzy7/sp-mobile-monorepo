@@ -5,7 +5,7 @@ part 'splash_state.dart';
 
 @injectable
 class SplashCubit extends Cubit<SplashState> {
-  final AuthRepositoryTemp authRepository;
+  final AuthRepository authRepository;
   SplashCubit({required this.authRepository}) : super(SplashInitial());
 
   Future<void> checkSession() async {

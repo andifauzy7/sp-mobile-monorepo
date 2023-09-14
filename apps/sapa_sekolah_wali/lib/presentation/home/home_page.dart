@@ -18,9 +18,9 @@ class HomePage extends StatelessWidget {
     return Container(
       color: SPColors.colorFAFAFA,
       child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 24, right: 24, top: 24),
             child: Column(
               children: [
                 Row(

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 
-class MenuCard extends StatelessWidget {
+class CardMenu extends StatelessWidget {
   final String title;
   final String description;
   final String imageUrl;
-  final Color color;
-  const MenuCard({
+  final String package;
+  const CardMenu({
     super.key,
     required this.title,
     required this.description,
     required this.imageUrl,
-    required this.color,
+    this.package = 'sapa_component',
   });
 
   @override
@@ -19,10 +20,11 @@ class MenuCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.2),
+        color: Colors.white,
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
+        boxShadow: SPShadow.shadowGrey,
       ),
       child: Center(
         child: Column(

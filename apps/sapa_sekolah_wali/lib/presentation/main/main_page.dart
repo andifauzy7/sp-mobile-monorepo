@@ -77,7 +77,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: PersistentTabView(
         context,
         controller: _controller,

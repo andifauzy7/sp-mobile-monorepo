@@ -4,9 +4,11 @@ import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/form/sp_text_field.dart';
 import 'package:sapa_component/form/sp_validator.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/toast/sp_toast.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/change_password/change_password_bloc.dart';
 import 'package:sapa_sekolah_wali/presentation/splash/splash_page.dart';
@@ -82,15 +84,9 @@ class __ForgotPasswordPageBodyState extends State<_ForgotPasswordPageBody> {
         backgroundColor: SPColors.colorFAFAFA,
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    SPAssets.images.forgotPasswordOrnament.path,
-                    package: 'sapa_component',
-                  ),
-                ),
-              ),
+            child: SPContainerImage(
+              imageUrl: SPAssets.images.dotOrnament.path,
+              package: spComponentPackage,
               child: Column(
                 children: [
                   const SizedBox(height: 32),
@@ -103,7 +99,7 @@ class __ForgotPasswordPageBodyState extends State<_ForgotPasswordPageBody> {
                       image: DecorationImage(
                         image: AssetImage(
                           SPAssets.images.forgotPasswordBackground.path,
-                          package: 'sapa_component',
+                          package: spComponentPackage,
                         ),
                       ),
                     ),

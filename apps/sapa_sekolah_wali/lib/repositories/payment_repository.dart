@@ -34,7 +34,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
     final data = FormData.fromMap({
       "token": token,
       "user_id": userId,
-      "student_id": 1,
+      "student_id": studentId,
     });
     try {
       final response = await dio.post(

@@ -12,6 +12,13 @@ class SPTextStyles {
       color: SPColors.colorB3B3B3,
     ),
   );
+  static TextStyle text8W400WHITE = GoogleFonts.dmSans(
+    textStyle: const TextStyle(
+      fontSize: 8,
+      fontWeight: FontWeight.w400,
+      color: Colors.white,
+    ),
+  );
 
   // Text 10
   /// Text 10 W400

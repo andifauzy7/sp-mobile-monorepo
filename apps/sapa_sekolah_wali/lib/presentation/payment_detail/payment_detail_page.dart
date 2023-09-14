@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/animation/sp_switcher_animation.dart';
+import 'package:sapa_component/app_bar/sp_app_bar.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
-import 'package:sapa_component/other/sp_icon_button.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_payment_detail/get_payment_detail_bloc.dart';
 import 'package:sapa_sekolah_wali/shared/constant/app_constant.dart';
@@ -60,45 +64,25 @@ class __PaymentDetailPageBodyState extends State<_PaymentDetailPageBody> {
       },
       child: Scaffold(
         backgroundColor: SPColors.colorFAFAFA,
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                SPAssets.images.lessonPlanBackground.path,
-                package: 'sapa_component',
-              ),
-            ),
-          ),
+        body: SPContainerImage(
+          imageUrl: SPAssets.images.circleBackground.path,
+          package: spComponentPackage,
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      SPIconButton(
-                        url: SPAssets.icon.arrowLeft.path,
-                        color: SPColors.colorC8A8DA,
-                        onTap: () => Navigator.pop(context),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "Detail Pembayaran",
-                        style: SPTextStyles.text16W400303030,
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                  const SPAppBar(title: 'Detail Pembayaran'),
+                  const SizedBox(height: 24),
                   Expanded(
                     child: BlocBuilder<GetPaymentDetailBloc,
                         GetPaymentDetailState>(
                       builder: (context, state) {
+                        Widget renderWidget = const Center(
+                          child: CircularProgressIndicator(),
+                        );
                         if (state is GetPaymentDetailSuccess) {
-                          return ListView(
+                          renderWidget = ListView(
                             physics: const BouncingScrollPhysics(
                               parent: AlwaysScrollableScrollPhysics(),
                             ),
@@ -109,11 +93,12 @@ class __PaymentDetailPageBodyState extends State<_PaymentDetailPageBody> {
                                   horizontal: 16,
                                   vertical: 12,
                                 ),
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(16),
                                   ),
+                                  boxShadow: SPShadow.shadowGrey,
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -248,11 +233,12 @@ class __PaymentDetailPageBodyState extends State<_PaymentDetailPageBody> {
                                   horizontal: 16,
                                   vertical: 12,
                                 ),
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(16),
                                   ),
+                                  boxShadow: SPShadow.shadowGrey,
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -279,7 +265,7 @@ class __PaymentDetailPageBodyState extends State<_PaymentDetailPageBody> {
                                               .toList()
                                           : state.paymentDetail.bankName ==
                                                   'BCA'
-                                              ? bacMobileBankingGuide
+                                              ? bcaMobileBankingGuide
                                                   .map(
                                                     (e) => Text(
                                                       e,
@@ -306,13 +292,11 @@ class __PaymentDetailPageBodyState extends State<_PaymentDetailPageBody> {
                           );
                         }
                         if (state is GetPaymentDetailError) {
-                          return SPFailureWidget(
+                          renderWidget = SPFailureWidget(
                             message: state.message,
                           );
                         }
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
+                        return SPSwitcherAnimation(child: renderWidget);
                       },
                     ),
                   ),

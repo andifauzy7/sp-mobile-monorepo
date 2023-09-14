@@ -119,6 +119,14 @@ class $AssetsImagesGen {
   AssetGenImage get attendanceStudentImage =>
       const AssetGenImage('assets/images/attendance_student_image.png');
 
+  /// File path: assets/images/circle_background.png
+  AssetGenImage get circleBackground =>
+      const AssetGenImage('assets/images/circle_background.png');
+
+  /// File path: assets/images/dot_ornament.png
+  AssetGenImage get dotOrnament =>
+      const AssetGenImage('assets/images/dot_ornament.png');
+
   /// File path: assets/images/forgot_password_background.png
   AssetGenImage get forgotPasswordBackground =>
       const AssetGenImage('assets/images/forgot_password_background.png');
@@ -175,6 +183,8 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [
         attendanceImage,
         attendanceStudentImage,
+        circleBackground,
+        dotOrnament,
         forgotPasswordBackground,
         forgotPasswordOrnament,
         imageFailure,

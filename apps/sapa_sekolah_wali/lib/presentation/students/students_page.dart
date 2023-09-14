@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/animation/sp_switcher_animation.dart';
+import 'package:sapa_component/app_bar/sp_app_bar.dart';
+import 'package:sapa_component/card/card_student.dart';
 import 'package:sapa_component/form/sp_text_field.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
-import 'package:sapa_component/other/sp_icon_button.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
-import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_students/get_students_bloc.dart';
 import 'package:sapa_sekolah_wali/model/students_response_model.dart';
@@ -115,39 +118,16 @@ class _StudentsPageBodyState extends State<_StudentsPageBody> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: SPColors.colorFAFAFA,
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                SPAssets.images.lessonPlanBackground.path,
-                package: 'sapa_component',
-              ),
-            ),
-          ),
+        body: SPContainerImage(
+          imageUrl: SPAssets.images.circleBackground.path,
+          package: spComponentPackage,
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      SPIconButton(
-                        url: SPAssets.icon.arrowLeft.path,
-                        color: SPColors.colorC8A8DA,
-                        onTap: () => Navigator.pop(context),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        widget.pagePurpose.title,
-                        style: SPTextStyles.text18W400303030,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  SPAppBar(title: widget.pagePurpose.title),
+                  const SizedBox(height: 16),
                   Expanded(
                     child: BlocListener<GetStudentsBloc, GetStudentsState>(
                       listener: (context, state) {
@@ -157,88 +137,71 @@ class _StudentsPageBodyState extends State<_StudentsPageBody> {
                       },
                       child: BlocBuilder<GetStudentsBloc, GetStudentsState>(
                         builder: (context, state) {
+                          Widget renderWidget = const Center(
+                            child: CircularProgressIndicator(),
+                          );
                           if (state is GetStudentsSuccess) {
                             if (state.students.isEmpty) {
-                              return const SPFailureWidget(
+                              renderWidget = const SPFailureWidget(
                                 message: 'Data kosong',
                               );
-                            }
-                            return Column(
-                              children: [
-                                SPTextField(
-                                  controller: searchController,
-                                  hintText: 'Cari berdasarkan nama',
-                                  prefix: SvgPicture.asset(
-                                    SPAssets.icon.searchNormal.path,
-                                    package: 'sapa_component',
-                                  ),
-                                  onChanged: (value) => setState(() {
-                                    studentFiltered = state.students
-                                        .where((element) =>
-                                            (element.studentName ?? '')
-                                                .toLowerCase()
-                                                .contains(value.toLowerCase()))
-                                        .toList();
-                                  }),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Expanded(
-                                  child: ListView.separated(
-                                    physics: const BouncingScrollPhysics(
-                                      parent: AlwaysScrollableScrollPhysics(),
+                            } else {
+                              renderWidget = Column(
+                                children: [
+                                  SPTextField(
+                                    controller: searchController,
+                                    hintText: 'Cari berdasarkan nama',
+                                    prefix: SvgPicture.asset(
+                                      SPAssets.icon.searchNormal.path,
+                                      package: spComponentPackage,
                                     ),
-                                    itemCount: studentFiltered.length,
-                                    separatorBuilder: (_, __) => const SizedBox(
-                                      height: 12,
-                                    ),
-                                    itemBuilder: (_, index) => GestureDetector(
-                                      onTap: () => _navigateTo(
-                                        context,
-                                        student: studentFiltered[index],
-                                      ),
-                                      child: Container(
-                                        padding: const EdgeInsets.all(16),
-                                        decoration: const BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(16),
-                                          ),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              studentFiltered[index]
+                                    onChanged: (value) => setState(() {
+                                      studentFiltered = state.students
+                                          .where((element) => (element
                                                       .studentName ??
-                                                  '-',
-                                              style:
-                                                  SPTextStyles.text12W400303030,
-                                            ),
-                                            SvgPicture.asset(
-                                              SPAssets.icon.arrowRight.path,
-                                              package: 'sapa_component',
-                                            ),
-                                          ],
+                                                  '')
+                                              .toLowerCase()
+                                              .contains(value.toLowerCase()))
+                                          .toList();
+                                    }),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  Expanded(
+                                    child: ListView.separated(
+                                      physics: const BouncingScrollPhysics(
+                                        parent: AlwaysScrollableScrollPhysics(),
+                                      ),
+                                      itemCount: studentFiltered.length,
+                                      separatorBuilder: (_, __) =>
+                                          const SizedBox(
+                                        height: 12,
+                                      ),
+                                      itemBuilder: (_, index) =>
+                                          GestureDetector(
+                                        onTap: () => _navigateTo(
+                                          context,
+                                          student: studentFiltered[index],
+                                        ),
+                                        child: CardStudent(
+                                          studentName: studentFiltered[index]
+                                                  .studentName ??
+                                              '-',
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            );
+                                ],
+                              );
+                            }
                           }
-
                           if (state is GetStudentsError) {
-                            return SPFailureWidget(
+                            renderWidget = SPFailureWidget(
                               message: state.message,
                             );
                           }
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return SPSwitcherAnimation(child: renderWidget);
                         },
                       ),
                     ),

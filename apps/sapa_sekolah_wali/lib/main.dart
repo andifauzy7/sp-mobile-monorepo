@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         statusBarBrightness: Brightness.light,
       ),
       child: MaterialApp(
-        title: 'Sapa Sekolah',
+        title: 'Sapa Wali',
         navigatorKey: GetIt.instance.get<Alice>().getNavigatorKey(),
         theme: ThemeData(
           primarySwatch: getMaterialColor(

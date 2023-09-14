@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 
 class NewsCard extends StatelessWidget {
@@ -12,6 +13,7 @@ class NewsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
+        boxShadow: SPShadow.shadowGrey,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

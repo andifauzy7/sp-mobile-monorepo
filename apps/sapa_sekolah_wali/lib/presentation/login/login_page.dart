@@ -4,11 +4,14 @@ import 'package:sapa_component/dialog/sp_dialog.dart';
 import 'package:sapa_component/form/sp_text_field.dart';
 import 'package:sapa_component/form/sp_validator.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/toast/sp_toast.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/login/login_bloc.dart';
+import 'package:sapa_sekolah_wali/gen/assets.gen.dart';
 import 'package:sapa_sekolah_wali/presentation/main/main_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -75,15 +78,9 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
         backgroundColor: SPColors.colorFAFAFA,
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(
-                    SPAssets.images.loginOrnament.path,
-                    package: 'sapa_component',
-                  ),
-                ),
-              ),
+            child: SPContainerImage(
+              imageUrl: SPAssets.images.dotOrnament.path,
+              package: spComponentPackage,
               child: Column(
                 children: [
                   SizedBox(
@@ -91,10 +88,10 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
                     child: SizedBox(
                       height: 200,
                       child: Container(
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                              'assets/images/logo.png',
+                              Assets.images.logoLittleCastle.path,
                             ),
                           ),
                         ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/card/card_menu.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
-import 'package:sapa_sekolah_wali/presentation/menu/widget/menu_card.dart';
+import 'package:sapa_sekolah_wali/gen/assets.gen.dart';
 
 class MenuPage extends StatelessWidget {
   final VoidCallback onChildrenData,
@@ -47,47 +48,42 @@ class MenuPage extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: onChildrenData,
-                    child: MenuCard(
+                    child: CardMenu(
                       title: 'Data Murid',
                       description: 'Data Murid',
-                      imageUrl: 'assets/images/data_murid.png',
-                      color: SPColors.colorEAD2E0,
+                      imageUrl: Assets.images.menuDataStudent.path,
                     ),
                   ),
                   GestureDetector(
                     onTap: onTeacherData,
-                    child: MenuCard(
+                    child: CardMenu(
                       title: 'Data Guru',
                       description: 'Data Pengajar',
-                      imageUrl: 'assets/images/data_murid.png',
-                      color: SPColors.colorC8A8DA,
+                      imageUrl: Assets.images.menuDataStudent.path,
                     ),
                   ),
                   GestureDetector(
                     onTap: onPaymentData,
-                    child: MenuCard(
+                    child: CardMenu(
                       title: 'Pembayaran',
                       description: 'Rekap Pembayaran',
-                      imageUrl: 'assets/images/pembayaran.png',
-                      color: SPColors.colorFFE5C0,
+                      imageUrl: Assets.images.menuPayment.path,
                     ),
                   ),
                   GestureDetector(
                     onTap: onReportData,
-                    child: MenuCard(
+                    child: CardMenu(
                       title: 'Laporan',
                       description: 'Laporan Siswa',
-                      imageUrl: 'assets/images/laporan.png',
-                      color: SPColors.colorEAD2E0,
+                      imageUrl: Assets.images.menuReport.path,
                     ),
                   ),
                   GestureDetector(
                     onTap: onLessonPlan,
-                    child: MenuCard(
+                    child: CardMenu(
                       title: 'Lesson Plan',
                       description: 'Planning Siswa',
-                      imageUrl: 'assets/images/laporan.png',
-                      color: SPColors.colorC8A8DA,
+                      imageUrl: Assets.images.menuReport.path,
                     ),
                   ),
                 ],

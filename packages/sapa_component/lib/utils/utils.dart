@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+String spComponentPackage = 'sapa_component';
+
 MaterialColor getMaterialColor(Color color) {
   final int red = color.red;
   final int green = color.green;

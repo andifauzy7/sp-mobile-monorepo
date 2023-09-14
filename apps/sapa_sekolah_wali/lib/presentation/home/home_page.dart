@@ -4,6 +4,7 @@ import 'package:sapa_component/other/sp_icon_button.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/toast/sp_toast.dart';
+import 'package:sapa_sekolah_wali/gen/assets.gen.dart';
 import 'package:sapa_sekolah_wali/presentation/home/widget/news_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -63,7 +64,7 @@ class HomePage extends StatelessWidget {
                 GestureDetector(
                   onTap: () => _comingSoonMessage(),
                   child: Image.asset(
-                    'assets/images/banner.png',
+                    Assets.images.homeBanner.path,
                   ),
                 ),
                 const SizedBox(

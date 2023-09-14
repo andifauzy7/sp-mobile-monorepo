@@ -10,4 +10,12 @@ class SPShadow {
       offset: const Offset(0, 0),
     ),
   ];
+
+  static List<BoxShadow> shadowGrey = [
+    BoxShadow(
+      offset: const Offset(2, 2),
+      color: Colors.grey[300]!,
+      blurRadius: 5,
+    )
+  ];
 }

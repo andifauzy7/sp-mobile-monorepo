@@ -39,26 +39,27 @@ class StudentDetailModel {
   String? address;
   String? studentPhoto;
 
-  StudentDetailModel(
-      {this.studentName,
-      this.nipd,
-      this.nisn,
-      this.gender,
-      this.tempatLahir,
-      this.tanggalLahir,
-      this.nik,
-      this.religion,
-      this.address,
-      this.studentPhoto});
+  StudentDetailModel({
+    this.studentName,
+    this.nipd,
+    this.nisn,
+    this.gender,
+    this.tempatLahir,
+    this.tanggalLahir,
+    this.nik,
+    this.religion,
+    this.address,
+    this.studentPhoto,
+  });
 
   StudentDetailModel.fromJson(Map<String, dynamic> json) {
     studentName = json['student_name'];
-    nipd = json['nipd'].toString();
-    nisn = json['nisn'].toString();
+    nipd = json['nipd'];
+    nisn = json['nisn'];
     gender = json['gender'];
     tempatLahir = json['tempat_lahir'];
     tanggalLahir = json['tanggal_lahir'];
-    nik = json['nik'].toString();
+    nik = json['nik'];
     religion = json['religion'];
     address = json['address'];
     studentPhoto = json['student_photo'];

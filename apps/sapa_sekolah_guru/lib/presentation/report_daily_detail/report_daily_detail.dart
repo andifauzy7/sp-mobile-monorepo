@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/animation/sp_switcher_animation.dart';
+import 'package:sapa_component/app_bar/sp_app_bar.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/dialog/sp_dialog.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
-import 'package:sapa_component/other/sp_icon_button.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_daily_report_detail/get_daily_report_detail_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/update_daily_report/update_daily_report_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 
 class ReportDailyDetail extends StatelessWidget {
   final String reportId;
@@ -179,34 +183,15 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: SPColors.colorFAFAFA,
-          body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  Assets.images.lessonPlanBackground.path,
-                ),
-              ),
-            ),
+          body: SPContainerImage(
+            imageUrl: SPAssets.images.circleBackground.path,
+            package: spComponentPackage,
             child: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        SPIconButton(
-                          url: Assets.icon.arrowLeft.path,
-                          onTap: () => Navigator.pop(context),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Text(
-                          'Laporan Harian',
-                          style: SPTextStyles.text18W400303030,
-                        ),
-                      ],
-                    ),
+                    const SPAppBar(title: 'Laporan Harian'),
                     const SizedBox(height: 16),
                     Expanded(
                       child: BlocConsumer<GetDailyReportDetailBloc,
@@ -226,19 +211,23 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                           }
                         },
                         builder: (context, state) {
+                          Widget renderWidget = const Center(
+                            child: CircularProgressIndicator(),
+                          );
                           if (state is GetDailyReportDetailSuccess) {
-                            return ListView(
+                            renderWidget = ListView(
                               physics: const BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics(),
                               ),
                               children: [
                                 Container(
                                   padding: const EdgeInsets.all(16),
-                                  decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.all(
+                                    borderRadius: const BorderRadius.all(
                                       Radius.circular(16),
                                     ),
+                                    boxShadow: SPShadow.shadowGrey,
                                   ),
                                   child: Column(
                                     crossAxisAlignment:
@@ -276,11 +265,12 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                 Container(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 16),
-                                  decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.all(
+                                    borderRadius: const BorderRadius.all(
                                       Radius.circular(16),
                                     ),
+                                    boxShadow: SPShadow.shadowGrey,
                                   ),
                                   child: Column(
                                     crossAxisAlignment:
@@ -360,11 +350,12 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                 Container(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 16),
-                                  decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.all(
+                                    borderRadius: const BorderRadius.all(
                                       Radius.circular(16),
                                     ),
+                                    boxShadow: SPShadow.shadowGrey,
                                   ),
                                   child: Column(
                                     crossAxisAlignment:
@@ -403,11 +394,12 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                 Container(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 16),
-                                  decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.all(
+                                    borderRadius: const BorderRadius.all(
                                       Radius.circular(16),
                                     ),
+                                    boxShadow: SPShadow.shadowGrey,
                                   ),
                                   child: Column(
                                     crossAxisAlignment:
@@ -489,13 +481,11 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                           }
 
                           if (state is GetDailyReportDetailError) {
-                            return SPFailureWidget(
+                            renderWidget = SPFailureWidget(
                               message: state.message,
                             );
                           }
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return SPSwitcherAnimation(child: renderWidget);
                         },
                       ),
                     ),
@@ -547,8 +537,9 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
           children: [
             SvgPicture.asset(
               isSelected
-                  ? Assets.icon.trueCheckbox.path
-                  : Assets.icon.emptyCheckbox.path,
+                  ? SPAssets.icon.trueCheckbox.path
+                  : SPAssets.icon.emptyCheckbox.path,
+              package: spComponentPackage,
             ),
             const SizedBox(width: 12),
             Text(

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/animation/sp_switcher_animation.dart';
+import 'package:sapa_component/app_bar/sp_app_bar.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/dialog/sp_dialog.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
-import 'package:sapa_component/other/sp_icon_button.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/add_permit/add_permit_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/presentation/permission/widget/create_permission.dart';
 
 class PermissionPage extends StatelessWidget {
@@ -76,56 +80,41 @@ class _PermissionPageBody extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: SPColors.colorFAFAFA,
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                Assets.images.lessonPlanBackground.path,
-              ),
-            ),
-          ),
+        body: SPContainerImage(
+          imageUrl: SPAssets.images.circleBackground.path,
+          package: spComponentPackage,
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      SPIconButton(
-                        url: Assets.icon.arrowLeft.path,
-                        onTap: () => Navigator.pop(context),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        'Izin Siswa',
-                        style: SPTextStyles.text18W400303030,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  const SPAppBar(title: 'Izin Siswa'),
+                  const SizedBox(height: 16),
                   Expanded(
                     child: Container(
                       padding: const EdgeInsets.all(16),
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(16),
                         ),
+                        boxShadow: SPShadow.shadowGrey,
                       ),
                       child: BlocBuilder<GetStudentPermitsBloc,
                           GetStudentPermitsState>(
                         builder: (context, state) {
+                          Widget renderWidget = const Center(
+                            child: CircularProgressIndicator(),
+                          );
                           if (state is GetStudentPermitsError) {
-                            return SPFailureWidget(message: state.message);
+                            renderWidget = SPFailureWidget(
+                              message: state.message,
+                            );
                           }
 
                           if (state is GetStudentPermitsSuccess) {
-                            return ListView.separated(
+                            renderWidget = ListView.separated(
                               physics: const BouncingScrollPhysics(
                                 parent: AlwaysScrollableScrollPhysics(),
                               ),
@@ -189,104 +178,12 @@ class _PermissionPageBody extends StatelessWidget {
                               ),
                             );
                           }
-
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return SPSwitcherAnimation(child: renderWidget);
                         },
                       ),
                     ),
                   ),
-                  /*
-                  Expanded(
-                    child: ListView(
-                      physics: const BouncingScrollPhysics(),
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(16),
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Data Izin Siswa',
-                                    style: SPTextStyles.text16W400303030,
-                                  ),
-                                  Text(
-                                    'View Detail',
-                                    style: SPTextStyles.text12W400B3B3B3,
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Row(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(15),
-                                    ),
-                                    child: SizedBox(
-                                      width: 40,
-                                      height: 40,
-                                      child: Image.network(
-                                        'https://www.timeshighereducation.com/sites/default/files/styles/article_teaser/public/shutterstock_508251865_resize.jpg?itok=4R835hL_',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Dani Carvajal',
-                                          style: SPTextStyles.text14W400303030,
-                                        ),
-                                        Text(
-                                          'Siswa, Kelas 7B',
-                                          style: SPTextStyles.text10W400B3B3B3,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        'Sakit',
-                                        style: SPTextStyles.text12W400303030,
-                                      ),
-                                      Text(
-                                        '10 Aug 2023',
-                                        style: SPTextStyles.text10W400B3B3B3,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                    ),
-                  ),*/
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
                     child: SPElevatedButton(
@@ -294,9 +191,7 @@ class _PermissionPageBody extends StatelessWidget {
                       onPressed: () => _createPermissionDialog(context),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),

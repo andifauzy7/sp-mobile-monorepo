@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/app_bar/sp_app_bar.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/add_lesson_plan/add_lesson_plan_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/activities_response_model.dart';
 import 'package:sapa_sekolah_guru/model/lesson_plan_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
@@ -13,7 +16,6 @@ import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/dialog/sp_dialog.dart';
 import 'package:sapa_component/form/sp_dropdown_field.dart';
 import 'package:sapa_component/form/sp_text_field.dart';
-import 'package:sapa_component/other/sp_icon_button.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 
@@ -129,14 +131,9 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
       },
       child: Scaffold(
         backgroundColor: SPColors.colorFAFAFA,
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                Assets.images.lessonPlanBackground.path,
-              ),
-            ),
-          ),
+        body: SPContainerImage(
+          imageUrl: SPAssets.images.circleBackground.path,
+          package: spComponentPackage,
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
@@ -148,33 +145,15 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              SPIconButton(
-                                url: Assets.icon.arrowLeft.path,
-                                onTap: () => Navigator.pop(context),
-                              ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Text(
-                                "Planning",
-                                style: SPTextStyles.text16W400303030,
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
+                          const SPAppBar(title: 'Planning'),
+                          const SizedBox(height: 24),
                           Text(
                             isEdit
                                 ? 'Tambah Planning Harian'
                                 : 'Buat Planning Harian',
                             style: SPTextStyles.text16W400303030,
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+                          const SizedBox(height: 20),
                           BlocBuilder<GetStudentsBloc, GetStudentsState>(
                             builder: (context, state) {
                               if (state is GetStudentsError) {
@@ -202,7 +181,8 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                                       .toList(),
                                   hintText: 'Pilih Murid',
                                   suffix: SvgPicture.asset(
-                                    Assets.icon.arrowDown.path,
+                                    SPAssets.icon.arrowDown.path,
+                                    package: spComponentPackage,
                                   ),
                                   onChanged: (value) {
                                     setState(() {
@@ -222,15 +202,14 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                               );
                             },
                           ),
-                          const SizedBox(
-                            height: 16,
-                          ),
+                          const SizedBox(height: 16),
                           SPTextField(
                             controller: dateController,
                             hintText: 'Pilih Tanggal',
                             enabled: false,
                             suffix: SvgPicture.asset(
-                              Assets.icon.calendarPicker.path,
+                              SPAssets.icon.calendarPicker.path,
+                              package: spComponentPackage,
                             ),
                             onTap: () async {
                               if (!isEdit) {
@@ -256,9 +235,7 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                               }
                             },
                           ),
-                          const SizedBox(
-                            height: 16,
-                          ),
+                          const SizedBox(height: 16),
                           BlocBuilder<GetLessonsBloc, GetLessonsState>(
                             builder: (context, state) {
                               if (state is GetLessonsError) {
@@ -271,7 +248,8 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                                       .toList(),
                                   hintText: 'Pilih Area',
                                   suffix: SvgPicture.asset(
-                                    Assets.icon.arrowDown.path,
+                                    SPAssets.icon.arrowDown.path,
+                                    package: spComponentPackage,
                                   ),
                                   onChanged: (value) {
                                     setState(() {
@@ -291,9 +269,7 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                               );
                             },
                           ),
-                          const SizedBox(
-                            height: 16,
-                          ),
+                          const SizedBox(height: 16),
                           BlocBuilder<GetActivitiesBloc, GetActivitiesState>(
                             builder: (context, state) {
                               if (state is GetActivitiesError) {
@@ -306,7 +282,8 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                                       .toList(),
                                   hintText: 'Pilih Aktivitas',
                                   suffix: SvgPicture.asset(
-                                    Assets.icon.arrowDown.path,
+                                    SPAssets.icon.arrowDown.path,
+                                    package: spComponentPackage,
                                   ),
                                   onChanged: (value) {
                                     try {
@@ -347,18 +324,14 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                                     ))
                                 .toList(),
                           ),
-                          const SizedBox(
-                            height: 16,
-                          ),
+                          const SizedBox(height: 16),
                           SPTextField(
                             controller: noteController,
                             hintText: 'Tambah keterangan',
                             maxLines: 4,
                             onChanged: (value) => _setEnableButton(),
                           ),
-                          const SizedBox(
-                            height: 24,
-                          ),
+                          const SizedBox(height: 24),
                         ],
                       ),
                     ),

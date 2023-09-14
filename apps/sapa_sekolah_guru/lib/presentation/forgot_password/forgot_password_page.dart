@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/change_password/change_password_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/presentation/splash/splash_page.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/dialog/sp_dialog.dart';
@@ -84,7 +85,8 @@ class __ForgotPasswordPageBodyState extends State<_ForgotPasswordPageBody> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: SPContainerImage(
-              imageUrl: Assets.images.forgotPasswordOrnament.path,
+              imageUrl: SPAssets.images.dotOrnament.path,
+              package: spComponentPackage,
               child: Column(
                 children: [
                   const SizedBox(height: 32),
@@ -96,7 +98,8 @@ class __ForgotPasswordPageBodyState extends State<_ForgotPasswordPageBody> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
-                          Assets.images.forgotPasswordBackground.path,
+                          SPAssets.images.forgotPasswordBackground.path,
+                          package: spComponentPackage,
                         ),
                       ),
                     ),

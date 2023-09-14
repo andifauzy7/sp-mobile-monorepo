@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
-import 'package:sapa_component/styles/sp_text_styles.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_sekolah_guru/presentation/forgot_password/forgot_password_page.dart';
 import 'package:sapa_sekolah_guru/presentation/home/home_page.dart';
-import 'package:sapa_sekolah_guru/presentation/main/widget/menu_card.dart';
-import 'package:sapa_sekolah_guru/presentation/main/widget/profile_page.dart';
+import 'package:sapa_sekolah_guru/presentation/menu/menu_page.dart';
+import 'package:sapa_sekolah_guru/presentation/profile/profile_page.dart';
 import 'package:sapa_sekolah_guru/presentation/lesson_plan/lesson_plan_page.dart';
 import 'package:sapa_sekolah_guru/presentation/permission/permission_page.dart';
 import 'package:sapa_sekolah_guru/presentation/report/report_page.dart';
@@ -98,69 +98,11 @@ class _MainPageState extends State<MainPage> {
         controller: _controller,
         screens: [
           const HomePage(),
-          SafeArea(
-            child: Container(
-              color: SPColors.colorFAFAFA,
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                children: [
-                  Center(
-                    child: Text(
-                      'Menu',
-                      style: SPTextStyles.text18W400303030,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Expanded(
-                    child: GridView.count(
-                      physics: const BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics(),
-                      ),
-                      primary: false,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                      crossAxisCount: 2,
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () => _navigateToStudentPresence(context),
-                          child: MenuCard(
-                            title: 'Absensi',
-                            description: 'Absensi Siswa',
-                            imageUrl: Assets.images.attendanceStudentImage.path,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () => _navigateToPermission(context),
-                          child: MenuCard(
-                            title: 'Izin Murid',
-                            description: 'Memberikan Izin\nKepada Murid',
-                            imageUrl: Assets.images.permissionImage.path,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () => _navigateToLessonPlan(context),
-                          child: MenuCard(
-                            title: 'Lesson Plan',
-                            description: 'Buat Plan',
-                            imageUrl: Assets.images.lessonImage.path,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () => _navigateToReportPage(context),
-                          child: MenuCard(
-                            title: 'Laporan',
-                            description: 'Berisi Laporan\nPeriodik',
-                            imageUrl: Assets.images.reportImage.path,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          MenuPage(
+            onPresence: () => _navigateToStudentPresence(context),
+            onPermit: () => _navigateToPermission(context),
+            onLessonPlan: () => _navigateToLessonPlan(context),
+            onReport: () => _navigateToReportPage(context),
           ),
           ProfilePage(
             onLogout: () => _navigateToSplash(context),
@@ -170,7 +112,8 @@ class _MainPageState extends State<MainPage> {
         items: [
           PersistentBottomNavBarItem(
             icon: SvgPicture.asset(
-              Assets.icon.home.path,
+              SPAssets.icon.home.path,
+              package: spComponentPackage,
               colorFilter: const ColorFilter.mode(
                 Colors.white,
                 BlendMode.srcIn,
@@ -178,12 +121,16 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           PersistentBottomNavBarItem(
-            icon: SvgPicture.asset(Assets.icon.filter.path),
+            icon: SvgPicture.asset(
+              SPAssets.icon.filter.path,
+              package: spComponentPackage,
+            ),
             activeColorPrimary: Colors.white,
           ),
           PersistentBottomNavBarItem(
             icon: SvgPicture.asset(
-              Assets.icon.profile.path,
+              SPAssets.icon.profile.path,
+              package: spComponentPackage,
               colorFilter: const ColorFilter.mode(
                 Colors.white,
                 BlendMode.srcIn,

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/app_bar/sp_app_bar.dart';
 import 'package:sapa_component/calendar/sp_calendar.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/image/sp_cached_network_image.dart';
-import 'package:sapa_component/other/sp_icon_button.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_teacher/get_teacher_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/teacher_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/update_student_presence/update_student_presence_page.dart';
 
@@ -34,51 +37,30 @@ class StudentPresencePage extends StatelessWidget {
           GetTeacherEvent(),
         ),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         backgroundColor: SPColors.colorFAFAFA,
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                Assets.images.lessonPlanBackground.path,
-              ),
-            ),
-          ),
+        body: SPContainerImage(
+          imageUrl: SPAssets.images.circleBackground.path,
+          package: spComponentPackage,
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      SPIconButton(
-                        url: Assets.icon.arrowLeft.path,
-                        onTap: () => Navigator.pop(context),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        'Kehadiran Siswa',
-                        style: SPTextStyles.text18W400303030,
-                      ),
-                    ],
-                  ),
+                  const SPAppBar(title: 'Kehadiran Siswa'),
                   Expanded(
                     child: ListView(
                       physics: const BouncingScrollPhysics(),
                       children: [
-                        const SizedBox(
-                          height: 24,
-                        ),
+                        const SizedBox(height: 24),
                         Container(
                           padding: const EdgeInsets.all(16),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(16),
                             ),
+                            boxShadow: SPShadow.shadowGrey,
                           ),
                           child: BlocBuilder<GetTeacherBloc, GetTeacherState>(
                             builder: (context, state) {
@@ -133,23 +115,20 @@ class StudentPresencePage extends StatelessWidget {
                             },
                           ),
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
+                        const SizedBox(height: 16),
                         Text(
                           'Silahkan Pilih Tanggal',
                           style: SPTextStyles.text16W400303030,
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
+                        const SizedBox(height: 16),
                         Container(
                           padding: const EdgeInsets.all(8),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(16),
                             ),
+                            boxShadow: SPShadow.shadowGrey,
                           ),
                           child: SPCalendar(
                             lastDay: DateTime.now(),
@@ -161,9 +140,7 @@ class StudentPresencePage extends StatelessWidget {
                             },
                           ),
                         ),
-                        const SizedBox(
-                          height: 24,
-                        ),
+                        const SizedBox(height: 24),
                       ],
                     ),
                   )

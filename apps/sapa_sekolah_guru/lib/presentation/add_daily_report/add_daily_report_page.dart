@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/app_bar/sp_app_bar.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/update_daily_report/update_daily_report_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/dialog/sp_dialog.dart';
-import 'package:sapa_component/other/sp_icon_button.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 
@@ -156,34 +159,15 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: SPColors.colorFAFAFA,
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                Assets.images.lessonPlanBackground.path,
-              ),
-            ),
-          ),
+        body: SPContainerImage(
+          imageUrl: SPAssets.images.circleBackground.path,
+          package: spComponentPackage,
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      SPIconButton(
-                        url: Assets.icon.arrowLeft.path,
-                        onTap: () => Navigator.pop(context),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        'Buat Laporan Harian',
-                        style: SPTextStyles.text18W400303030,
-                      ),
-                    ],
-                  ),
+                  const SPAppBar(title: 'Buat Laporan Harian'),
                   const SizedBox(height: 16),
                   Expanded(
                     child: ListView(
@@ -193,11 +177,12 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(16),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(16),
                             ),
+                            boxShadow: SPShadow.shadowGrey,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,11 +201,12 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                         const SizedBox(height: 16),
                         Container(
                           padding: const EdgeInsets.all(16),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(16),
                             ),
+                            boxShadow: SPShadow.shadowGrey,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,7 +241,8 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                       style: SPTextStyles.text14W400303030,
                                     ),
                                     SvgPicture.asset(
-                                      Assets.icon.calendarPicker.path,
+                                      SPAssets.icon.calendarPicker.path,
+                                      package: spComponentPackage,
                                     ),
                                   ],
                                 ),
@@ -266,11 +253,12 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                         const SizedBox(height: 16),
                         Container(
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(16),
                             ),
+                            boxShadow: SPShadow.shadowGrey,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -344,11 +332,12 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                         const SizedBox(height: 16),
                         Container(
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(16),
                             ),
+                            boxShadow: SPShadow.shadowGrey,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -383,11 +372,12 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                         const SizedBox(height: 16),
                         Container(
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(16),
                             ),
+                            boxShadow: SPShadow.shadowGrey,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -503,8 +493,9 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
           children: [
             SvgPicture.asset(
               isSelected
-                  ? Assets.icon.trueCheckbox.path
-                  : Assets.icon.emptyCheckbox.path,
+                  ? SPAssets.icon.trueCheckbox.path
+                  : SPAssets.icon.emptyCheckbox.path,
+              package: spComponentPackage,
             ),
             const SizedBox(width: 12),
             Text(

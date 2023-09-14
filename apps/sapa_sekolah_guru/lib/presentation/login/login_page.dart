@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/login/login_bloc.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
@@ -78,7 +80,8 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
         body: SafeArea(
           child: SingleChildScrollView(
             child: SPContainerImage(
-              imageUrl: Assets.images.loginOrnament.path,
+              imageUrl: SPAssets.images.dotOrnament.path,
+              package: spComponentPackage,
               child: Column(
                 children: [
                   const SizedBox(height: 32),
@@ -146,25 +149,6 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
                       onChanged: (_) => _setEnableButton(),
                     ),
                   ),
-                  /*
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                    ),
-                    child: GestureDetector(
-                      onTap: () => _navigateToForgotPassword(context),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          'Lupa Password?',
-                          style: SPTextStyles.text12W400B3B3B3,
-                        ),
-                      ),
-                    ),
-                  ),*/
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(

@@ -111,14 +111,6 @@ class $AssetsIconGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/attendance_image.png
-  AssetGenImage get attendanceImage =>
-      const AssetGenImage('assets/images/attendance_image.png');
-
-  /// File path: assets/images/attendance_student_image.png
-  AssetGenImage get attendanceStudentImage =>
-      const AssetGenImage('assets/images/attendance_student_image.png');
-
   /// File path: assets/images/circle_background.png
   AssetGenImage get circleBackground =>
       const AssetGenImage('assets/images/circle_background.png');
@@ -143,30 +135,6 @@ class $AssetsImagesGen {
   AssetGenImage get imageSuccess =>
       const AssetGenImage('assets/images/image_success.png');
 
-  /// File path: assets/images/lesson_image.png
-  AssetGenImage get lessonImage =>
-      const AssetGenImage('assets/images/lesson_image.png');
-
-  /// File path: assets/images/lesson_plan_background.png
-  AssetGenImage get lessonPlanBackground =>
-      const AssetGenImage('assets/images/lesson_plan_background.png');
-
-  /// File path: assets/images/login_background.png
-  AssetGenImage get loginBackground =>
-      const AssetGenImage('assets/images/login_background.png');
-
-  /// File path: assets/images/login_ornament.png
-  AssetGenImage get loginOrnament =>
-      const AssetGenImage('assets/images/login_ornament.png');
-
-  /// File path: assets/images/permission_image.png
-  AssetGenImage get permissionImage =>
-      const AssetGenImage('assets/images/permission_image.png');
-
-  /// File path: assets/images/report_image.png
-  AssetGenImage get reportImage =>
-      const AssetGenImage('assets/images/report_image.png');
-
   /// File path: assets/images/splash_background.png
   AssetGenImage get splashBackground =>
       const AssetGenImage('assets/images/splash_background.png');
@@ -181,35 +149,16 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        attendanceImage,
-        attendanceStudentImage,
         circleBackground,
         dotOrnament,
         forgotPasswordBackground,
         forgotPasswordOrnament,
         imageFailure,
         imageSuccess,
-        lessonImage,
-        lessonPlanBackground,
-        loginBackground,
-        loginOrnament,
-        permissionImage,
-        reportImage,
         splashBackground,
         splashOrnament,
         splashWelcome
       ];
-}
-
-class $AssetsShapeGen {
-  const $AssetsShapeGen();
-
-  /// File path: assets/shape/rectangle_login.png
-  AssetGenImage get rectangleLogin =>
-      const AssetGenImage('assets/shape/rectangle_login.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [rectangleLogin];
 }
 
 class SPAssets {
@@ -217,7 +166,6 @@ class SPAssets {
 
   static const $AssetsIconGen icon = $AssetsIconGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
-  static const $AssetsShapeGen shape = $AssetsShapeGen();
 }
 
 class AssetGenImage {

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
 import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/add_daily_report/add_daily_report_page.dart';
 import 'package:sapa_sekolah_guru/presentation/report_daily_detail/report_daily_detail.dart';
@@ -86,11 +88,12 @@ class ReportDaily extends StatelessWidget {
                       ),
                       child: Container(
                         padding: const EdgeInsets.all(16),
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.all(
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(16),
                           ),
+                          boxShadow: SPShadow.shadowGrey,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,7 +106,8 @@ class ReportDaily extends StatelessWidget {
                               style: SPTextStyles.text12W400303030,
                             ),
                             SvgPicture.asset(
-                              Assets.icon.arrowRight.path,
+                              SPAssets.icon.arrowRight.path,
+                              package: spComponentPackage,
                             ),
                           ],
                         ),

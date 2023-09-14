@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_component/card/card_profile_menu.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/logout/logout_bloc.dart';
-import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 
 class ProfilePage extends StatelessWidget {
   final VoidCallback onLogout, onChangePassword;
@@ -36,14 +37,9 @@ class _ProfilePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-            Assets.images.lessonPlanBackground.path,
-          ),
-        ),
-      ),
+    return SPContainerImage(
+      imageUrl: SPAssets.images.circleBackground.path,
+      package: spComponentPackage,
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
@@ -9,6 +10,7 @@ import 'package:sapa_sekolah_wali/presentation/splash/splash_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
+  initializeDateFormatting();
   runApp(const MyApp());
 }
 

@@ -7,6 +7,8 @@ import 'package:sapa_sekolah_wali/presentation/home/home_page.dart';
 import 'package:sapa_sekolah_wali/presentation/menu/menu_page.dart';
 import 'package:sapa_sekolah_wali/presentation/profile/profile_page.dart';
 import 'package:sapa_sekolah_wali/presentation/splash/splash_page.dart';
+import 'package:sapa_sekolah_wali/presentation/students/students_page.dart';
+import 'package:sapa_sekolah_wali/presentation/teachers/teachers_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -44,6 +46,29 @@ class _MainPageState extends State<MainPage> {
         ),
       );
 
+  void _navigateToStudentsPage(
+    BuildContext context, {
+    required StudentsPagePurpose pagePurpose,
+  }) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => StudentsPage(
+            pagePurpose: pagePurpose,
+          ),
+        ),
+      );
+
+  void _navigateToTeachersPage(
+    BuildContext context,
+  ) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const TeachersPage(),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,10 +78,34 @@ class _MainPageState extends State<MainPage> {
         controller: _controller,
         screens: [
           const HomePage(),
-          const MenuPage(),
+          MenuPage(
+            onChildrenData: () => _navigateToStudentsPage(
+              context,
+              pagePurpose: StudentsPagePurpose.childrenData,
+            ),
+            onTeacherData: () => _navigateToTeachersPage(
+              context,
+            ),
+            onPaymentData: () => _navigateToStudentsPage(
+              context,
+              pagePurpose: StudentsPagePurpose.paymentData,
+            ),
+            onReportData: () => _navigateToStudentsPage(
+              context,
+              pagePurpose: StudentsPagePurpose.reportData,
+            ),
+            onLessonPlan: () => _navigateToStudentsPage(
+              context,
+              pagePurpose: StudentsPagePurpose.lessonPlan,
+            ),
+          ),
           ProfilePage(
-            onLogout: () => _navigateToSplash(context),
-            onChangePassword: () => _navigateToForgotPasswordPage(context),
+            onLogout: () => _navigateToSplash(
+              context,
+            ),
+            onChangePassword: () => _navigateToForgotPasswordPage(
+              context,
+            ),
           ),
         ],
         items: [

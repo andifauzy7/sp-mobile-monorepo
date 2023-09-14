@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
-import 'package:injectable/injectable.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/model/lesson_plan/lesson_plans_response_model.dart';
-import 'package:sapa_sekolah_wali/repositories/lesson_plan/lesson_repository.dart';
+import 'package:sapa_sekolah_wali/repositories/lesson_repository.dart';
 
 part 'get_lesson_plans_event.dart';
 part 'get_lesson_plans_state.dart';

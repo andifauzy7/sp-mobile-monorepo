@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/toast/sp_toast.dart';
 import 'package:sapa_sekolah_wali/presentation/forgot_password/forgot_password_page.dart';
 import 'package:sapa_sekolah_wali/presentation/home/home_page.dart';
 import 'package:sapa_sekolah_wali/presentation/menu/menu_page.dart';
@@ -25,6 +26,10 @@ class _MainPageState extends State<MainPage> {
     _controller = PersistentTabController(initialIndex: 0);
     super.initState();
   }
+
+  void _comingSoonMessage() => SPToast.showToast(
+        message: 'Fitur akan segera hadir',
+      );
 
   void _navigateToSplash(
     BuildContext context,
@@ -90,10 +95,7 @@ class _MainPageState extends State<MainPage> {
               context,
               pagePurpose: StudentsPagePurpose.paymentData,
             ),
-            onReportData: () => _navigateToStudentsPage(
-              context,
-              pagePurpose: StudentsPagePurpose.reportData,
-            ),
+            onReportData: () => _comingSoonMessage(),
             onLessonPlan: () => _navigateToStudentsPage(
               context,
               pagePurpose: StudentsPagePurpose.lessonPlan,

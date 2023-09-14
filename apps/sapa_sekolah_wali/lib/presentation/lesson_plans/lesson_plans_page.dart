@@ -6,8 +6,9 @@ import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
-import 'package:sapa_sekolah_wali/application/bloc/get_lesson_plans/get_lesson_plans_bloc.dart';
-import 'package:sapa_sekolah_wali/model/lesson_plan/lesson_plans_response_model.dart';
+import 'package:sapa_sekolah_wali/bloc/get_lesson_plans/get_lesson_plans_bloc.dart';
+import 'package:sapa_sekolah_wali/model/lesson_plans_response_model.dart';
+import 'package:sapa_sekolah_wali/presentation/lesson_plan_detail/lesson_plan_detail_page.dart';
 
 class LessonPlansPage extends StatelessWidget {
   final String studentId;
@@ -35,7 +36,16 @@ class _LessonPlansPageBody extends StatelessWidget {
   Future<void> _navigateToDetailPlanning(
     BuildContext context, {
     required String id,
-  }) async {}
+  }) async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => LessonPlanDetailPage(
+          id: id,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

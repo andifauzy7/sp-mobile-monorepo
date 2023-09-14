@@ -17,16 +17,16 @@ import 'package:sapa_core/sapa_core.dart' as _i3;
 import 'package:sapa_sekolah_wali/application/bloc/detail_child/detail_child_bloc.dart'
     as _i18;
 import 'package:sapa_sekolah_wali/application/bloc/detail_payment/detail_payment_bloc.dart'
-    as _i30;
-import 'package:sapa_sekolah_wali/application/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
-    as _i31;
+    as _i29;
 import 'package:sapa_sekolah_wali/application/bloc/list_payment/list_payment_bloc.dart'
     as _i24;
 import 'package:sapa_sekolah_wali/application/bloc/news/news_bloc.dart' as _i27;
-import 'package:sapa_sekolah_wali/application/bloc/teacher/teacher_bloc.dart'
-    as _i29;
 import 'package:sapa_sekolah_wali/bloc/change_password/change_password_bloc.dart'
     as _i15;
+import 'package:sapa_sekolah_wali/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart'
+    as _i30;
+import 'package:sapa_sekolah_wali/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
+    as _i31;
 import 'package:sapa_sekolah_wali/bloc/get_students/get_students_bloc.dart'
     as _i21;
 import 'package:sapa_sekolah_wali/bloc/get_teachers/get_teachers_bloc.dart'
@@ -55,10 +55,10 @@ import 'package:sapa_sekolah_wali/repositories/payment/list_payment_repository_i
     as _i6;
 import 'package:sapa_sekolah_wali/repositories/student_repository.dart' as _i10;
 import 'package:sapa_sekolah_wali/repositories/teacher/teacher_repository.dart'
-    as _i11;
-import 'package:sapa_sekolah_wali/repositories/teacher/teacher_repository_impl.dart'
     as _i12;
-import 'package:sapa_sekolah_wali/repositories/teacher_repository.dart' as _i13;
+import 'package:sapa_sekolah_wali/repositories/teacher/teacher_repository_impl.dart'
+    as _i13;
+import 'package:sapa_sekolah_wali/repositories/teacher_repository.dart' as _i11;
 import 'package:sapa_sekolah_wali/shared/core/core_module.dart' as _i32;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -89,12 +89,12 @@ extension GetItInjectableX on _i1.GetIt {
           dio: gh<_i3.Dio>(),
           sharedPreferences: gh<_i3.SharedPreferences>(),
         ));
-    gh.lazySingleton<_i11.TeacherRepository>(
-        () => _i12.TeacherRepositoryImpl(gh<_i7.Dio>()));
-    gh.lazySingleton<_i13.TeacherRepository>(() => _i13.TeacherRepositoryImpl(
+    gh.lazySingleton<_i11.TeacherRepository>(() => _i11.TeacherRepositoryImpl(
           dio: gh<_i3.Dio>(),
           sharedPreferences: gh<_i3.SharedPreferences>(),
         ));
+    gh.lazySingleton<_i12.TeacherRepository>(
+        () => _i13.TeacherRepositoryImpl(gh<_i7.Dio>()));
     gh.lazySingleton<_i14.AuthRepository>(() => _i14.AuthRepositoryImpl(
           dio: gh<_i3.Dio>(),
           sharedPreferences: gh<_i3.SharedPreferences>(),
@@ -110,7 +110,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i21.GetStudentsBloc>(() =>
         _i21.GetStudentsBloc(studentRepository: gh<_i10.StudentRepository>()));
     gh.factory<_i22.GetTeachersBloc>(() =>
-        _i22.GetTeachersBloc(teacherRepository: gh<_i11.TeacherRepository>()));
+        _i22.GetTeachersBloc(teacherRepository: gh<_i12.TeacherRepository>()));
     gh.lazySingleton<_i23.LessonRepository>(() => _i23.LessonRepositoryImpl(
           dio: gh<_i3.Dio>(),
           sharedPreferences: gh<_i3.SharedPreferences>(),
@@ -124,10 +124,10 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i27.NewsBloc>(() => _i27.NewsBloc(gh<_i8.NewsRepository>()));
     gh.factory<_i28.SplashCubit>(
         () => _i28.SplashCubit(authRepository: gh<_i14.AuthRepository>()));
-    gh.factory<_i29.TeacherBloc>(
-        () => _i29.TeacherBloc(gh<_i11.TeacherRepository>()));
-    gh.factory<_i30.DetailPaymentBloc>(
-        () => _i30.DetailPaymentBloc(gh<_i19.DetailPaymentRepository>()));
+    gh.factory<_i29.DetailPaymentBloc>(
+        () => _i29.DetailPaymentBloc(gh<_i19.DetailPaymentRepository>()));
+    gh.factory<_i30.GetLessonPlanDetailBloc>(() => _i30.GetLessonPlanDetailBloc(
+        lessonRepository: gh<_i23.LessonRepository>()));
     gh.factory<_i31.GetLessonPlansBloc>(() =>
         _i31.GetLessonPlansBloc(lessonRepository: gh<_i23.LessonRepository>()));
     return this;

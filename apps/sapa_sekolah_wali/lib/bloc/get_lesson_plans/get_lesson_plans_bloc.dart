@@ -1,5 +1,5 @@
 import 'package:sapa_core/sapa_core.dart';
-import 'package:sapa_sekolah_wali/model/lesson_plan/lesson_plans_response_model.dart';
+import 'package:sapa_sekolah_wali/model/lesson_plans_response_model.dart';
 import 'package:sapa_sekolah_wali/repositories/lesson_repository.dart';
 
 part 'get_lesson_plans_event.dart';
@@ -22,7 +22,7 @@ class GetLessonPlansBloc
           message: failure.toString(),
         )),
         (lessonPlans) => emit(GetLessonPlansSuccess(
-          lessonPlans: lessonPlans,
+          lessonPlans: lessonPlans.reversed.toList(),
         )),
       );
     });

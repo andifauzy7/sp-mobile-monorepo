@@ -1,39 +1,48 @@
 import 'package:sapa_core/failure/failure.dart';
 import 'package:sapa_core/failure/server_failure.dart';
 import 'package:sapa_core/sapa_core.dart';
-import 'package:sapa_sekolah_wali/model/student_detail_response_model.dart';
-import 'package:sapa_sekolah_wali/model/students_response_model.dart';
+import 'package:sapa_sekolah_wali/model/payment_detail_response_model.dart';
+import 'package:sapa_sekolah_wali/model/payments_response_model.dart';
 import 'package:sapa_sekolah_wali/repositories/auth_repository.dart';
 
-abstract class StudentRepository {
-  Future<Either<Failure, List<StudentModel>>> getStudents();
-  Future<Either<Failure, StudentDetailModel>> getDetailChild(String studentId);
+abstract class PaymentRepository {
+  Future<Either<Failure, List<PaymentModel>>> getPayments(
+    String studentId,
+  );
+  Future<Either<Failure, PaymentDetailModel>> getPaymentDetail(
+    String studentId,
+    String paymentId,
+  );
 }
 
-@LazySingleton(as: StudentRepository)
-class StudentRepositoryImpl implements StudentRepository {
+@LazySingleton(as: PaymentRepository)
+class PaymentRepositoryImpl implements PaymentRepository {
   final Dio dio;
   final SharedPreferences sharedPreferences;
 
-  StudentRepositoryImpl({
+  PaymentRepositoryImpl({
     required this.dio,
     required this.sharedPreferences,
   });
+
   @override
-  Future<Either<Failure, List<StudentModel>>> getStudents() async {
+  Future<Either<Failure, List<PaymentModel>>> getPayments(
+    String studentId,
+  ) async {
     final token = sharedPreferences.getString(keyToken);
     final userId = sharedPreferences.getString(keyUserId);
     final data = FormData.fromMap({
       "token": token,
       "user_id": userId,
+      "student_id": 1,
     });
     try {
       final response = await dio.post(
-        'getchildlist.php',
+        'paymentlist.php',
         data: data,
       );
       if (response.statusCode == 200) {
-        final result = StudentsResponseModel.fromJson(response.data);
+        final result = PaymentsResponseModel.fromJson(response.data);
         if (result.success ?? false) {
           return Right(result.data ?? []);
         } else {
@@ -52,8 +61,9 @@ class StudentRepositoryImpl implements StudentRepository {
   }
 
   @override
-  Future<Either<Failure, StudentDetailModel>> getDetailChild(
+  Future<Either<Failure, PaymentDetailModel>> getPaymentDetail(
     String studentId,
+    String paymentId,
   ) async {
     final token = sharedPreferences.getString(keyToken);
     final userId = sharedPreferences.getString(keyUserId);
@@ -61,14 +71,15 @@ class StudentRepositoryImpl implements StudentRepository {
       "token": token,
       "user_id": userId,
       "student_id": studentId,
+      "payment_id": paymentId,
     });
     try {
       final response = await dio.post(
-        'getstudentinfo.php',
+        'paymentdetail.php',
         data: data,
       );
       if (response.statusCode == 200) {
-        final result = StudentDetailResponseModel.fromJson(response.data);
+        final result = PaymentDetailResponseModel.fromJson(response.data);
         if (result.success ?? false) {
           return Right(result.data!.first);
         } else {

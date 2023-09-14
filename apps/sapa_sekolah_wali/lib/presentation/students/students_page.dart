@@ -10,6 +10,8 @@ import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_students/get_students_bloc.dart';
 import 'package:sapa_sekolah_wali/model/students_response_model.dart';
 import 'package:sapa_sekolah_wali/presentation/lesson_plans/lesson_plans_page.dart';
+import 'package:sapa_sekolah_wali/presentation/payments/payments_page.dart';
+import 'package:sapa_sekolah_wali/presentation/student_detail/student_detail_page.dart';
 
 enum StudentsPagePurpose {
   childrenData,
@@ -79,15 +81,28 @@ class _StudentsPageBodyState extends State<_StudentsPageBody> {
         ),
       );
     }
-    /*
-    Navigator.push(
+
+    if (widget.pagePurpose == StudentsPagePurpose.childrenData) {
+      Navigator.push(
         context,
         MaterialPageRoute<void>(
-          builder: (BuildContext context) => ReportStudentPage(
-            student: student,
+          builder: (BuildContext context) => StudentDetailPage(
+            studentId: student.studentId.toString(),
           ),
         ),
-      ); */
+      );
+    }
+
+    if (widget.pagePurpose == StudentsPagePurpose.paymentData) {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => PaymentsPage(
+            studentId: student.studentId.toString(),
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -143,6 +158,11 @@ class _StudentsPageBodyState extends State<_StudentsPageBody> {
                       child: BlocBuilder<GetStudentsBloc, GetStudentsState>(
                         builder: (context, state) {
                           if (state is GetStudentsSuccess) {
+                            if (state.students.isEmpty) {
+                              return const SPFailureWidget(
+                                message: 'Data kosong',
+                              );
+                            }
                             return Column(
                               children: [
                                 SPTextField(

@@ -29,6 +29,13 @@ class SPTextStyles {
       color: SPColors.color303030,
     ),
   );
+  static TextStyle text10W400333333 = GoogleFonts.dmSans(
+    textStyle: TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w400,
+      color: SPColors.color333333,
+    ),
+  );
   static TextStyle text10W400EB5757 = GoogleFonts.dmSans(
     textStyle: TextStyle(
       fontSize: 10,

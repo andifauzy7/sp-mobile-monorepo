@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class SPColors {
   static Color color303030 = const Color(0xff303030);
+  static Color color333333 = const Color(0xff333333);
   static Color colorFAFAFA = const Color(0xFFFAFAFA);
   static Color colorFFF1E6 = const Color(0xFFFFF1E6);
   static Color color636363 = const Color(0xff636363);
@@ -14,4 +15,5 @@ class SPColors {
   static Color colorEAD2E0 = const Color(0xffEAD2E0);
   static Color colorC7A7D9 = const Color(0xffC7A7D9);
   static Color colorC8A8DA = const Color(0xffC8A8DA);
+  static Color colorF0F0F0 = const Color(0xffF0F0F0);
 }

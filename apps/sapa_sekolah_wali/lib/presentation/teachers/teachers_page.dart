@@ -9,7 +9,7 @@ import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_teachers/get_teachers_bloc.dart';
 import 'package:sapa_sekolah_wali/model/students_response_model.dart';
-import 'package:sapa_sekolah_wali/model/teacher/teacher_model.dart';
+import 'package:sapa_sekolah_wali/model/teachers_response_model.dart';
 import 'package:sapa_sekolah_wali/presentation/teachers/widget/teacher_card.dart';
 
 class TeachersPage extends StatelessWidget {

@@ -87,12 +87,15 @@ class _LoginPageBodyState extends State<_LoginPageBody> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 200,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                            'assets/images/logo.png',
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    child: SizedBox(
+                      height: 200,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/logo.png',
+                            ),
                           ),
                         ),
                       ),

@@ -1,12 +1,17 @@
 import 'package:sapa_core/failure/failure.dart';
 import 'package:sapa_core/failure/server_failure.dart';
 import 'package:sapa_core/sapa_core.dart';
+import 'package:sapa_sekolah_wali/model/payment_detail_response_model.dart';
 import 'package:sapa_sekolah_wali/model/payments_response_model.dart';
 import 'package:sapa_sekolah_wali/repositories/auth_repository.dart';
 
 abstract class PaymentRepository {
   Future<Either<Failure, List<PaymentModel>>> getPayments(
     String studentId,
+  );
+  Future<Either<Failure, PaymentDetailModel>> getPaymentDetail(
+    String studentId,
+    String paymentId,
   );
 }
 
@@ -29,7 +34,7 @@ class PaymentRepositoryImpl implements PaymentRepository {
     final data = FormData.fromMap({
       "token": token,
       "user_id": userId,
-      "student_id": studentId,
+      "student_id": 1,
     });
     try {
       final response = await dio.post(
@@ -40,6 +45,43 @@ class PaymentRepositoryImpl implements PaymentRepository {
         final result = PaymentsResponseModel.fromJson(response.data);
         if (result.success ?? false) {
           return Right(result.data ?? []);
+        } else {
+          return Left(
+            ServerFailure(message: result.message),
+          );
+        }
+      } else {
+        return Left(
+          ServerFailure(message: response.data['message']),
+        );
+      }
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PaymentDetailModel>> getPaymentDetail(
+    String studentId,
+    String paymentId,
+  ) async {
+    final token = sharedPreferences.getString(keyToken);
+    final userId = sharedPreferences.getString(keyUserId);
+    final data = FormData.fromMap({
+      "token": token,
+      "user_id": userId,
+      "student_id": studentId,
+      "payment_id": paymentId,
+    });
+    try {
+      final response = await dio.post(
+        'paymentdetail.php',
+        data: data,
+      );
+      if (response.statusCode == 200) {
+        final result = PaymentDetailResponseModel.fromJson(response.data);
+        if (result.success ?? false) {
+          return Right(result.data!.first);
         } else {
           return Left(
             ServerFailure(message: result.message),

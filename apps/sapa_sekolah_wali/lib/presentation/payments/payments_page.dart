@@ -6,6 +6,7 @@ import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_payments/get_payments_bloc.dart';
+import 'package:sapa_sekolah_wali/presentation/payment_detail/payment_detail_page.dart';
 import 'package:sapa_sekolah_wali/presentation/payments/widget/payment_card.dart';
 
 class PaymentsPage extends StatelessWidget {
@@ -38,6 +39,22 @@ class _PaymentsPageBody extends StatefulWidget {
 }
 
 class __PaymentsPageBodyState extends State<_PaymentsPageBody> {
+  Future<void> _navigateToPaymentDetailPage(
+    BuildContext context, {
+    required String paymentId,
+    required String studentId,
+  }) async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => PaymentDetailPage(
+          paymentId: paymentId,
+          studentId: studentId,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -102,8 +119,16 @@ class __PaymentsPageBodyState extends State<_PaymentsPageBody> {
                             separatorBuilder: (_, __) => const SizedBox(
                               height: 12,
                             ),
-                            itemBuilder: (_, index) => PaymentCard(
-                              payment: state.payments[index],
+                            itemBuilder: (_, index) => GestureDetector(
+                              onTap: () => _navigateToPaymentDetailPage(
+                                context,
+                                paymentId:
+                                    state.payments[index].paymentId.toString(),
+                                studentId: widget.studentId,
+                              ),
+                              child: PaymentCard(
+                                payment: state.payments[index],
+                              ),
                             ),
                           );
                         }

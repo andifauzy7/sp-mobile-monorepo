@@ -25,7 +25,7 @@ const briMobileBankingGuide = [
   '3. Pilih menu BRIVA',
   '4. Masukkan Nomor Virtual Account',
   '5. Masukkan password Internet Banking BRI',
-  '6. 6.Masukkan mToken Internet Banking BRI',
+  '6. Masukkan mToken Internet Banking BRI',
   '7. Anda akan mendapatkan notifikasi pembayaran',
 ];
 

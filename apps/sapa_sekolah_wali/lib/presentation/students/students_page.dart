@@ -158,6 +158,11 @@ class _StudentsPageBodyState extends State<_StudentsPageBody> {
                       child: BlocBuilder<GetStudentsBloc, GetStudentsState>(
                         builder: (context, state) {
                           if (state is GetStudentsSuccess) {
+                            if (state.students.isEmpty) {
+                              return const SPFailureWidget(
+                                message: 'Data kosong',
+                              );
+                            }
                             return Column(
                               children: [
                                 SPTextField(

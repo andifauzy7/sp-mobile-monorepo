@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/application/bloc/detail_child/detail_child_bloc.dart';
-import 'package:sapa_sekolah_wali/dependency.dart';
+import 'package:sapa_sekolah_wali/injection/injection.dart';
 
 class DetailChildPage extends StatefulWidget {
   const DetailChildPage({Key? key, required this.studentId}) : super(key: key);

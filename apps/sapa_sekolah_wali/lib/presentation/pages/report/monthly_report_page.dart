@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sapa_sekolah_wali/presentation/utils/routes/route_utils.dart';
 
 class MonthlyReportPage extends StatelessWidget {
   const MonthlyReportPage({super.key});
@@ -300,10 +299,7 @@ class MonthlyReportPage extends StatelessWidget {
               height: 12,
             ),
             TextButton(
-              onPressed: () => Navigator.pushNamed(
-                context,
-                RouteName.addParentOpinion,
-              ),
+              onPressed: () => {},
               child: const Text(
                 'Tambah Pendapat Orang Tua +',
                 textAlign: TextAlign.right,

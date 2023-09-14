@@ -23,6 +23,7 @@ class SPFailureWidget extends StatelessWidget {
               const Spacer(),
               Image.asset(
                 SPAssets.images.imageFailure.path,
+                package: 'sapa_component',
                 height: 120,
                 width: double.infinity,
               ),

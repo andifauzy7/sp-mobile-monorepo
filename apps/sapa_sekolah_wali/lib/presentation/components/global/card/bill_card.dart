@@ -1,7 +1,6 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_sekolah_wali/model/payment/list_payment_model.dart';
-import 'package:sapa_sekolah_wali/presentation/utils/routes/route_utils.dart';
 
 class BillCard extends StatelessWidget {
   const BillCard({
@@ -16,13 +15,7 @@ class BillCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Map<String, String?> payload = {
-          'payment_id': model?.paymentId.toString(),
-          'student_id': studentId.toString(),
-        };
-        Navigator.pushNamed(context, RouteName.detailBill, arguments: payload);
-      },
+      onTap: () {},
       child: Container(
         padding: const EdgeInsets.all(12),
         margin: const EdgeInsets.only(

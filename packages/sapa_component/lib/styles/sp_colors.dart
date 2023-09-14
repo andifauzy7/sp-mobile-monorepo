@@ -13,4 +13,5 @@ class SPColors {
   static Color colorEB5757 = const Color(0xffEB5757);
   static Color colorEAD2E0 = const Color(0xffEAD2E0);
   static Color colorC7A7D9 = const Color(0xffC7A7D9);
+  static Color colorC8A8DA = const Color(0xffC8A8DA);
 }

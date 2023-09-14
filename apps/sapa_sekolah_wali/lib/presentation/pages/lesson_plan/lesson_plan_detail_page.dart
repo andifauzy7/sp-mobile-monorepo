@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/application/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart';
-import 'package:sapa_sekolah_wali/dependency.dart';
+import 'package:sapa_sekolah_wali/injection/injection.dart';
 
 class LessonPlanDetailPage extends StatefulWidget {
   final String? lessonPlanId;

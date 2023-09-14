@@ -1,8 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_sekolah_wali/presentation/components/global/card/schedule_timeline_card.dart';
 import 'package:sapa_sekolah_wali/presentation/components/global/card/tag_card.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class StudySchedulePage extends StatefulWidget {
   const StudySchedulePage({Key? key}) : super(key: key);

@@ -27,6 +27,7 @@ class SPIconButton extends StatelessWidget {
         ),
         child: SvgPicture.asset(
           url,
+          package: 'sapa_component',
         ),
       ),
     );

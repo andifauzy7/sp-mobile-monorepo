@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/application/bloc/teacher/teacher_bloc.dart';
-import 'package:sapa_sekolah_wali/dependency.dart';
+import 'package:sapa_sekolah_wali/injection/injection.dart';
 import 'package:sapa_sekolah_wali/presentation/components/global/card/shimmer_grid.dart';
 import 'package:sapa_sekolah_wali/presentation/components/global/card/teacher_card.dart';
-import 'package:sapa_sekolah_wali/presentation/utils/routes/route_utils.dart';
 
 class ListTeacherPage extends StatefulWidget {
   const ListTeacherPage({
@@ -176,10 +175,7 @@ class _ListTeacherPageState extends State<ListTeacherPage> {
                               children: List.generate(success.payload.length,
                                   (index) {
                                 return GestureDetector(
-                                  onTap: () => Navigator.pushNamed(
-                                    context,
-                                    RouteName.detailTeacher,
-                                  ),
+                                  onTap: () => {},
                                   child: TeacherCard(
                                     imageUrl:
                                         success.payload[index].employeePhoto ??

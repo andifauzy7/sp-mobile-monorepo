@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/application/bloc/get_lesson_plans/get_lesson_plans_bloc.dart';
-import 'package:sapa_sekolah_wali/dependency.dart';
+import 'package:sapa_sekolah_wali/injection/injection.dart';
 import 'package:sapa_sekolah_wali/model/lesson_plan/lesson_plans_response_model.dart';
-import 'package:sapa_sekolah_wali/presentation/utils/routes/route_utils.dart';
 
 class LessonPlanListPage extends StatefulWidget {
   final int? studentId;
@@ -21,13 +20,7 @@ class _LessonPlanListPageState extends State<LessonPlanListPage> {
 
   void _navigateToLessonPlanDetail({
     required String lessonPlanId,
-  }) {
-    Navigator.pushNamed(
-      context,
-      RouteName.detailLessonPlan,
-      arguments: lessonPlanId,
-    );
-  }
+  }) {}
 
   @override
   void initState() {

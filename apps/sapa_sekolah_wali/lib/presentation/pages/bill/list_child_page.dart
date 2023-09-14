@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/application/bloc/child/child_bloc.dart';
-import 'package:sapa_sekolah_wali/dependency.dart';
+import 'package:sapa_sekolah_wali/injection/injection.dart';
 import 'package:sapa_sekolah_wali/presentation/components/global/card/child_card.dart';
 import 'package:sapa_sekolah_wali/presentation/components/global/card/shimmer_card.dart';
-
-import '../../utils/routes/route_utils.dart';
 
 class ListChildPage extends StatefulWidget {
   const ListChildPage({Key? key, this.direction = 'payment'}) : super(key: key);
@@ -174,57 +172,7 @@ class _ListChildPageState extends State<ListChildPage> {
                                     .map(
                                       (e) => ChildCard(
                                         childModel: e,
-                                        onTap: () {
-                                          if (widget.direction ==
-                                              'daily-report') {
-                                            Navigator.pushNamed(
-                                              context,
-                                              RouteName.reportDaily,
-                                            );
-                                          }
-
-                                          if (widget.direction ==
-                                              'monthly-report') {
-                                            Navigator.pushNamed(
-                                              context,
-                                              RouteName.reportMonthly,
-                                            );
-                                          }
-
-                                          if (widget.direction ==
-                                              'montessori-report') {
-                                            Navigator.pushNamed(
-                                              context,
-                                              RouteName.reportSemester,
-                                            );
-                                          }
-
-                                          if (widget.direction ==
-                                              'detail-child') {
-                                            Navigator.pushNamed(
-                                              context,
-                                              RouteName.detailChild,
-                                              arguments: e.studentId,
-                                            );
-                                          }
-
-                                          if (widget.direction ==
-                                              'lesson-plan') {
-                                            Navigator.pushNamed(
-                                              context,
-                                              RouteName.listLessonPlan,
-                                              arguments: e.studentId,
-                                            );
-                                          }
-
-                                          if (widget.direction == 'payment') {
-                                            Navigator.pushNamed(
-                                              context,
-                                              RouteName.listBill,
-                                              arguments: e.studentId,
-                                            );
-                                          }
-                                        },
+                                        onTap: () {},
                                       ),
                                     )
                                     .toList(),

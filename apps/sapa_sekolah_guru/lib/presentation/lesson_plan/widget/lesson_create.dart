@@ -56,12 +56,12 @@ class _LessonCreateState extends State<LessonCreate> {
       child: Column(
         children: [
           Text(
-            'Tambah Mata Pelajaran',
+            'Tambah Area Pengembangan',
             style: SPTextStyles.text16W400BLACK,
           ),
           const SizedBox(height: 16),
           SPTextField(
-            hintText: 'Nama mata pelajaran',
+            hintText: 'Nama area pengembangan',
             controller: lessonController,
             onChanged: (_) => _setEnableButton(),
           ),

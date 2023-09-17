@@ -34,7 +34,7 @@ class CardLessonPlanActivity extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Mata Pelajaran',
+                  'Area Pengembangan',
                   style: SPTextStyles.text12W400B3B3B3,
                 ),
               ),

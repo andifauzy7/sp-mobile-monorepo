@@ -184,7 +184,7 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Pelajaran Hari Ini',
+                        'Area Pengembangan Hari Ini',
                         style: SPTextStyles.text16W400808080,
                       ),
                       Text(

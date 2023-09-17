@@ -145,7 +145,7 @@ class __StudentDetailPageBodyState extends State<_StudentDetailPageBody> {
                                       ),
                                       const SizedBox(height: 8),
                                       StudentDataTile(
-                                        label: 'Religion',
+                                        label: 'Address',
                                         value: state.studentDetail.address,
                                       ),
                                       const SizedBox(height: 8),

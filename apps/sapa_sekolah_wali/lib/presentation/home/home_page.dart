@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
-import 'package:sapa_component/other/sp_failure_widget.dart';
 import 'package:sapa_component/other/sp_icon_button.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/toast/sp_toast.dart';
 import 'package:sapa_sekolah_wali/gen/assets.gen.dart';
-import 'package:sapa_sekolah_wali/presentation/home/widget/news_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

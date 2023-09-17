@@ -103,7 +103,7 @@ class LessonListWidget extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 16, top: 12),
             child: SPElevatedButton(
               onPressed: () => _createLessonDialog(context),
-              text: 'Tambah Mata Pelajaran',
+              text: 'Tambah Area Pengembangan',
             ),
           ),
         ],

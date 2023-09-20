@@ -135,6 +135,18 @@ class $AssetsImagesGen {
   AssetGenImage get imageSuccess =>
       const AssetGenImage('assets/images/image_success.png');
 
+  /// File path: assets/images/menu-attendance.png
+  AssetGenImage get menuAttendance =>
+      const AssetGenImage('assets/images/menu-attendance.png');
+
+  /// File path: assets/images/menu-lesson-plan.png
+  AssetGenImage get menuLessonPlan =>
+      const AssetGenImage('assets/images/menu-lesson-plan.png');
+
+  /// File path: assets/images/menu-report.png
+  AssetGenImage get menuReport =>
+      const AssetGenImage('assets/images/menu-report.png');
+
   /// File path: assets/images/splash_background.png
   AssetGenImage get splashBackground =>
       const AssetGenImage('assets/images/splash_background.png');
@@ -155,6 +167,9 @@ class $AssetsImagesGen {
         forgotPasswordOrnament,
         imageFailure,
         imageSuccess,
+        menuAttendance,
+        menuLessonPlan,
+        menuReport,
         splashBackground,
         splashOrnament,
         splashWelcome

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_teacher/get_teacher_bloc.dart';
 import 'package:sapa_component/form/sp_text_field.dart';
@@ -119,11 +120,12 @@ class HomePage extends StatelessWidget {
                     horizontal: 16,
                     vertical: 8,
                   ),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(16),
                     ),
+                    boxShadow: SPShadow.shadowGrey,
                   ),
                   child: GestureDetector(
                     onTap: () => _comingSoonMessage(),
@@ -174,17 +176,18 @@ class HomePage extends StatelessWidget {
                 const SizedBox(height: 24),
                 Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(16),
                     ),
+                    boxShadow: SPShadow.shadowGrey,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Area Pengembangan Hari Ini',
+                        'Area Hari Ini',
                         style: SPTextStyles.text16W400808080,
                       ),
                       Text(

@@ -16,30 +16,12 @@ class $AssetsImagesGen {
   AssetGenImage get loginBackground =>
       const AssetGenImage('assets/images/login_background.png');
 
-  /// File path: assets/images/menu-attendance.png
-  AssetGenImage get menuAttendance =>
-      const AssetGenImage('assets/images/menu-attendance.png');
-
-  /// File path: assets/images/menu-lesson-plan.png
-  AssetGenImage get menuLessonPlan =>
-      const AssetGenImage('assets/images/menu-lesson-plan.png');
-
   /// File path: assets/images/menu-permission.png
   AssetGenImage get menuPermission =>
       const AssetGenImage('assets/images/menu-permission.png');
 
-  /// File path: assets/images/menu-report.png
-  AssetGenImage get menuReport =>
-      const AssetGenImage('assets/images/menu-report.png');
-
   /// List of all assets
-  List<AssetGenImage> get values => [
-        loginBackground,
-        menuAttendance,
-        menuLessonPlan,
-        menuPermission,
-        menuReport
-      ];
+  List<AssetGenImage> get values => [loginBackground, menuPermission];
 }
 
 class Assets {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_component/card/card_menu.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 
 class MenuPage extends StatelessWidget {
@@ -46,7 +48,8 @@ class MenuPage extends StatelessWidget {
                     child: CardMenu(
                       title: 'Absensi',
                       description: 'Absensi Siswa',
-                      imageUrl: Assets.images.menuAttendance.path,
+                      package: spComponentPackage,
+                      imageUrl: SPAssets.images.menuAttendance.path,
                     ),
                   ),
                   GestureDetector(
@@ -62,7 +65,8 @@ class MenuPage extends StatelessWidget {
                     child: CardMenu(
                       title: 'Lesson Plan',
                       description: 'Buat Plan',
-                      imageUrl: Assets.images.menuLessonPlan.path,
+                      package: spComponentPackage,
+                      imageUrl: SPAssets.images.menuLessonPlan.path,
                     ),
                   ),
                   GestureDetector(
@@ -70,7 +74,8 @@ class MenuPage extends StatelessWidget {
                     child: CardMenu(
                       title: 'Laporan',
                       description: 'Berisi Laporan\nPeriodik',
-                      imageUrl: Assets.images.menuReport.path,
+                      package: spComponentPackage,
+                      imageUrl: SPAssets.images.menuReport.path,
                     ),
                   ),
                 ],

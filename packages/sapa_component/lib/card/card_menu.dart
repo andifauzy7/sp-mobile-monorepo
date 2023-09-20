@@ -6,13 +6,13 @@ class CardMenu extends StatelessWidget {
   final String title;
   final String description;
   final String imageUrl;
-  final String package;
+  final String? package;
   const CardMenu({
     super.key,
     required this.title,
     required this.description,
     required this.imageUrl,
-    this.package = 'sapa_component',
+    this.package,
   });
 
   @override
@@ -32,6 +32,7 @@ class CardMenu extends StatelessWidget {
           children: [
             Image.asset(
               imageUrl,
+              package: package,
               width: 50,
               height: 50,
             ),

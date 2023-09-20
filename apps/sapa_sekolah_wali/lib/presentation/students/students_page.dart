@@ -15,6 +15,7 @@ import 'package:sapa_sekolah_wali/model/students_response_model.dart';
 import 'package:sapa_sekolah_wali/presentation/attendance/attendance_page.dart';
 import 'package:sapa_sekolah_wali/presentation/lesson_plans/lesson_plans_page.dart';
 import 'package:sapa_sekolah_wali/presentation/payments/payments_page.dart';
+import 'package:sapa_sekolah_wali/presentation/report/report_page.dart';
 import 'package:sapa_sekolah_wali/presentation/student_detail/student_detail_page.dart';
 
 enum StudentsPagePurpose {
@@ -116,6 +117,17 @@ class _StudentsPageBodyState extends State<_StudentsPageBody> {
         context,
         MaterialPageRoute<void>(
           builder: (BuildContext context) => AttendancePage(
+            student: student,
+          ),
+        ),
+      );
+    }
+
+    if (widget.pagePurpose == StudentsPagePurpose.reportData) {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => ReportPage(
             student: student,
           ),
         ),

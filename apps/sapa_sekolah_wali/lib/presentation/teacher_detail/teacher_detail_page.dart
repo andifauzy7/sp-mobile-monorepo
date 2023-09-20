@@ -63,21 +63,16 @@ class _TeacherDetailPageBody extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       );
                       if (state is GetTeacherDetailSuccess) {
-                        renderWidget = SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(
-                            parent: AlwaysScrollableScrollPhysics(),
-                          ),
-                          child: Column(
-                            children: [
-                              SPCachedNetworkImage(
-                                imageUrl:
-                                    state.teacherDetail.employeePhoto ?? '',
-                                width: MediaQuery.of(context).size.height * 0.3,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.3,
-                              ),
-                              const SizedBox(height: 16),
-                              Container(
+                        renderWidget = Column(
+                          children: [
+                            SPCachedNetworkImage(
+                              imageUrl: state.teacherDetail.employeePhoto ?? '',
+                              width: MediaQuery.of(context).size.height * 0.3,
+                              height: MediaQuery.of(context).size.height * 0.3,
+                            ),
+                            const SizedBox(height: 16),
+                            Expanded(
+                              child: Container(
                                 padding: const EdgeInsets.all(16),
                                 width: double.infinity,
                                 decoration: const BoxDecoration(
@@ -86,33 +81,40 @@ class _TeacherDetailPageBody extends StatelessWidget {
                                     Radius.circular(30),
                                   ),
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(height: 8),
-                                    Center(
-                                      child: Text(
-                                        state.teacherDetail.employeeName ?? '-',
+                                child: SingleChildScrollView(
+                                  physics: const BouncingScrollPhysics(
+                                    parent: AlwaysScrollableScrollPhysics(),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(height: 8),
+                                      Center(
+                                        child: Text(
+                                          state.teacherDetail.employeeName ??
+                                              '-',
+                                          style: SPTextStyles.text14W400303030,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 24),
+                                      Text(
+                                        'Deskripsi ${state.teacherDetail.employeeName ?? '-'}',
                                         style: SPTextStyles.text14W400303030,
                                       ),
-                                    ),
-                                    const SizedBox(height: 24),
-                                    Text(
-                                      'Deskripsi ${state.teacherDetail.employeeName ?? '-'}',
-                                      style: SPTextStyles.text14W400303030,
-                                    ),
-                                    const SizedBox(height: 16),
-                                    Text(
-                                      state.teacherDetail.description ?? '-',
-                                      style: SPTextStyles.text12W400B3B3B3,
-                                      textAlign: TextAlign.justify,
-                                    ),
-                                    const SizedBox(height: 8),
-                                  ],
+                                      const SizedBox(height: 16),
+                                      Text(
+                                        state.teacherDetail.description ?? '-',
+                                        style: SPTextStyles.text12W400B3B3B3,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                      const SizedBox(height: 8),
+                                    ],
+                                  ),
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         );
                       }
                       if (state is GetTeacherDetailError) {

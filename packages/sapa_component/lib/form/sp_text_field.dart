@@ -12,6 +12,7 @@ class SPTextField extends StatefulWidget {
   final int? maxLines;
   final bool obscureText;
   final Widget? suffix, prefix;
+  final String? initialValue;
   const SPTextField({
     Key? key,
     required this.hintText,
@@ -24,6 +25,7 @@ class SPTextField extends StatefulWidget {
     this.prefix,
     this.enabled,
     this.onTap,
+    this.initialValue,
   }) : super(key: key);
 
   @override
@@ -49,6 +51,7 @@ class _SPTextFieldState extends State<SPTextField> {
           child: GestureDetector(
             onTap: widget.onTap,
             child: TextFormField(
+              initialValue: widget.initialValue,
               enabled: widget.enabled,
               obscureText: widget.obscureText,
               controller: widget.controller,

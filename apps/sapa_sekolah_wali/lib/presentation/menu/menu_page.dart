@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_component/card/card_menu.dart';
+import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_sekolah_wali/gen/assets.gen.dart';
 
 class MenuPage extends StatelessWidget {
@@ -9,7 +11,8 @@ class MenuPage extends StatelessWidget {
       onTeacherData,
       onPaymentData,
       onReportData,
-      onLessonPlan;
+      onLessonPlan,
+      onAttendance;
   const MenuPage({
     super.key,
     required this.onChildrenData,
@@ -17,6 +20,7 @@ class MenuPage extends StatelessWidget {
     required this.onPaymentData,
     required this.onReportData,
     required this.onLessonPlan,
+    required this.onAttendance,
   });
 
   @override
@@ -75,7 +79,8 @@ class MenuPage extends StatelessWidget {
                     child: CardMenu(
                       title: 'Laporan',
                       description: 'Laporan Siswa',
-                      imageUrl: Assets.images.menuReport.path,
+                      package: spComponentPackage,
+                      imageUrl: SPAssets.images.menuReport.path,
                     ),
                   ),
                   GestureDetector(
@@ -83,7 +88,17 @@ class MenuPage extends StatelessWidget {
                     child: CardMenu(
                       title: 'Lesson Plan',
                       description: 'Planning Siswa',
-                      imageUrl: Assets.images.menuReport.path,
+                      package: spComponentPackage,
+                      imageUrl: SPAssets.images.menuLessonPlan.path,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: onAttendance,
+                    child: CardMenu(
+                      title: 'Absensi',
+                      description: 'Absensi Murid',
+                      package: spComponentPackage,
+                      imageUrl: SPAssets.images.menuAttendance.path,
                     ),
                   ),
                 ],

@@ -27,10 +27,6 @@ class _MainPageState extends State<MainPage> {
     super.initState();
   }
 
-  void _comingSoonMessage() => SPToast.showToast(
-        message: 'Fitur akan segera hadir',
-      );
-
   void _navigateToSplash(
     BuildContext context,
   ) =>
@@ -94,7 +90,14 @@ class _MainPageState extends State<MainPage> {
               context,
               pagePurpose: StudentsPagePurpose.paymentData,
             ),
-            onReportData: () => _comingSoonMessage(),
+            onReportData: () => _navigateToStudentsPage(
+              context,
+              pagePurpose: StudentsPagePurpose.reportData,
+            ),
+            onAttendance: () => _navigateToStudentsPage(
+              context,
+              pagePurpose: StudentsPagePurpose.attendanceData,
+            ),
             onLessonPlan: () => _navigateToStudentsPage(
               context,
               pagePurpose: StudentsPagePurpose.lessonPlan,

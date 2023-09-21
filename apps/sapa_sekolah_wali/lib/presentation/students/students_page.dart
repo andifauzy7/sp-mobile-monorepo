@@ -12,8 +12,10 @@ import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_students/get_students_bloc.dart';
 import 'package:sapa_sekolah_wali/model/students_response_model.dart';
+import 'package:sapa_sekolah_wali/presentation/attendance/attendance_page.dart';
 import 'package:sapa_sekolah_wali/presentation/lesson_plans/lesson_plans_page.dart';
 import 'package:sapa_sekolah_wali/presentation/payments/payments_page.dart';
+import 'package:sapa_sekolah_wali/presentation/report/report_page.dart';
 import 'package:sapa_sekolah_wali/presentation/student_detail/student_detail_page.dart';
 
 enum StudentsPagePurpose {
@@ -21,6 +23,7 @@ enum StudentsPagePurpose {
   paymentData,
   reportData,
   lessonPlan,
+  attendanceData,
 }
 
 extension StudentsPagePurposeExtension on StudentsPagePurpose {
@@ -32,6 +35,8 @@ extension StudentsPagePurposeExtension on StudentsPagePurpose {
         return 'Laporan';
       case StudentsPagePurpose.lessonPlan:
         return 'Lesson Plan';
+      case StudentsPagePurpose.attendanceData:
+        return 'Kehadiran Siswa';
       case StudentsPagePurpose.childrenData:
       default:
         return 'Data Murid';
@@ -102,6 +107,28 @@ class _StudentsPageBodyState extends State<_StudentsPageBody> {
         MaterialPageRoute<void>(
           builder: (BuildContext context) => PaymentsPage(
             studentId: student.studentId.toString(),
+          ),
+        ),
+      );
+    }
+
+    if (widget.pagePurpose == StudentsPagePurpose.attendanceData) {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => AttendancePage(
+            student: student,
+          ),
+        ),
+      );
+    }
+
+    if (widget.pagePurpose == StudentsPagePurpose.reportData) {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => ReportPage(
+            student: student,
           ),
         ),
       );

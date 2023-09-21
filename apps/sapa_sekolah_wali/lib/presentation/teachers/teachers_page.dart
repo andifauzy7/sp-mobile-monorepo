@@ -11,6 +11,7 @@ import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_teachers/get_teachers_bloc.dart';
 import 'package:sapa_sekolah_wali/model/teachers_response_model.dart';
+import 'package:sapa_sekolah_wali/presentation/teacher_detail/teacher_detail_page.dart';
 import 'package:sapa_sekolah_wali/presentation/teachers/widget/teacher_card.dart';
 
 class TeachersPage extends StatelessWidget {
@@ -40,6 +41,19 @@ class _StudentsPageBody extends StatefulWidget {
 class _StudentsPageBodyState extends State<_StudentsPageBody> {
   final TextEditingController searchController = TextEditingController();
   List<TeacherModel> teacherFiltered = [];
+
+  void _navigateToTeacherDetail(
+    BuildContext context, {
+    required String teacherId,
+  }) =>
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => TeacherDetailPage(
+            teacherId: teacherId,
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -109,13 +123,22 @@ class _StudentsPageBodyState extends State<_StudentsPageBody> {
                                       children: List.generate(
                                         teacherFiltered.length,
                                         (index) {
-                                          return TeacherCard(
-                                            imageUrl: teacherFiltered[index]
-                                                    .employeePhoto ??
-                                                '',
-                                            name: teacherFiltered[index]
-                                                    .employeeName ??
-                                                '-',
+                                          return GestureDetector(
+                                            onTap: () =>
+                                                _navigateToTeacherDetail(
+                                              context,
+                                              teacherId: teacherFiltered[index]
+                                                  .employeeId
+                                                  .toString(),
+                                            ),
+                                            child: TeacherCard(
+                                              imageUrl: teacherFiltered[index]
+                                                      .employeePhoto ??
+                                                  '',
+                                              name: teacherFiltered[index]
+                                                      .employeeName ??
+                                                  '-',
+                                            ),
                                           );
                                         },
                                       ),

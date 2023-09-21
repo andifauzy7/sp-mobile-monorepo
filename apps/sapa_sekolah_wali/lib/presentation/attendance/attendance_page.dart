@@ -97,7 +97,7 @@ class _AttendancePageBodyState extends State<_AttendancePageBody> {
                     name: widget.student.studentName ?? '-',
                   ),
                   const SizedBox(height: 16),
-                  Expanded(
+                  Flexible(
                     child: BlocBuilder<GetAttendancesBloc, GetAttendancesState>(
                       builder: (context, state) {
                         Widget renderWidget = const Center(

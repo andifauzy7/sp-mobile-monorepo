@@ -39,67 +39,71 @@ class ReportDaily extends StatelessWidget {
         );
         return Future.value(null);
       },
-      child: Expanded(
-        child: BlocBuilder<GetDailyReportsBloc, GetDailyReportsState>(
-          builder: (context, state) {
-            if (state is GetDailyReportsSuccess) {
-              if (state.reports.isEmpty) {
-                return const SPFailureWidget(
-                  message: 'Data kosong',
-                );
-              }
-              return ListView.separated(
-                physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics(),
-                ),
-                itemCount: state.reports.length,
-                separatorBuilder: (_, __) => const SizedBox(
-                  height: 12,
-                ),
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => _navigateToReportDailyDetailPage(
-                    context,
-                    reportId: state.reports[index].reportDailyId.toString(),
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(16),
+      child: Column(
+        children: [
+          Expanded(
+            child: BlocBuilder<GetDailyReportsBloc, GetDailyReportsState>(
+              builder: (context, state) {
+                if (state is GetDailyReportsSuccess) {
+                  if (state.reports.isEmpty) {
+                    return const SPFailureWidget(
+                      message: 'Data kosong',
+                    );
+                  }
+                  return ListView.separated(
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
+                    itemCount: state.reports.length,
+                    separatorBuilder: (_, __) => const SizedBox(
+                      height: 12,
+                    ),
+                    itemBuilder: (context, index) => GestureDetector(
+                      onTap: () => _navigateToReportDailyDetailPage(
+                        context,
+                        reportId: state.reports[index].reportDailyId.toString(),
                       ),
-                      boxShadow: SPShadow.shadowGrey,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          DateFormat('EEEE, d MMMM y', 'id_ID').format(
-                            DateTime.parse(
-                                state.reports[index].reportDate ?? ''),
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(16),
                           ),
-                          style: SPTextStyles.text12W400303030,
+                          boxShadow: SPShadow.shadowGrey,
                         ),
-                        SvgPicture.asset(
-                          SPAssets.icon.arrowRight.path,
-                          package: spComponentPackage,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              DateFormat('EEEE, d MMMM y', 'id_ID').format(
+                                DateTime.parse(
+                                    state.reports[index].reportDate ?? ''),
+                              ),
+                              style: SPTextStyles.text12W400303030,
+                            ),
+                            SvgPicture.asset(
+                              SPAssets.icon.arrowRight.path,
+                              package: spComponentPackage,
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              );
-            }
-            if (state is GetDailyReportsError) {
-              return SPFailureWidget(
-                message: state.message,
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-        ),
+                  );
+                }
+                if (state is GetDailyReportsError) {
+                  return SPFailureWidget(
+                    message: state.message,
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

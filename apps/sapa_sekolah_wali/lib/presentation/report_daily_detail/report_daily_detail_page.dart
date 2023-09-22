@@ -215,9 +215,6 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                         label: completeWork[index],
                                         isSelected:
                                             indexCompleteWork == (index + 1),
-                                        onTap: () => setState(() {
-                                          indexCompleteWork = index + 1;
-                                        }),
                                       ),
                                     ),
                                     const SizedBox(height: 12),
@@ -247,9 +244,6 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                         label: qualityWork[index],
                                         isSelected:
                                             indexQualityWork == (index + 1),
-                                        onTap: () => setState(() {
-                                          indexQualityWork = index + 1;
-                                        }),
                                       ),
                                     ),
                                   ],
@@ -290,9 +284,6 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                         label: needToWork[index],
                                         isSelected:
                                             indexNeedToWork == (index + 1),
-                                        onTap: () => setState(() {
-                                          indexNeedToWork = index + 1;
-                                        }),
                                       ),
                                     ),
                                   ],
@@ -342,9 +333,6 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                         label: behaviorSchool[index],
                                         isSelected:
                                             indexBehaviorSchool == (index + 1),
-                                        onTap: () => setState(() {
-                                          indexBehaviorSchool = index + 1;
-                                        }),
                                       ),
                                     ),
                                     const SizedBox(height: 12),
@@ -374,9 +362,6 @@ class _ReportDailyDetailBodyState extends State<_ReportDailyDetailBody> {
                                         label: areaImprovement[index],
                                         isSelected:
                                             indexAreaImprovement == (index + 1),
-                                        onTap: () => setState(() {
-                                          indexAreaImprovement = index + 1;
-                                        }),
                                       ),
                                     ),
                                   ],

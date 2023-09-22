@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sapa_component/sapa_component.dart';
@@ -27,7 +28,9 @@ class MyApp extends StatelessWidget {
       ),
       child: MaterialApp(
         title: 'Sapa Wali',
-        navigatorKey: GetIt.instance.get<Alice>().getNavigatorKey(),
+        navigatorKey: kDebugMode
+            ? GetIt.instance.get<Alice>().getNavigatorKey()
+            : GetIt.instance.get<GlobalKey<NavigatorState>>(),
         theme: ThemeData(
           primarySwatch: getMaterialColor(
             SPColors.colorC8A8DA,

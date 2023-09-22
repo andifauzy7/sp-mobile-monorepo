@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sapa_core/interceptor/error_interceptor.dart';
 import 'package:sapa_core/sapa_core.dart';
@@ -14,9 +15,9 @@ abstract class CoreModule {
   @lazySingleton
   Alice get alice {
     final alice = Alice(
-      showNotification: true,
-      showInspectorOnShake: true,
-      showShareButton: true,
+      showNotification: kDebugMode,
+      showInspectorOnShake: kDebugMode,
+      showShareButton: kDebugMode,
     );
     final GlobalKey<NavigatorState> navigatorKey =
         GetIt.instance.get<GlobalKey<NavigatorState>>();

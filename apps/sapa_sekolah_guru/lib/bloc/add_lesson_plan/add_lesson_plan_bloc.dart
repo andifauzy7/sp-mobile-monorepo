@@ -19,6 +19,7 @@ class AddLessonPlanBloc extends Bloc<AddLessonPlanEvent, AddLessonPlanState> {
         event.studentId,
         DateFormat("yyyy-MM-dd").format(event.datePlan),
         event.lessonId,
+        event.planNotes,
         event.activityId.map((e) => e.activityId.toString()).toList(),
       );
       result.fold(

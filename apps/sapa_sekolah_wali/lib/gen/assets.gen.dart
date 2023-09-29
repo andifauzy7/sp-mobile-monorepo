@@ -24,13 +24,22 @@ class $AssetsImagesGen {
   AssetGenImage get menuDataStudent =>
       const AssetGenImage('assets/images/menu-data-student.png');
 
+  /// File path: assets/images/menu-data-teacher.png
+  AssetGenImage get menuDataTeacher =>
+      const AssetGenImage('assets/images/menu-data-teacher.png');
+
   /// File path: assets/images/menu-payment.png
   AssetGenImage get menuPayment =>
       const AssetGenImage('assets/images/menu-payment.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [homeBanner, logoLittleCastle, menuDataStudent, menuPayment];
+  List<AssetGenImage> get values => [
+        homeBanner,
+        logoLittleCastle,
+        menuDataStudent,
+        menuDataTeacher,
+        menuPayment
+      ];
 }
 
 class Assets {

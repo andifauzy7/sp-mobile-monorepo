@@ -354,6 +354,7 @@ class _AddPlanningPageBodyState extends State<_AddPlanningPageBody> {
                                 studentId: studentId,
                                 datePlan: dateTime!,
                                 lessonId: lessonId,
+                                planNotes: noteController.text,
                                 activityId: activitiesId,
                               ),
                             ),

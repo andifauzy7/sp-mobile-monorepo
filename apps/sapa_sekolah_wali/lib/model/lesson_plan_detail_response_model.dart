@@ -1,3 +1,4 @@
+
 class LessonPlanDetailResponseModel {
   bool? success;
   String? message;
@@ -28,18 +29,21 @@ class LessonPlanDetailModel {
   int? lessonplanId;
   String? studentName;
   String? lessonplanDate;
+  String? planNotes;
   List<LessonPlanDataModel>? lessonPlanlesson;
 
   LessonPlanDetailModel(
       {this.lessonplanId,
       this.studentName,
       this.lessonplanDate,
+      this.planNotes,
       this.lessonPlanlesson});
 
   LessonPlanDetailModel.fromJson(Map<String, dynamic> json) {
     lessonplanId = json['lessonplan_id'];
     studentName = json['student_name'];
     lessonplanDate = json['lessonplan_date'];
+    planNotes = json['plan_notes'];
     if (json['lesson_planlesson'] != null) {
       lessonPlanlesson = <LessonPlanDataModel>[];
       json['lesson_planlesson'].forEach((v) {
@@ -53,6 +57,7 @@ class LessonPlanDetailModel {
     data['lessonplan_id'] = lessonplanId;
     data['student_name'] = studentName;
     data['lessonplan_date'] = lessonplanDate;
+    data['plan_notes'] = planNotes;
     if (lessonPlanlesson != null) {
       data['lesson_planlesson'] =
           lessonPlanlesson!.map((v) => v.toJson()).toList();

@@ -3,6 +3,7 @@ import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 
 class SPDialog {
   static Future showDefaultLoading(BuildContext context) async {
@@ -75,6 +76,7 @@ class SPDialog {
           Center(
             child: Image.asset(
               SPAssets.images.imageSuccess.path,
+              package: spComponentPackage,
               height: 150,
             ),
           ),
@@ -105,6 +107,7 @@ class SPDialog {
           Center(
             child: Image.asset(
               SPAssets.images.imageFailure.path,
+              package: spComponentPackage,
               height: 150,
             ),
           ),

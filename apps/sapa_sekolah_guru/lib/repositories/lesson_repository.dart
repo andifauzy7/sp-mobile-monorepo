@@ -30,6 +30,7 @@ abstract class LessonRepository {
     String studentId,
     String datePlan,
     String lessonId,
+    String planNotes,
     List<String> activityId,
   );
 }
@@ -215,6 +216,7 @@ class LessonRepositoryImpl implements LessonRepository {
     String studentId,
     String datePlan,
     String lessonId,
+    String planNotes,
     List<String> activityId,
   ) async {
     final token = sharedPreferences.getString(keyToken);
@@ -226,6 +228,7 @@ class LessonRepositoryImpl implements LessonRepository {
       "student_id": studentId,
       "date_plan": datePlan,
       "lesson_id": lessonId,
+      "plan_notes": planNotes,
       "activity_id": json.encode(activityId),
     });
     try {

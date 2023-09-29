@@ -3,6 +3,7 @@ import 'package:sapa_component/animation/sp_switcher_animation.dart';
 import 'package:sapa_component/app_bar/sp_app_bar.dart';
 import 'package:sapa_component/card/card_lesson_plan_activity.dart';
 import 'package:sapa_component/card/card_lesson_plan_header.dart';
+import 'package:sapa_component/card/card_lesson_plan_note.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/utils/utils.dart';
@@ -113,6 +114,18 @@ class _DetailPlanningPageBodyState extends State<_DetailPlanningPageBody> {
                                       .toList()
                                       .join("\n"),
                                 ),
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                'Keterangan',
+                                style: SPTextStyles.text10W400303030,
+                              ),
+                              const SizedBox(height: 12),
+                              CardLessonPlanNote(
+                                note: state.lessonPlan.planNotes?.isNotEmpty ??
+                                        false
+                                    ? state.lessonPlan.planNotes!
+                                    : '-',
                               ),
                               const SizedBox(height: 24),
                             ],

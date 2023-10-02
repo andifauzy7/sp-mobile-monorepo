@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
+import 'package:sapa_component/utils/utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class SPCalendar extends StatefulWidget {
@@ -37,9 +38,11 @@ class _SPCalendarState extends State<SPCalendar> {
         titleTextStyle: SPTextStyles.text14W400303030,
         leftChevronIcon: SvgPicture.asset(
           SPAssets.icon.arrowCircleLeft.path,
+          package: spComponentPackage,
         ),
         rightChevronIcon: SvgPicture.asset(
           SPAssets.icon.arrowCircleRight.path,
+          package: spComponentPackage,
         ),
         titleTextFormatter: (date, locale) => DateFormat.yMMMM('id_ID').format(
           date,

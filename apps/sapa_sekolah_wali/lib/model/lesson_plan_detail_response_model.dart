@@ -1,4 +1,3 @@
-
 class LessonPlanDetailResponseModel {
   bool? success;
   String? message;
@@ -29,21 +28,18 @@ class LessonPlanDetailModel {
   int? lessonplanId;
   String? studentName;
   String? lessonplanDate;
-  String? planNotes;
   List<LessonPlanDataModel>? lessonPlanlesson;
 
   LessonPlanDetailModel(
       {this.lessonplanId,
       this.studentName,
       this.lessonplanDate,
-      this.planNotes,
       this.lessonPlanlesson});
 
   LessonPlanDetailModel.fromJson(Map<String, dynamic> json) {
     lessonplanId = json['lessonplan_id'];
     studentName = json['student_name'];
     lessonplanDate = json['lessonplan_date'];
-    planNotes = json['plan_notes'];
     if (json['lesson_planlesson'] != null) {
       lessonPlanlesson = <LessonPlanDataModel>[];
       json['lesson_planlesson'].forEach((v) {
@@ -57,7 +53,6 @@ class LessonPlanDetailModel {
     data['lessonplan_id'] = lessonplanId;
     data['student_name'] = studentName;
     data['lessonplan_date'] = lessonplanDate;
-    data['plan_notes'] = planNotes;
     if (lessonPlanlesson != null) {
       data['lesson_planlesson'] =
           lessonPlanlesson!.map((v) => v.toJson()).toList();
@@ -69,6 +64,7 @@ class LessonPlanDetailModel {
 class LessonPlanDataModel {
   int? subjectplanId;
   String? subjectName;
+  String? planNotes;
   List<LessonPlanActivityModel>? activityList;
 
   LessonPlanDataModel(
@@ -77,6 +73,7 @@ class LessonPlanDataModel {
   LessonPlanDataModel.fromJson(Map<String, dynamic> json) {
     subjectplanId = json['subjectplan_id'];
     subjectName = json['subject_name'];
+    planNotes = json['plan_notes'];
     if (json['activity_list'] != null) {
       activityList = <LessonPlanActivityModel>[];
       json['activity_list'].forEach((v) {
@@ -89,6 +86,7 @@ class LessonPlanDataModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['subjectplan_id'] = subjectplanId;
     data['subject_name'] = subjectName;
+    data['plan_notes'] = planNotes;
     if (activityList != null) {
       data['activity_list'] = activityList!.map((v) => v.toJson()).toList();
     }

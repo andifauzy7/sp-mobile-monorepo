@@ -2,41 +2,36 @@ import 'package:dio/dio.dart';
 
 class ErrorInterceptor extends Interceptor {
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     String checkConnections = 'periksa koneksi anda!';
     switch (err.type) {
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         throw ApiException(
           err.requestOptions,
           'Permintaan ke server dibatalkan',
         );
-      case DioErrorType.connectTimeout:
+      case DioExceptionType.connectionTimeout:
         throw ApiException(
           err.requestOptions,
           'Timeout, $checkConnections',
         );
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         throw ApiException(
           err.requestOptions,
           'Timeout, $checkConnections',
         );
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         throw ApiException(
           err.requestOptions,
           'Timeout, $checkConnections',
         );
-      case DioErrorType.other:
-        if (err.message.contains('SocketException')) {
-          throw ApiException(
-            err.requestOptions,
-            'Jaringan bermasalah, $checkConnections',
-          );
-        }
+      case DioExceptionType.connectionError:
         throw ApiException(
           err.requestOptions,
-          'Terjadi kesalahan tak terduga',
+          'Jaringan bermasalah, $checkConnections',
         );
-      case DioErrorType.response:
+      case DioExceptionType.unknown:
+      case DioExceptionType.badResponse:
         String message = _handleError(
           err.response?.statusCode,
           err.response?.data,
@@ -72,17 +67,14 @@ class ErrorInterceptor extends Interceptor {
   }
 }
 
-class ApiException extends DioError {
-  @override
-  final String message;
-
+class ApiException extends DioException {
   ApiException(
     RequestOptions requestOptions,
-    this.message,
-  ) : super(requestOptions: requestOptions);
+    String message,
+  ) : super(requestOptions: requestOptions, message: message);
 
   @override
   String toString() {
-    return message;
+    return message ?? '';
   }
 }

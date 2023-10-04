@@ -31,9 +31,9 @@ abstract class CoreModule {
     final dio = Dio(
       BaseOptions(
         baseUrl: 'https://lc.sapasekolah.com/api/parent/',
-        connectTimeout: 20000,
-        sendTimeout: 30000,
-        receiveTimeout: 30000,
+        connectTimeout: const Duration(milliseconds: 20000),
+        sendTimeout: const Duration(milliseconds: 30000),
+        receiveTimeout: const Duration(milliseconds: 30000),
       ),
     );
 

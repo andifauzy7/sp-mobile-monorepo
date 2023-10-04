@@ -53,14 +53,14 @@ class SemesterReportPage extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Row(
+            const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   flex: 2,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         "Age :",
                         style: TextStyle(
@@ -73,14 +73,14 @@ class SemesterReportPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 8,
                 ),
                 Expanded(
                   flex: 1,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         "Quarter :",
                         style: TextStyle(
@@ -419,11 +419,11 @@ class SemesterReportPage extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: Column(
-                    children: const [
+                    children: [
                       Text(
                         'Poppy Morina, S.Pd',
                         textAlign: TextAlign.center,
@@ -440,12 +440,12 @@ class SemesterReportPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 16,
                 ),
                 Expanded(
                   child: Column(
-                    children: const [
+                    children: [
                       Text(
                         'Ms. Annisa Oktarianda, S. Psi',
                         textAlign: TextAlign.center,

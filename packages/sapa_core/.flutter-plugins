@@ -1,7 +1,7 @@
 # This is a generated file; do not edit or check into version control.
-flutter_local_notifications=/Users/andifauzy/.pub-cache/hosted/pub.dev/flutter_local_notifications-12.0.4/
+flutter_local_notifications=/Users/andifauzy/.pub-cache/hosted/pub.dev/flutter_local_notifications-14.1.4/
 open_filex=/Users/andifauzy/.pub-cache/hosted/pub.dev/open_filex-4.3.2/
-package_info_plus=/Users/andifauzy/.pub-cache/hosted/pub.dev/package_info_plus-3.1.2/
+package_info_plus=/Users/andifauzy/.pub-cache/hosted/pub.dev/package_info_plus-4.1.0/
 path_provider=/Users/andifauzy/.pub-cache/hosted/pub.dev/path_provider-2.1.1/
 path_provider_android=/Users/andifauzy/.pub-cache/hosted/pub.dev/path_provider_android-2.2.0/
 path_provider_foundation=/Users/andifauzy/.pub-cache/hosted/pub.dev/path_provider_foundation-2.3.1/
@@ -11,8 +11,8 @@ permission_handler=/Users/andifauzy/.pub-cache/hosted/pub.dev/permission_handler
 permission_handler_android=/Users/andifauzy/.pub-cache/hosted/pub.dev/permission_handler_android-10.3.6/
 permission_handler_apple=/Users/andifauzy/.pub-cache/hosted/pub.dev/permission_handler_apple-9.1.4/
 permission_handler_windows=/Users/andifauzy/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.3/
-sensors_plus=/Users/andifauzy/.pub-cache/hosted/pub.dev/sensors_plus-2.0.5/
-share_plus=/Users/andifauzy/.pub-cache/hosted/pub.dev/share_plus-6.3.4/
+sensors_plus=/Users/andifauzy/.pub-cache/hosted/pub.dev/sensors_plus-3.0.3/
+share_plus=/Users/andifauzy/.pub-cache/hosted/pub.dev/share_plus-7.1.0/
 shared_preferences=/Users/andifauzy/.pub-cache/hosted/pub.dev/shared_preferences-2.2.1/
 shared_preferences_android=/Users/andifauzy/.pub-cache/hosted/pub.dev/shared_preferences_android-2.2.1/
 shared_preferences_foundation=/Users/andifauzy/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.3.4/

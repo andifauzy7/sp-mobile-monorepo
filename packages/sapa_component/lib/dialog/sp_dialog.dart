@@ -21,13 +21,13 @@ class SPDialog {
           ),
           child: WillPopScope(
             onWillPop: () => Future.value(false),
-            child: Padding(
-              padding: const EdgeInsets.all(
+            child: const Padding(
+              padding: EdgeInsets.all(
                 16,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   CircularProgressIndicator(),
                 ],
               ),

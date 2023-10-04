@@ -55,7 +55,7 @@ class _HomePageBody extends StatelessWidget {
         color: SPColors.colorFAFAFA,
         child: SafeArea(
           child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(
+            physics: const ClampingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics(),
             ),
             child: Padding(

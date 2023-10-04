@@ -21,7 +21,7 @@ class NewsRepositoryImpl implements NewsRepository {
       final response = await dio.post('infolist.php');
       if (response.statusCode == 200) {
         final result = NewsResponseModel.fromJson(response.data);
-        if (true) {
+        if (result.success ?? false) {
           return Right(result.data ?? []);
         } else {
           return Left(

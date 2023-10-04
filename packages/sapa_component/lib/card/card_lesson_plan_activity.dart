@@ -5,11 +5,13 @@ import 'package:sapa_component/styles/sp_text_styles.dart';
 class CardLessonPlanActivity extends StatelessWidget {
   final String subjectName;
   final String activities;
+  final String planNotes;
 
   const CardLessonPlanActivity({
     super.key,
     required this.subjectName,
     required this.activities,
+    required this.planNotes,
   });
 
   @override
@@ -30,38 +32,35 @@ class CardLessonPlanActivity extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  'Area Pengembangan',
-                  style: SPTextStyles.text12W400B3B3B3,
-                ),
-              ),
-              Text(
-                subjectName,
-                style: SPTextStyles.text12W400303030,
-              ),
-            ],
+          Text(
+            'Area Pengembangan',
+            style: SPTextStyles.text12W400B3B3B3,
+          ),
+          Text(
+            subjectName,
+            style: SPTextStyles.text12W400303030,
           ),
           const SizedBox(
-            height: 4,
+            height: 6,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Text(
-                  'Aktifitas',
-                  style: SPTextStyles.text12W400B3B3B3,
-                ),
-              ),
-              Text(
-                activities,
-                textAlign: TextAlign.right,
-                style: SPTextStyles.text12W400303030,
-              ),
-            ],
+          Text(
+            'Aktifitas',
+            style: SPTextStyles.text12W400B3B3B3,
+          ),
+          Text(
+            activities,
+            style: SPTextStyles.text12W400303030,
+          ),
+          const SizedBox(
+            height: 6,
+          ),
+          Text(
+            'Keterangan',
+            style: SPTextStyles.text12W400B3B3B3,
+          ),
+          Text(
+            planNotes.isEmpty ? '-' : planNotes,
+            style: SPTextStyles.text12W400303030,
           ),
         ],
       ),

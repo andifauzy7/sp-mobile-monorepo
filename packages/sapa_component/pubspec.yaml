@@ -3,21 +3,21 @@ description: A new Flutter project.
 version: 0.0.1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: '>=3.1.3 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
   # Components
-  google_fonts: ^4.0.4
-  fluttertoast: ^8.1.1
-  flutter_svg: ^2.0.5
+  google_fonts: ^6.1.0
+  fluttertoast: ^8.2.2
+  flutter_svg: ^2.0.7
   persistent_bottom_nav_bar: ^5.0.2
   table_calendar: ^3.0.9
   intl: ^0.18.1
-  cached_network_image: ^3.2.3
-  syncfusion_flutter_datepicker: ^20.4.38
+  cached_network_image: ^3.3.0
+  syncfusion_flutter_datepicker: ^23.1.39
   flutter_slidable: ^3.0.0
 
 dev_dependencies:

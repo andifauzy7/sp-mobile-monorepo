@@ -64,6 +64,7 @@ class LessonPlanDetailModel {
 class LessonPlanDataModel {
   int? subjectplanId;
   String? subjectName;
+  String? planNotes;
   List<LessonPlanActivityModel>? activityList;
 
   LessonPlanDataModel(
@@ -72,6 +73,7 @@ class LessonPlanDataModel {
   LessonPlanDataModel.fromJson(Map<String, dynamic> json) {
     subjectplanId = json['subjectplan_id'];
     subjectName = json['subject_name'];
+    planNotes = json['plan_notes'];
     if (json['activity_list'] != null) {
       activityList = <LessonPlanActivityModel>[];
       json['activity_list'].forEach((v) {
@@ -84,6 +86,7 @@ class LessonPlanDataModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['subjectplan_id'] = subjectplanId;
     data['subject_name'] = subjectName;
+    data['plan_notes'] = planNotes;
     if (activityList != null) {
       data['activity_list'] = activityList!.map((v) => v.toJson()).toList();
     }

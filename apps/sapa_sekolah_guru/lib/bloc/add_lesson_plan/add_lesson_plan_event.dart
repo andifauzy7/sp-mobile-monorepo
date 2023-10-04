@@ -5,13 +5,14 @@ class AddLessonPlanEvent {
   final String studentId;
   final DateTime datePlan;
   final String lessonId;
+  final String planNotes;
   final List<ActivityModel> activityId;
 
-  AddLessonPlanEvent({
-    this.lessonPlanId,
-    required this.studentId,
-    required this.datePlan,
-    required this.lessonId,
-    required this.activityId,
-  });
+  AddLessonPlanEvent(
+      {this.lessonPlanId,
+      required this.studentId,
+      required this.datePlan,
+      required this.lessonId,
+      required this.activityId,
+      required this.planNotes});
 }

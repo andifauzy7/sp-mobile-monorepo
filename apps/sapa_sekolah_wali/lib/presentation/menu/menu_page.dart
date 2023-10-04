@@ -63,7 +63,7 @@ class MenuPage extends StatelessWidget {
                     child: CardMenu(
                       title: 'Data Guru',
                       description: 'Data Pengajar',
-                      imageUrl: Assets.images.menuDataStudent.path,
+                      imageUrl: Assets.images.menuDataTeacher.path,
                     ),
                   ),
                   GestureDetector(

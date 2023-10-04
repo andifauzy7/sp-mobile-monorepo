@@ -246,6 +246,11 @@ class _DetailPlanningPageBodyState extends State<_DetailPlanningPageBody> {
                                             .map((e) => e.activityName)
                                             .toList()
                                             .join("\n"),
+                                        planNotes: state
+                                                .lessonPlan
+                                                .lessonPlanlesson?[index]
+                                                .planNotes ??
+                                            '-',
                                       ),
                                     ),
                                   ),

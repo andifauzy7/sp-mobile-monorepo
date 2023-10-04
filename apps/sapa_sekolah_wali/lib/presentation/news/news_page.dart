@@ -6,6 +6,7 @@ import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_sekolah_wali/model/news_response_model.dart';
 import 'package:sapa_sekolah_wali/presentation/home/widget/news_card.dart';
+import 'package:sapa_sekolah_wali/presentation/news_detail/news_detail_page.dart';
 
 class NewsPage extends StatelessWidget {
   final List<NewsModel> news;
@@ -13,6 +14,20 @@ class NewsPage extends StatelessWidget {
     super.key,
     required this.news,
   });
+
+  Future<void> _navigateToNewsDetail(
+    BuildContext context, {
+    required NewsModel news,
+  }) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => NewsDetailPage(
+          news: news,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +56,16 @@ class NewsPage extends StatelessWidget {
                     ),
                     itemCount: news.length,
                     itemBuilder: (BuildContext ctx, index) {
-                      return NewsCard(
-                        news: news[index].news,
-                        newsTitle: news[index].newsTitle,
-                        imageUrl: news[index].newsImage,
+                      return GestureDetector(
+                        onTap: () => _navigateToNewsDetail(
+                          context,
+                          news: news[index],
+                        ),
+                        child: NewsCard(
+                          news: news[index].news,
+                          newsTitle: news[index].newsTitle,
+                          imageUrl: news[index].newsImage,
+                        ),
                       );
                     },
                   ),

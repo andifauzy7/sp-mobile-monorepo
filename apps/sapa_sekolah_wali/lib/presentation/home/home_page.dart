@@ -14,9 +14,11 @@ import 'widget/news_card.dart';
 
 class HomePage extends StatelessWidget {
   final Function(List<NewsModel> news) onViewAll;
+  final Function(NewsModel news) onDetail;
   const HomePage({
     super.key,
     required this.onViewAll,
+    required this.onDetail,
   });
 
   @override
@@ -26,14 +28,15 @@ class HomePage extends StatelessWidget {
         ..add(
           GetNewsEvent(),
         ),
-      child: _HomePageBody(onViewAll),
+      child: _HomePageBody(onViewAll, onDetail),
     );
   }
 }
 
 class _HomePageBody extends StatelessWidget {
   final Function(List<NewsModel> news) onViewAll;
-  const _HomePageBody(this.onViewAll);
+  final Function(NewsModel news) onDetail;
+  const _HomePageBody(this.onViewAll, this.onDetail);
 
   void _comingSoonMessage() => SPToast.showToast(
         message: 'Fitur akan segera hadir',
@@ -177,10 +180,13 @@ class _HomePageBody extends StatelessWidget {
                             itemCount:
                                 state.news.length >= 4 ? 4 : state.news.length,
                             itemBuilder: (BuildContext ctx, index) {
-                              return NewsCard(
-                                news: state.news[index].news,
-                                newsTitle: state.news[index].newsTitle,
-                                imageUrl: state.news[index].newsImage,
+                              return GestureDetector(
+                                onTap: () => onDetail(state.news[index]),
+                                child: NewsCard(
+                                  news: state.news[index].news,
+                                  newsTitle: state.news[index].newsTitle,
+                                  imageUrl: state.news[index].newsImage,
+                                ),
                               );
                             },
                           );

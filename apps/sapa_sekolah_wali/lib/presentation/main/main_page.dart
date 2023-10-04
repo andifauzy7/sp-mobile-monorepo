@@ -7,6 +7,7 @@ import 'package:sapa_sekolah_wali/presentation/forgot_password/forgot_password_p
 import 'package:sapa_sekolah_wali/presentation/home/home_page.dart';
 import 'package:sapa_sekolah_wali/presentation/menu/menu_page.dart';
 import 'package:sapa_sekolah_wali/presentation/news/news_page.dart';
+import 'package:sapa_sekolah_wali/presentation/news_detail/news_detail_page.dart';
 import 'package:sapa_sekolah_wali/presentation/profile/profile_page.dart';
 import 'package:sapa_sekolah_wali/presentation/splash/splash_page.dart';
 import 'package:sapa_sekolah_wali/presentation/students/students_page.dart';
@@ -85,6 +86,20 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  Future<void> _navigateToNewsDetail(
+    BuildContext context, {
+    required NewsModel news,
+  }) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => NewsDetailPage(
+          news: news,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,6 +109,10 @@ class _MainPageState extends State<MainPage> {
         screens: [
           HomePage(
             onViewAll: (news) => _navigateToNews(
+              context,
+              news: news,
+            ),
+            onDetail: (news) => _navigateToNewsDetail(
               context,
               news: news,
             ),

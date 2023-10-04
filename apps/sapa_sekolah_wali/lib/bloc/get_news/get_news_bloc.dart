@@ -20,43 +20,7 @@ class GetNewsBloc extends Bloc<GetNewsEvent, GetNewsState> {
           message: failure.toString(),
         )),
         (news) => emit(GetNewsSuccess(
-          news: [
-            NewsModel(
-              id: 1,
-              newsImage: "https://lc.sapasekolah.com/assets/images/news/",
-              newsTitle: "Info Libur",
-              news:
-                  "Diinfokan kepada orang tua siswa bahwa sekolah akan diliburkan pada besok, tanggal 22-25 September 2023. Terimakasih. ",
-            ),
-            NewsModel(
-              id: 1,
-              newsImage: "https://lc.sapasekolah.com/assets/images/news/",
-              newsTitle: "Info Libur",
-              news:
-                  "Diinfokan kepada orang tua siswa bahwa sekolah akan diliburkan pada besok, tanggal 22-25 September 2023. Terimakasih. ",
-            ),
-            NewsModel(
-              id: 1,
-              newsImage: "https://lc.sapasekolah.com/assets/images/news/",
-              newsTitle: "Info Libur",
-              news:
-                  "Diinfokan kepada orang tua siswa bahwa sekolah akan diliburkan pada besok, tanggal 22-25 September 2023. Terimakasih. ",
-            ),
-            NewsModel(
-              id: 1,
-              newsImage: "https://lc.sapasekolah.com/assets/images/news/",
-              newsTitle: "Info Libur",
-              news:
-                  "Diinfokan kepada orang tua siswa bahwa sekolah akan diliburkan pada besok, tanggal 22-25 September 2023. Terimakasih. ",
-            ),
-            NewsModel(
-              id: 1,
-              newsImage: "https://lc.sapasekolah.com/assets/images/news/",
-              newsTitle: "Info Libur",
-              news:
-                  "Diinfokan kepada orang tua siswa bahwa sekolah akan diliburkan pada besok, tanggal 22-25 September 2023. Terimakasih. ",
-            ),
-          ],
+          news: news,
         )),
       );
     });

@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:sapa_component/sapa_component.dart';
+import 'package:sapa_component/image/sp_cached_network_image.dart';
 import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 
 class NewsCard extends StatelessWidget {
-  const NewsCard({super.key});
+  final String? imageUrl;
+  final String? newsTitle;
+  final String? news;
+  const NewsCard({
+    super.key,
+    this.imageUrl,
+    this.newsTitle,
+    this.news,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,32 +27,22 @@ class NewsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Container(
+            child: SPCachedNetworkImage(
+              imageUrl: imageUrl ?? '',
               width: double.infinity,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(16),
-                ),
-                image: DecorationImage(
-                  image: CachedNetworkImageProvider(
-                    'https://images.template.net/wp-content/uploads/2015/12/20071035/Free-Newspaper-Template.jpeg',
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
             ),
           ),
           const SizedBox(
             height: 8,
           ),
           Text(
-            'Keperluan Sekolah',
+            newsTitle ?? '-',
             style: SPTextStyles.text10W400808080,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
           Text(
-            'Pembayaran Juli',
+            news ?? '-',
             style: SPTextStyles.text12W400303030,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,

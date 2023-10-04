@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_sekolah_wali/model/news_response_model.dart';
 import 'package:sapa_sekolah_wali/presentation/forgot_password/forgot_password_page.dart';
 import 'package:sapa_sekolah_wali/presentation/home/home_page.dart';
 import 'package:sapa_sekolah_wali/presentation/menu/menu_page.dart';
+import 'package:sapa_sekolah_wali/presentation/news/news_page.dart';
+import 'package:sapa_sekolah_wali/presentation/news_detail/news_detail_page.dart';
 import 'package:sapa_sekolah_wali/presentation/profile/profile_page.dart';
 import 'package:sapa_sekolah_wali/presentation/splash/splash_page.dart';
 import 'package:sapa_sekolah_wali/presentation/students/students_page.dart';
@@ -69,6 +72,34 @@ class _MainPageState extends State<MainPage> {
         ),
       );
 
+  Future<void> _navigateToNews(
+    BuildContext context, {
+    required List<NewsModel> news,
+  }) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => NewsPage(
+          news: news,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _navigateToNewsDetail(
+    BuildContext context, {
+    required NewsModel news,
+  }) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => NewsDetailPage(
+          news: news,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +107,16 @@ class _MainPageState extends State<MainPage> {
         context,
         controller: _controller,
         screens: [
-          const HomePage(),
+          HomePage(
+            onViewAll: (news) => _navigateToNews(
+              context,
+              news: news,
+            ),
+            onDetail: (news) => _navigateToNewsDetail(
+              context,
+              news: news,
+            ),
+          ),
           MenuPage(
             onChildrenData: () => _navigateToStudentsPage(
               context,

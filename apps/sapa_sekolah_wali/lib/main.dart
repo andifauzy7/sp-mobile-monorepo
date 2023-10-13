@@ -7,9 +7,16 @@ import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/injection/injection.dart';
 import 'package:sapa_sekolah_wali/presentation/splash/splash_page.dart';
+import 'package:sapa_sekolah_wali/shared/constant/core_constant.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FlavorConfig(
+    name: CoreConstant.prod,
+    variables: {
+      CoreConstant.keyBaseUrl: CoreConstant.prodBaseUrl,
+    },
+  );
   await configureDependencies();
   initializeDateFormatting();
   runApp(const MyApp());
@@ -27,6 +34,7 @@ class MyApp extends StatelessWidget {
         statusBarBrightness: Brightness.light,
       ),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Sapa Wali',
         navigatorKey: kDebugMode
             ? GetIt.instance.get<Alice>().getNavigatorKey()

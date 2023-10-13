@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sapa_core/interceptor/error_interceptor.dart';
 import 'package:sapa_core/sapa_core.dart';
+import 'package:sapa_sekolah_guru/shared/constant/core_constant.dart';
 
 @module
 abstract class CoreModule {
@@ -30,7 +31,7 @@ abstract class CoreModule {
   Dio get dio {
     final dio = Dio(
       BaseOptions(
-        baseUrl: 'https://lc.sapasekolah.com/api/',
+        baseUrl: FlavorConfig.instance.variables[CoreConstant.keyBaseUrl],
         connectTimeout: const Duration(milliseconds: 20000),
         sendTimeout: const Duration(milliseconds: 30000),
         receiveTimeout: const Duration(milliseconds: 30000),

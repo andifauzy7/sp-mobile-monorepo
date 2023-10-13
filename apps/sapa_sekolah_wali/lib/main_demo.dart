@@ -1,19 +1,20 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
-import 'package:sapa_sekolah_guru/injection/injection.dart';
-import 'package:sapa_sekolah_guru/presentation/splash/splash_page.dart';
-import 'package:sapa_sekolah_guru/shared/constant/core_constant.dart';
+import 'package:sapa_sekolah_wali/injection/injection.dart';
+import 'package:sapa_sekolah_wali/presentation/splash/splash_page.dart';
+import 'package:sapa_sekolah_wali/shared/constant/core_constant.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig(
-    name: CoreConstant.prod,
+    name: CoreConstant.demo,
     variables: {
-      CoreConstant.keyBaseUrl: CoreConstant.prodBaseUrl,
+      CoreConstant.keyBaseUrl: CoreConstant.demoBaseUrl,
     },
   );
   await configureDependencies();
@@ -22,7 +23,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -31,16 +33,20 @@ class MyApp extends StatelessWidget {
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
       ),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'SAPA Guru',
-        navigatorKey: GetIt.instance.get<Alice>().getNavigatorKey(),
-        theme: ThemeData(
-          primarySwatch: getMaterialColor(
-            SPColors.colorFFE5C0,
+      child: FlavorBanner(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Wali Demo',
+          navigatorKey: kDebugMode
+              ? GetIt.instance.get<Alice>().getNavigatorKey()
+              : GetIt.instance.get<GlobalKey<NavigatorState>>(),
+          theme: ThemeData(
+            primarySwatch: getMaterialColor(
+              SPColors.colorC8A8DA,
+            ),
           ),
+          home: const SplashPage(),
         ),
-        home: const SplashPage(),
       ),
     );
   }

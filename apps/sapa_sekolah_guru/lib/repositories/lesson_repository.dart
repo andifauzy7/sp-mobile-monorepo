@@ -55,7 +55,7 @@ class LessonRepositoryImpl implements LessonRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/lessonlist.php',
+        'lessonlist.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -88,7 +88,7 @@ class LessonRepositoryImpl implements LessonRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/lessonadd.php',
+        'lessonadd.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -120,7 +120,7 @@ class LessonRepositoryImpl implements LessonRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/activitylist.php',
+        'activitylist.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -153,7 +153,7 @@ class LessonRepositoryImpl implements LessonRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/activityadd.php',
+        'activityadd.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -188,7 +188,7 @@ class LessonRepositoryImpl implements LessonRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/lessonplanlist.php',
+        'lessonplanlist.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -233,7 +233,7 @@ class LessonRepositoryImpl implements LessonRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/lessonplanadd.php',
+        'lessonplanadd.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -267,7 +267,7 @@ class LessonRepositoryImpl implements LessonRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/lessonplandetail.php',
+        'lessonplandetail.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -304,7 +304,7 @@ class LessonRepositoryImpl implements LessonRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/lessonplanlessondelete.php',
+        'lessonplanlessondelete.php',
         data: data,
       );
       if (response.statusCode == 200) {

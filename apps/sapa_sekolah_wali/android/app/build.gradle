@@ -67,6 +67,21 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
+
+    flavorDimensions "sapa_sekolah_wali"
+    productFlavors {
+        demo {
+            resValue "string", "app_name", "Wali Demo"
+            dimension "sapa_sekolah_wali"
+            applicationIdSuffix ".demo"
+            versionNameSuffix ".demo"
+        }
+        prod {
+            resValue "string", "app_name", "SAPA Wali"
+            dimension "sapa_sekolah_wali"
+        }
+    }
+
     buildTypes {
         release {
             signingConfig signingConfigs.release

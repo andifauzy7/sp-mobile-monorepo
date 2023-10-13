@@ -37,7 +37,7 @@ class AuthRepositoryImpl implements AuthRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/login.php',
+        'login.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -92,7 +92,7 @@ class AuthRepositoryImpl implements AuthRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/changepassword.php',
+        'changepassword.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -125,7 +125,7 @@ class AuthRepositoryImpl implements AuthRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/teacherdata.php',
+        'teacherdata.php',
         data: data,
       );
       if (response.statusCode == 200) {

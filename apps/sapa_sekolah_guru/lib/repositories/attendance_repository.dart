@@ -38,7 +38,7 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/studentattendancedata.php',
+        'studentattendancedata.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -82,7 +82,7 @@ class AttendanceRepositoryImpl implements AttendanceRepository {
         ),
       });
       final response = await dio.post(
-        'teacher/submitstudentattendance.php',
+        'submitstudentattendance.php',
         data: data,
       );
       if (response.statusCode == 200) {

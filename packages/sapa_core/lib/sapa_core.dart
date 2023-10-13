@@ -9,3 +9,4 @@ export 'package:injectable/injectable.dart' hide order, Order;
 export 'package:pretty_dio_logger/pretty_dio_logger.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:flutter_flavor/flutter_flavor.dart';

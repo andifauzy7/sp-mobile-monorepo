@@ -27,7 +27,7 @@ class StudentRepositoryImpl implements StudentRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/getstudentlist.php',
+        'getstudentlist.php',
         data: data,
       );
       if (response.statusCode == 200) {

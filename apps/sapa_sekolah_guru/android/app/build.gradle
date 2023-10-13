@@ -53,6 +53,20 @@ android {
         versionName flutterVersionName
     }
 
+    flavorDimensions "sapa_sekolah_guru"
+    productFlavors {
+        demo {
+            resValue "string", "app_name", "Guru Demo"
+            dimension "sapa_sekolah_guru"
+            applicationIdSuffix ".demo"
+            versionNameSuffix ".demo"
+        }
+        prod {
+            resValue "string", "app_name", "SAPA Guru"
+            dimension "sapa_sekolah_guru"
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

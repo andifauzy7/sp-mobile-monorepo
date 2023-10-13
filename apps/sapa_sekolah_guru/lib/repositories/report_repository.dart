@@ -48,7 +48,7 @@ class ReportRepositoryImpl implements ReportRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/reportdailylist.php',
+        'reportdailylist.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -83,7 +83,7 @@ class ReportRepositoryImpl implements ReportRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/reportdailydetail.php',
+        'reportdailydetail.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -132,7 +132,7 @@ class ReportRepositoryImpl implements ReportRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/reportdailysubmit.php',
+        'reportdailysubmit.php',
         data: data,
       );
       if (response.statusCode == 200) {

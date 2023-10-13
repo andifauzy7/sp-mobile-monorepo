@@ -38,7 +38,7 @@ class PermitRepositoryImpl implements PermitRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/studentpermit.php',
+        'studentpermit.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -70,7 +70,7 @@ class PermitRepositoryImpl implements PermitRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/permittype.php',
+        'permittype.php',
         data: data,
       );
       if (response.statusCode == 200) {
@@ -113,7 +113,7 @@ class PermitRepositoryImpl implements PermitRepository {
     });
     try {
       final response = await dio.post(
-        'teacher/studentpermitadd.php',
+        'studentpermitadd.php',
         data: data,
       );
       if (response.statusCode == 200) {

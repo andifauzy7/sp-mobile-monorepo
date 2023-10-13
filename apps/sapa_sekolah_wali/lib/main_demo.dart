@@ -12,9 +12,9 @@ import 'package:sapa_sekolah_wali/shared/constant/core_constant.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FlavorConfig(
-    name: CoreConstant.prod,
+    name: CoreConstant.demo,
     variables: {
-      CoreConstant.keyBaseUrl: CoreConstant.prodBaseUrl,
+      CoreConstant.keyBaseUrl: CoreConstant.demoBaseUrl,
     },
   );
   await configureDependencies();
@@ -33,18 +33,20 @@ class MyApp extends StatelessWidget {
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
       ),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Sapa Wali',
-        navigatorKey: kDebugMode
-            ? GetIt.instance.get<Alice>().getNavigatorKey()
-            : GetIt.instance.get<GlobalKey<NavigatorState>>(),
-        theme: ThemeData(
-          primarySwatch: getMaterialColor(
-            SPColors.colorC8A8DA,
+      child: FlavorBanner(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Wali Demo',
+          navigatorKey: kDebugMode
+              ? GetIt.instance.get<Alice>().getNavigatorKey()
+              : GetIt.instance.get<GlobalKey<NavigatorState>>(),
+          theme: ThemeData(
+            primarySwatch: getMaterialColor(
+              SPColors.colorC8A8DA,
+            ),
           ),
+          home: const SplashPage(),
         ),
-        home: const SplashPage(),
       ),
     );
   }

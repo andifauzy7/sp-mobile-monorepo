@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       child: FlavorBanner(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'SAPA Guru',
+          title: 'Guru Demo',
           navigatorKey: GetIt.instance.get<Alice>().getNavigatorKey(),
           theme: ThemeData(
             primarySwatch: getMaterialColor(

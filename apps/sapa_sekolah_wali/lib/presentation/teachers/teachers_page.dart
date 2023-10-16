@@ -46,7 +46,7 @@ class _StudentsPageBodyState extends State<_StudentsPageBody> {
     BuildContext context, {
     required String teacherId,
   }) =>
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute<void>(
           builder: (BuildContext context) => TeacherDetailPage(

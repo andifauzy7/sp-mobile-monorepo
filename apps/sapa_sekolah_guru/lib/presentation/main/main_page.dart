@@ -3,6 +3,7 @@ import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/utils/utils.dart';
+import 'package:sapa_sekolah_guru/presentation/consultations/consultations_page.dart';
 import 'package:sapa_sekolah_guru/presentation/forgot_password/forgot_password_page.dart';
 import 'package:sapa_sekolah_guru/presentation/home/home_page.dart';
 import 'package:sapa_sekolah_guru/presentation/menu/menu_page.dart';
@@ -83,6 +84,16 @@ class _MainPageState extends State<MainPage> {
         ),
       );
 
+  void _navigateToConsultation(
+    BuildContext context,
+  ) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => const ConsultationsPage(),
+        ),
+      );
+
   @override
   void initState() {
     _controller = PersistentTabController(initialIndex: 0);
@@ -103,6 +114,7 @@ class _MainPageState extends State<MainPage> {
             onPermit: () => _navigateToPermission(context),
             onLessonPlan: () => _navigateToLessonPlan(context),
             onReport: () => _navigateToReportPage(context),
+            onConsultation: () => _navigateToConsultation(context),
           ),
           ProfilePage(
             onLogout: () => _navigateToSplash(context),

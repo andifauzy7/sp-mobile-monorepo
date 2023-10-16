@@ -7,13 +7,18 @@ import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_sekolah_guru/gen/assets.gen.dart';
 
 class MenuPage extends StatelessWidget {
-  final VoidCallback onPresence, onPermit, onLessonPlan, onReport;
+  final VoidCallback onPresence,
+      onPermit,
+      onLessonPlan,
+      onReport,
+      onConsultation;
   const MenuPage({
     super.key,
     required this.onPresence,
     required this.onPermit,
     required this.onLessonPlan,
     required this.onReport,
+    required this.onConsultation,
   });
 
   @override
@@ -76,6 +81,15 @@ class MenuPage extends StatelessWidget {
                       description: 'Berisi Laporan\nPeriodik',
                       package: spComponentPackage,
                       imageUrl: SPAssets.images.menuReport.path,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: onConsultation,
+                    child: CardMenu(
+                      title: 'Konsultasi',
+                      description: 'Konsultasi\nOrang Tua',
+                      package: spComponentPackage,
+                      imageUrl: SPAssets.images.menuConsultation.path,
                     ),
                   ),
                 ],

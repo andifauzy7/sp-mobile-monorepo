@@ -25,7 +25,7 @@ class _ConsultationPageBody extends StatelessWidget {
   Future<void> _navigateToDetailConsultation(
     BuildContext context,
   ) async {
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       MaterialPageRoute<void>(
         builder: (BuildContext context) => const ConsultationDetailPage(),
@@ -36,7 +36,7 @@ class _ConsultationPageBody extends StatelessWidget {
   Future<void> _navigateToAddConsultation(
     BuildContext context,
   ) async {
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       MaterialPageRoute<void>(
         builder: (BuildContext context) => const ConsultationAddPage(),

@@ -12,7 +12,8 @@ class MenuPage extends StatelessWidget {
       onPaymentData,
       onReportData,
       onLessonPlan,
-      onAttendance;
+      onAttendance,
+      onConsultation;
   const MenuPage({
     super.key,
     required this.onChildrenData,
@@ -21,6 +22,7 @@ class MenuPage extends StatelessWidget {
     required this.onReportData,
     required this.onLessonPlan,
     required this.onAttendance,
+    required this.onConsultation,
   });
 
   @override
@@ -99,6 +101,15 @@ class MenuPage extends StatelessWidget {
                       description: 'Absensi Murid',
                       package: spComponentPackage,
                       imageUrl: SPAssets.images.menuAttendance.path,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: onConsultation,
+                    child: CardMenu(
+                      title: 'Konsultasi',
+                      description: 'Konsultasi\nOrang Tua',
+                      package: spComponentPackage,
+                      imageUrl: SPAssets.images.menuConsultation.path,
                     ),
                   ),
                 ],

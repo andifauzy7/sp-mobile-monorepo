@@ -139,6 +139,10 @@ class $AssetsImagesGen {
   AssetGenImage get menuAttendance =>
       const AssetGenImage('assets/images/menu-attendance.png');
 
+  /// File path: assets/images/menu-consultation.png
+  AssetGenImage get menuConsultation =>
+      const AssetGenImage('assets/images/menu-consultation.png');
+
   /// File path: assets/images/menu-lesson-plan.png
   AssetGenImage get menuLessonPlan =>
       const AssetGenImage('assets/images/menu-lesson-plan.png');
@@ -168,6 +172,7 @@ class $AssetsImagesGen {
         imageFailure,
         imageSuccess,
         menuAttendance,
+        menuConsultation,
         menuLessonPlan,
         menuReport,
         splashBackground,

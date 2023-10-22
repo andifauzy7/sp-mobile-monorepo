@@ -34,12 +34,15 @@ class _ConsultationPageBody extends StatelessWidget {
   }
 
   Future<void> _navigateToAddConsultation(
-    BuildContext context,
-  ) async {
+    BuildContext context, {
+    required VoidCallback onSuccess,
+  }) async {
     Navigator.push(
       context,
       MaterialPageRoute<void>(
-        builder: (BuildContext context) => const ConsultationAddPage(),
+        builder: (BuildContext context) => ConsultationAddPage(
+          onSuccess: onSuccess,
+        ),
       ),
     );
   }
@@ -94,7 +97,10 @@ class _ConsultationPageBody extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.only(top: 16),
                     child: SPElevatedButton(
-                      onPressed: () => _navigateToAddConsultation(context),
+                      onPressed: () => _navigateToAddConsultation(
+                        context,
+                        onSuccess: () {},
+                      ),
                       text: 'Konsultasi',
                     ),
                   ),

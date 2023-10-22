@@ -4,8 +4,7 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_lambdas, depend_on_referenced_packages
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: type=lint
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
@@ -13,45 +12,49 @@ import 'package:flutter/material.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:sapa_core/sapa_core.dart' as _i3;
+import 'package:sapa_sekolah_wali/bloc/add_consultation/add_consultation_bloc.dart'
+    as _i24;
 import 'package:sapa_sekolah_wali/bloc/change_password/change_password_bloc.dart'
     as _i10;
 import 'package:sapa_sekolah_wali/bloc/get_attendances/get_attendances_bloc.dart'
-    as _i11;
+    as _i12;
 import 'package:sapa_sekolah_wali/bloc/get_daily_report_detail/get_daily_report_detail_bloc.dart'
-    as _i23;
-import 'package:sapa_sekolah_wali/bloc/get_daily_reports/get_daily_reports_bloc.dart'
-    as _i24;
-import 'package:sapa_sekolah_wali/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart'
     as _i25;
-import 'package:sapa_sekolah_wali/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
+import 'package:sapa_sekolah_wali/bloc/get_daily_reports/get_daily_reports_bloc.dart'
     as _i26;
-import 'package:sapa_sekolah_wali/bloc/get_news/get_news_bloc.dart' as _i12;
-import 'package:sapa_sekolah_wali/bloc/get_payment_detail/get_payment_detail_bloc.dart'
+import 'package:sapa_sekolah_wali/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart'
     as _i27;
-import 'package:sapa_sekolah_wali/bloc/get_payments/get_payments_bloc.dart'
+import 'package:sapa_sekolah_wali/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
     as _i28;
+import 'package:sapa_sekolah_wali/bloc/get_news/get_news_bloc.dart' as _i13;
+import 'package:sapa_sekolah_wali/bloc/get_payment_detail/get_payment_detail_bloc.dart'
+    as _i29;
+import 'package:sapa_sekolah_wali/bloc/get_payments/get_payments_bloc.dart'
+    as _i30;
 import 'package:sapa_sekolah_wali/bloc/get_student_detail/get_student_detail_bloc.dart'
-    as _i13;
-import 'package:sapa_sekolah_wali/bloc/get_students/get_students_bloc.dart'
     as _i14;
-import 'package:sapa_sekolah_wali/bloc/get_teacher_detail/get_teacher_detail_bloc.dart'
+import 'package:sapa_sekolah_wali/bloc/get_students/get_students_bloc.dart'
     as _i15;
-import 'package:sapa_sekolah_wali/bloc/get_teachers/get_teachers_bloc.dart'
+import 'package:sapa_sekolah_wali/bloc/get_teacher_detail/get_teacher_detail_bloc.dart'
     as _i16;
-import 'package:sapa_sekolah_wali/bloc/login/login_bloc.dart' as _i18;
-import 'package:sapa_sekolah_wali/bloc/logout/logout_bloc.dart' as _i19;
+import 'package:sapa_sekolah_wali/bloc/get_teachers/get_teachers_bloc.dart'
+    as _i17;
+import 'package:sapa_sekolah_wali/bloc/login/login_bloc.dart' as _i19;
+import 'package:sapa_sekolah_wali/bloc/logout/logout_bloc.dart' as _i20;
 import 'package:sapa_sekolah_wali/presentation/splash/cubit/splash_cubit.dart'
-    as _i22;
+    as _i23;
 import 'package:sapa_sekolah_wali/repositories/attendance_repository.dart'
     as _i8;
 import 'package:sapa_sekolah_wali/repositories/auth_repository.dart' as _i9;
-import 'package:sapa_sekolah_wali/repositories/lesson_repository.dart' as _i17;
+import 'package:sapa_sekolah_wali/repositories/consultation_repository.dart'
+    as _i11;
+import 'package:sapa_sekolah_wali/repositories/lesson_repository.dart' as _i18;
 import 'package:sapa_sekolah_wali/repositories/news_repository.dart' as _i5;
-import 'package:sapa_sekolah_wali/repositories/payment_repository.dart' as _i20;
-import 'package:sapa_sekolah_wali/repositories/report_repository.dart' as _i21;
+import 'package:sapa_sekolah_wali/repositories/payment_repository.dart' as _i21;
+import 'package:sapa_sekolah_wali/repositories/report_repository.dart' as _i22;
 import 'package:sapa_sekolah_wali/repositories/student_repository.dart' as _i6;
 import 'package:sapa_sekolah_wali/repositories/teacher_repository.dart' as _i7;
-import 'package:sapa_sekolah_wali/shared/core/core_module.dart' as _i29;
+import 'package:sapa_sekolah_wali/shared/core/core_module.dart' as _i31;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -94,51 +97,58 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i10.ChangePasswordBloc>(() =>
         _i10.ChangePasswordBloc(authRepository: gh<_i9.AuthRepository>()));
-    gh.factory<_i11.GetAttendancesBloc>(() => _i11.GetAttendancesBloc(
+    gh.lazySingleton<_i11.ConsultationRepository>(
+        () => _i11.ConsultationRepositoryImpl(
+              dio: gh<_i3.Dio>(),
+              sharedPreferences: gh<_i3.SharedPreferences>(),
+            ));
+    gh.factory<_i12.GetAttendancesBloc>(() => _i12.GetAttendancesBloc(
         attendanceRepository: gh<_i8.AttendanceRepository>()));
-    gh.factory<_i12.GetNewsBloc>(
-        () => _i12.GetNewsBloc(newsRepository: gh<_i5.NewsRepository>()));
-    gh.factory<_i13.GetStudentDetailBloc>(() => _i13.GetStudentDetailBloc(
+    gh.factory<_i13.GetNewsBloc>(
+        () => _i13.GetNewsBloc(newsRepository: gh<_i5.NewsRepository>()));
+    gh.factory<_i14.GetStudentDetailBloc>(() => _i14.GetStudentDetailBloc(
         studentRepository: gh<_i6.StudentRepository>()));
-    gh.factory<_i14.GetStudentsBloc>(() =>
-        _i14.GetStudentsBloc(studentRepository: gh<_i6.StudentRepository>()));
-    gh.factory<_i15.GetTeacherDetailBloc>(() => _i15.GetTeacherDetailBloc(
+    gh.factory<_i15.GetStudentsBloc>(() =>
+        _i15.GetStudentsBloc(studentRepository: gh<_i6.StudentRepository>()));
+    gh.factory<_i16.GetTeacherDetailBloc>(() => _i16.GetTeacherDetailBloc(
         teacherRepository: gh<_i7.TeacherRepository>()));
-    gh.factory<_i16.GetTeachersBloc>(() =>
-        _i16.GetTeachersBloc(teacherRepository: gh<_i7.TeacherRepository>()));
-    gh.lazySingleton<_i17.LessonRepository>(() => _i17.LessonRepositoryImpl(
+    gh.factory<_i17.GetTeachersBloc>(() =>
+        _i17.GetTeachersBloc(teacherRepository: gh<_i7.TeacherRepository>()));
+    gh.lazySingleton<_i18.LessonRepository>(() => _i18.LessonRepositoryImpl(
           dio: gh<_i3.Dio>(),
           sharedPreferences: gh<_i3.SharedPreferences>(),
         ));
-    gh.factory<_i18.LoginBloc>(
-        () => _i18.LoginBloc(authRepository: gh<_i9.AuthRepository>()));
-    gh.factory<_i19.LogoutBloc>(
-        () => _i19.LogoutBloc(authRepository: gh<_i9.AuthRepository>()));
-    gh.lazySingleton<_i20.PaymentRepository>(() => _i20.PaymentRepositoryImpl(
+    gh.factory<_i19.LoginBloc>(
+        () => _i19.LoginBloc(authRepository: gh<_i9.AuthRepository>()));
+    gh.factory<_i20.LogoutBloc>(
+        () => _i20.LogoutBloc(authRepository: gh<_i9.AuthRepository>()));
+    gh.lazySingleton<_i21.PaymentRepository>(() => _i21.PaymentRepositoryImpl(
           dio: gh<_i3.Dio>(),
           sharedPreferences: gh<_i3.SharedPreferences>(),
         ));
-    gh.lazySingleton<_i21.ReportRepository>(() => _i21.ReportRepositoryImpl(
+    gh.lazySingleton<_i22.ReportRepository>(() => _i22.ReportRepositoryImpl(
           dio: gh<_i3.Dio>(),
           sharedPreferences: gh<_i3.SharedPreferences>(),
         ));
-    gh.factory<_i22.SplashCubit>(
-        () => _i22.SplashCubit(authRepository: gh<_i9.AuthRepository>()));
-    gh.factory<_i23.GetDailyReportDetailBloc>(() =>
-        _i23.GetDailyReportDetailBloc(
-            reportRepository: gh<_i21.ReportRepository>()));
-    gh.factory<_i24.GetDailyReportsBloc>(() => _i24.GetDailyReportsBloc(
-        reportRepository: gh<_i21.ReportRepository>()));
-    gh.factory<_i25.GetLessonPlanDetailBloc>(() => _i25.GetLessonPlanDetailBloc(
-        lessonRepository: gh<_i17.LessonRepository>()));
-    gh.factory<_i26.GetLessonPlansBloc>(() =>
-        _i26.GetLessonPlansBloc(lessonRepository: gh<_i17.LessonRepository>()));
-    gh.factory<_i27.GetPaymentDetailBloc>(() => _i27.GetPaymentDetailBloc(
-        paymentRepository: gh<_i20.PaymentRepository>()));
-    gh.factory<_i28.GetPaymentsBloc>(() =>
-        _i28.GetPaymentsBloc(paymentRepository: gh<_i20.PaymentRepository>()));
+    gh.factory<_i23.SplashCubit>(
+        () => _i23.SplashCubit(authRepository: gh<_i9.AuthRepository>()));
+    gh.factory<_i24.AddConsultationBloc>(() => _i24.AddConsultationBloc(
+        consultationRepository: gh<_i11.ConsultationRepository>()));
+    gh.factory<_i25.GetDailyReportDetailBloc>(() =>
+        _i25.GetDailyReportDetailBloc(
+            reportRepository: gh<_i22.ReportRepository>()));
+    gh.factory<_i26.GetDailyReportsBloc>(() => _i26.GetDailyReportsBloc(
+        reportRepository: gh<_i22.ReportRepository>()));
+    gh.factory<_i27.GetLessonPlanDetailBloc>(() => _i27.GetLessonPlanDetailBloc(
+        lessonRepository: gh<_i18.LessonRepository>()));
+    gh.factory<_i28.GetLessonPlansBloc>(() =>
+        _i28.GetLessonPlansBloc(lessonRepository: gh<_i18.LessonRepository>()));
+    gh.factory<_i29.GetPaymentDetailBloc>(() => _i29.GetPaymentDetailBloc(
+        paymentRepository: gh<_i21.PaymentRepository>()));
+    gh.factory<_i30.GetPaymentsBloc>(() =>
+        _i30.GetPaymentsBloc(paymentRepository: gh<_i21.PaymentRepository>()));
     return this;
   }
 }
 
-class _$CoreModule extends _i29.CoreModule {}
+class _$CoreModule extends _i31.CoreModule {}

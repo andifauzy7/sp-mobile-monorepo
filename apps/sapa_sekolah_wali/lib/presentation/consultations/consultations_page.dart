@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/animation/sp_switcher_animation.dart';
 import 'package:sapa_component/app_bar/sp_app_bar.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/card/card_consultation.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/other/sp_container_image.dart';
+import 'package:sapa_component/other/sp_failure_widget.dart';
+import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/utils/utils.dart';
+import 'package:sapa_core/sapa_core.dart';
+import 'package:sapa_sekolah_wali/bloc/get_consultations/get_consultations_bloc.dart';
 import 'package:sapa_sekolah_wali/presentation/consultation_add/consultation_add_page.dart';
 import 'package:sapa_sekolah_wali/presentation/consultation_detail/consultation_detail_page.dart';
 
@@ -15,7 +20,13 @@ class ConsultationsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const _ConsultationPageBody();
+    return BlocProvider(
+      create: (context) => GetIt.instance.get<GetConsultationsBloc>()
+        ..add(
+          GetConsultationsEvent(),
+        ),
+      child: const _ConsultationPageBody(),
+    );
   }
 }
 
@@ -51,6 +62,9 @@ class _ConsultationPageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () {
+        BlocProvider.of<GetConsultationsBloc>(context).add(
+          GetConsultationsEvent(),
+        );
         return Future.value(null);
       },
       child: Scaffold(
@@ -73,24 +87,55 @@ class _ConsultationPageBody extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Expanded(
-                    child: ListView.separated(
-                      physics: const BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics(),
-                      ),
-                      itemCount: 10,
-                      separatorBuilder: (context, index) => const SizedBox(
-                        height: 16,
-                      ),
-                      itemBuilder: (context, index) => GestureDetector(
-                        onTap: () => _navigateToDetailConsultation(context),
-                        child: CardConsultation(
-                          date: DateTime.now().toString(),
-                          name: 'Siti Mutmainah',
-                          detailStyle: SPTextStyles.text8W400WHITE,
-                          message:
-                              'Selamat pagi ibu Restu Putri, saya ingin berkonsultasi perihal',
-                        ),
-                      ),
+                    child: BlocBuilder<GetConsultationsBloc,
+                        GetConsultationsState>(
+                      builder: (context, state) {
+                        Widget renderWidget = const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                        if (state is GetConsultationsSuccess) {
+                          if (state.consultations.isEmpty) {
+                            renderWidget = const SPFailureWidget(
+                              message: 'Data kosong',
+                            );
+                          } else {
+                            renderWidget = ListView.separated(
+                              physics: const BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics(),
+                              ),
+                              itemCount: state.consultations.length,
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                height: 16,
+                              ),
+                              itemBuilder: (context, index) => GestureDetector(
+                                onTap: () =>
+                                    _navigateToDetailConsultation(context),
+                                child: CardConsultation(
+                                  date: DateFormat("dd-MMM-yyyy HH:mm")
+                                      .parse(state.consultations[index]
+                                              .submitDate ??
+                                          '')
+                                      .toString(),
+                                  name:
+                                      state.consultations[index].teacherName ??
+                                          '-',
+                                  detailStyle: SPTextStyles.text8W400WHITE,
+                                  message:
+                                      state.consultations[index].questionText ??
+                                          '-',
+                                ),
+                              ),
+                            );
+                          }
+                        }
+                        if (state is GetConsultationsError) {
+                          renderWidget = SPFailureWidget(
+                            message: state.message,
+                          );
+                        }
+                        return SPSwitcherAnimation(child: renderWidget);
+                      },
                     ),
                   ),
                   Container(

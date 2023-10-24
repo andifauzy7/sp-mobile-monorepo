@@ -73,9 +73,8 @@ class ConsultationRepositoryImpl implements ConsultationRepository {
     final token = sharedPreferences.getString(keyToken);
     final userId = sharedPreferences.getString(keyUserId);
     final data = FormData.fromMap({
-      "token":
-          "Zjg3a1dlUHJWS2RHMGF4bTU4N2toVGY2VlUzRnNFcUg3SWVaMURmbHJCOGs2T2ZMcFFVL09CeTZtWFV2bmlBRw",
-      "user_id": '6',
+      "token": token,
+      "user_id": userId,
     });
     try {
       final response = await dio.post(

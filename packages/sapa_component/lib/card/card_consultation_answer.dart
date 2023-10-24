@@ -18,25 +18,35 @@ class CardConsultationAnswer extends StatelessWidget {
   Widget _renderLeftPadding() {
     if (pov == CardConsultationAnswerPov.parent) {
       if (sender == 'teacher') {
+        return const SizedBox.shrink();
+      } else {
+        return const Spacer(flex: 1);
+      }
+    } else {
+      // POV Teacher
+      if (sender == 'teacher') {
         return const Spacer(flex: 1);
       } else {
         return const SizedBox.shrink();
       }
     }
-
-    return const SizedBox.shrink();
   }
 
   Widget _renderRightPadding() {
     if (pov == CardConsultationAnswerPov.parent) {
+      if (sender != 'teacher') {
+        return const SizedBox.shrink();
+      } else {
+        return const Spacer(flex: 1);
+      }
+    } else {
+      // POV Teacher
       if (sender != 'teacher') {
         return const Spacer(flex: 1);
       } else {
         return const SizedBox.shrink();
       }
     }
-
-    return const SizedBox.shrink();
   }
 
   @override

@@ -114,7 +114,8 @@ class _ConsultationPageBody extends StatelessWidget {
                               itemBuilder: (context, index) => GestureDetector(
                                 onTap: () => _navigateToDetailConsultation(
                                   context,
-                                  id: '1',
+                                  id: state.consultations[index].consultationId
+                                      .toString(),
                                 ),
                                 child: CardConsultation(
                                   date: DateFormat("dd-MMM-yyyy HH:mm")

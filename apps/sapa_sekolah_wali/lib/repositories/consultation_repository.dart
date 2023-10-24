@@ -38,6 +38,7 @@ class ConsultationRepositoryImpl implements ConsultationRepository {
       "student_id": studentId,
       "employee_id": teacherId,
       "question_text": questionText,
+      "question_file": '',
     });
     try {
       final response = await dio.post(

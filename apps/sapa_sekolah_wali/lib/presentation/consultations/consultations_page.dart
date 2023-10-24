@@ -144,7 +144,11 @@ class _ConsultationPageBody extends StatelessWidget {
                     child: SPElevatedButton(
                       onPressed: () => _navigateToAddConsultation(
                         context,
-                        onSuccess: () {},
+                        onSuccess: () {
+                          BlocProvider.of<GetConsultationsBloc>(context).add(
+                            GetConsultationsEvent(),
+                          );
+                        },
                       ),
                       text: 'Konsultasi',
                     ),

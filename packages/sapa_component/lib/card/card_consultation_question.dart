@@ -33,11 +33,11 @@ class CardConsultationQuestion extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                name,
-                style: SPTextStyles.text14W400303030,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+              Expanded(
+                child: Text(
+                  name,
+                  style: SPTextStyles.text14W400303030,
+                ),
               ),
               Text(
                 DateFormat('d MMMM, y', 'id_ID').format(

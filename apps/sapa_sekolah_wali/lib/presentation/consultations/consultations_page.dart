@@ -34,12 +34,15 @@ class _ConsultationPageBody extends StatelessWidget {
   const _ConsultationPageBody();
 
   Future<void> _navigateToDetailConsultation(
-    BuildContext context,
-  ) async {
+    BuildContext context, {
+    required String id,
+  }) async {
     Navigator.push(
       context,
       MaterialPageRoute<void>(
-        builder: (BuildContext context) => const ConsultationDetailPage(),
+        builder: (BuildContext context) => ConsultationDetailPage(
+          id: id,
+        ),
       ),
     );
   }
@@ -109,8 +112,11 @@ class _ConsultationPageBody extends StatelessWidget {
                                 height: 16,
                               ),
                               itemBuilder: (context, index) => GestureDetector(
-                                onTap: () =>
-                                    _navigateToDetailConsultation(context),
+                                onTap: () => _navigateToDetailConsultation(
+                                  context,
+                                  id: state.consultations[index].consultationId
+                                      .toString(),
+                                ),
                                 child: CardConsultation(
                                   date: DateFormat("dd-MMM-yyyy HH:mm")
                                       .parse(state.consultations[index]
@@ -144,7 +150,11 @@ class _ConsultationPageBody extends StatelessWidget {
                     child: SPElevatedButton(
                       onPressed: () => _navigateToAddConsultation(
                         context,
-                        onSuccess: () {},
+                        onSuccess: () {
+                          BlocProvider.of<GetConsultationsBloc>(context).add(
+                            GetConsultationsEvent(),
+                          );
+                        },
                       ),
                       text: 'Konsultasi',
                     ),

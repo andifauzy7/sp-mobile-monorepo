@@ -8,8 +8,10 @@ import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart';
+import 'package:sapa_sekolah_guru/bloc/get_monthly_reports/get_monthly_reports_bloc.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/report_student/widget/report_daily.dart';
+import 'package:sapa_sekolah_guru/presentation/report_student/widget/report_monthly.dart';
 
 class ReportStudentPage extends StatefulWidget {
   final StudentModel student;
@@ -126,10 +128,16 @@ class _ReportStudentPageState extends State<ReportStudentPage>
                           student: widget.student,
                         ),
                       ),
-                      const Center(
-                        child: Text(
-                          'Laporan Bulanan\nAkan Datang',
-                          textAlign: TextAlign.center,
+                      BlocProvider(
+                        create: (context) => GetIt.instance
+                            .get<GetMonthlyReportsBloc>()
+                          ..add(
+                            GetMonthlyReportsEvent(
+                              studentId: widget.student.studentId.toString(),
+                            ),
+                          ),
+                        child: ReportMonthly(
+                          student: widget.student,
                         ),
                       ),
                       const Center(

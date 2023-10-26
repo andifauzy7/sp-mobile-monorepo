@@ -9,7 +9,9 @@ import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_daily_reports/get_daily_reports_bloc.dart';
+import 'package:sapa_sekolah_wali/bloc/get_monthly_reports/get_monthly_reports_bloc.dart';
 import 'package:sapa_sekolah_wali/model/students_response_model.dart';
+import 'package:sapa_sekolah_wali/presentation/report/widget/report_monthly.dart';
 
 import 'widget/report_daily.dart';
 
@@ -101,11 +103,16 @@ class _ReportPageState extends State<ReportPage>
                           student: widget.student,
                         ),
                       ),
-                      Center(
-                        child: Text(
-                          'Laporan Bulanan\nAkan Datang',
-                          textAlign: TextAlign.center,
-                          style: SPTextStyles.text14W400B3B3B3,
+                      BlocProvider(
+                        create: (context) => GetIt.instance
+                            .get<GetMonthlyReportsBloc>()
+                          ..add(
+                            GetMonthlyReportsEvent(
+                              studentId: widget.student.studentId.toString(),
+                            ),
+                          ),
+                        child: ReportMonthly(
+                          student: widget.student,
                         ),
                       ),
                       Center(

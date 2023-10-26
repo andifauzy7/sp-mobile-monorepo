@@ -32,11 +32,13 @@ import 'package:sapa_sekolah_wali/bloc/get_lesson_plan_detail/get_lesson_plan_de
     as _i30;
 import 'package:sapa_sekolah_wali/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
     as _i31;
+import 'package:sapa_sekolah_wali/bloc/get_monthly_reports/get_monthly_reports_bloc.dart'
+    as _i32;
 import 'package:sapa_sekolah_wali/bloc/get_news/get_news_bloc.dart' as _i15;
 import 'package:sapa_sekolah_wali/bloc/get_payment_detail/get_payment_detail_bloc.dart'
-    as _i32;
-import 'package:sapa_sekolah_wali/bloc/get_payments/get_payments_bloc.dart'
     as _i33;
+import 'package:sapa_sekolah_wali/bloc/get_payments/get_payments_bloc.dart'
+    as _i34;
 import 'package:sapa_sekolah_wali/bloc/get_student_detail/get_student_detail_bloc.dart'
     as _i16;
 import 'package:sapa_sekolah_wali/bloc/get_students/get_students_bloc.dart'
@@ -60,7 +62,7 @@ import 'package:sapa_sekolah_wali/repositories/payment_repository.dart' as _i23;
 import 'package:sapa_sekolah_wali/repositories/report_repository.dart' as _i24;
 import 'package:sapa_sekolah_wali/repositories/student_repository.dart' as _i6;
 import 'package:sapa_sekolah_wali/repositories/teacher_repository.dart' as _i7;
-import 'package:sapa_sekolah_wali/shared/core/core_module.dart' as _i34;
+import 'package:sapa_sekolah_wali/shared/core/core_module.dart' as _i35;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -157,12 +159,14 @@ extension GetItInjectableX on _i1.GetIt {
         lessonRepository: gh<_i20.LessonRepository>()));
     gh.factory<_i31.GetLessonPlansBloc>(() =>
         _i31.GetLessonPlansBloc(lessonRepository: gh<_i20.LessonRepository>()));
-    gh.factory<_i32.GetPaymentDetailBloc>(() => _i32.GetPaymentDetailBloc(
+    gh.factory<_i32.GetMonthlyReportsBloc>(() => _i32.GetMonthlyReportsBloc(
+        reportRepository: gh<_i24.ReportRepository>()));
+    gh.factory<_i33.GetPaymentDetailBloc>(() => _i33.GetPaymentDetailBloc(
         paymentRepository: gh<_i23.PaymentRepository>()));
-    gh.factory<_i33.GetPaymentsBloc>(() =>
-        _i33.GetPaymentsBloc(paymentRepository: gh<_i23.PaymentRepository>()));
+    gh.factory<_i34.GetPaymentsBloc>(() =>
+        _i34.GetPaymentsBloc(paymentRepository: gh<_i23.PaymentRepository>()));
     return this;
   }
 }
 
-class _$CoreModule extends _i34.CoreModule {}
+class _$CoreModule extends _i35.CoreModule {}

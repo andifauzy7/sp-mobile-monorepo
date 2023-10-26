@@ -14,34 +14,36 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:sapa_core/sapa_core.dart' as _i3;
 import 'package:sapa_sekolah_guru/bloc/add_activity/add_activity_bloc.dart'
     as _i23;
-import 'package:sapa_sekolah_guru/bloc/add_lesson/add_lesson_bloc.dart' as _i24;
+import 'package:sapa_sekolah_guru/bloc/add_consultation_response/add_consultation_response_bloc.dart'
+    as _i24;
+import 'package:sapa_sekolah_guru/bloc/add_lesson/add_lesson_bloc.dart' as _i25;
 import 'package:sapa_sekolah_guru/bloc/add_lesson_plan/add_lesson_plan_bloc.dart'
-    as _i25;
-import 'package:sapa_sekolah_guru/bloc/add_permit/add_permit_bloc.dart' as _i26;
+    as _i26;
+import 'package:sapa_sekolah_guru/bloc/add_permit/add_permit_bloc.dart' as _i27;
 import 'package:sapa_sekolah_guru/bloc/change_password/change_password_bloc.dart'
     as _i8;
 import 'package:sapa_sekolah_guru/bloc/delete_lesson_plan/delete_lesson_plan_bloc.dart'
-    as _i27;
-import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart'
     as _i28;
+import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart'
+    as _i29;
 import 'package:sapa_sekolah_guru/bloc/get_consultation_detail/get_consultation_detail_bloc.dart'
     as _i10;
 import 'package:sapa_sekolah_guru/bloc/get_consultations/get_consultations_bloc.dart'
     as _i11;
 import 'package:sapa_sekolah_guru/bloc/get_daily_report_detail/get_daily_report_detail_bloc.dart'
-    as _i29;
-import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart'
     as _i30;
-import 'package:sapa_sekolah_guru/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart'
     as _i31;
-import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart'
     as _i32;
-import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
     as _i33;
-import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart'
     as _i34;
-import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart'
     as _i35;
+import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart'
+    as _i36;
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart'
     as _i13;
 import 'package:sapa_sekolah_guru/bloc/get_students_attendance/get_students_attendance_bloc.dart'
@@ -65,7 +67,7 @@ import 'package:sapa_sekolah_guru/repositories/lesson_repository.dart' as _i15;
 import 'package:sapa_sekolah_guru/repositories/permit_repository.dart' as _i18;
 import 'package:sapa_sekolah_guru/repositories/report_repository.dart' as _i19;
 import 'package:sapa_sekolah_guru/repositories/student_repository.dart' as _i5;
-import 'package:sapa_sekolah_guru/shared/core/core_module.dart' as _i36;
+import 'package:sapa_sekolah_guru/shared/core/core_module.dart' as _i37;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -144,33 +146,36 @@ extension GetItInjectableX on _i1.GetIt {
         reportRepository: gh<_i19.ReportRepository>()));
     gh.factory<_i23.AddActivityBloc>(() =>
         _i23.AddActivityBloc(lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i24.AddLessonBloc>(() =>
-        _i24.AddLessonBloc(lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i25.AddLessonPlanBloc>(() =>
-        _i25.AddLessonPlanBloc(lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i26.AddPermitBloc>(() =>
-        _i26.AddPermitBloc(permitRepository: gh<_i18.PermitRepository>()));
-    gh.factory<_i27.DeleteLessonPlanBloc>(() => _i27.DeleteLessonPlanBloc(
+    gh.factory<_i24.AddConsultationResponseBloc>(() =>
+        _i24.AddConsultationResponseBloc(
+            consultationRepository: gh<_i9.ConsultationRepository>()));
+    gh.factory<_i25.AddLessonBloc>(() =>
+        _i25.AddLessonBloc(lessonRepository: gh<_i15.LessonRepository>()));
+    gh.factory<_i26.AddLessonPlanBloc>(() =>
+        _i26.AddLessonPlanBloc(lessonRepository: gh<_i15.LessonRepository>()));
+    gh.factory<_i27.AddPermitBloc>(() =>
+        _i27.AddPermitBloc(permitRepository: gh<_i18.PermitRepository>()));
+    gh.factory<_i28.DeleteLessonPlanBloc>(() => _i28.DeleteLessonPlanBloc(
         lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i28.GetActivitiesBloc>(() =>
-        _i28.GetActivitiesBloc(lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i29.GetDailyReportDetailBloc>(() =>
-        _i29.GetDailyReportDetailBloc(
+    gh.factory<_i29.GetActivitiesBloc>(() =>
+        _i29.GetActivitiesBloc(lessonRepository: gh<_i15.LessonRepository>()));
+    gh.factory<_i30.GetDailyReportDetailBloc>(() =>
+        _i30.GetDailyReportDetailBloc(
             reportRepository: gh<_i19.ReportRepository>()));
-    gh.factory<_i30.GetDailyReportsBloc>(() => _i30.GetDailyReportsBloc(
+    gh.factory<_i31.GetDailyReportsBloc>(() => _i31.GetDailyReportsBloc(
         reportRepository: gh<_i19.ReportRepository>()));
-    gh.factory<_i31.GetLessonPlanDetailBloc>(() => _i31.GetLessonPlanDetailBloc(
+    gh.factory<_i32.GetLessonPlanDetailBloc>(() => _i32.GetLessonPlanDetailBloc(
         lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i32.GetLessonPlansBloc>(() =>
-        _i32.GetLessonPlansBloc(lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i33.GetLessonsBloc>(() =>
-        _i33.GetLessonsBloc(lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i34.GetPermitTypeBloc>(() =>
-        _i34.GetPermitTypeBloc(permitRepository: gh<_i18.PermitRepository>()));
-    gh.factory<_i35.GetStudentPermitsBloc>(() => _i35.GetStudentPermitsBloc(
+    gh.factory<_i33.GetLessonPlansBloc>(() =>
+        _i33.GetLessonPlansBloc(lessonRepository: gh<_i15.LessonRepository>()));
+    gh.factory<_i34.GetLessonsBloc>(() =>
+        _i34.GetLessonsBloc(lessonRepository: gh<_i15.LessonRepository>()));
+    gh.factory<_i35.GetPermitTypeBloc>(() =>
+        _i35.GetPermitTypeBloc(permitRepository: gh<_i18.PermitRepository>()));
+    gh.factory<_i36.GetStudentPermitsBloc>(() => _i36.GetStudentPermitsBloc(
         permitRepository: gh<_i18.PermitRepository>()));
     return this;
   }
 }
 
-class _$CoreModule extends _i36.CoreModule {}
+class _$CoreModule extends _i37.CoreModule {}

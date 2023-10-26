@@ -4,6 +4,7 @@ import 'package:sapa_component/app_bar/sp_app_bar.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
 import 'package:sapa_component/card/card_consultation_answer.dart';
 import 'package:sapa_component/card/card_consultation_question.dart';
+import 'package:sapa_component/dialog/sp_dialog.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
@@ -11,7 +12,9 @@ import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
+import 'package:sapa_sekolah_wali/bloc/add_consultation_response/add_consultation_response_bloc.dart';
 import 'package:sapa_sekolah_wali/bloc/get_consultation_detail/get_consultation_detail_bloc.dart';
+import 'package:sapa_sekolah_wali/presentation/consultation_detail/widget/consultation_add_response.dart';
 
 class ConsultationDetailPage extends StatelessWidget {
   final String id;
@@ -34,6 +37,23 @@ class ConsultationDetailPage extends StatelessWidget {
 class _ConsultationDetailPageBody extends StatelessWidget {
   final String id;
   const _ConsultationDetailPageBody(this.id);
+
+  void _addResponseDialog(BuildContext context) async =>
+      await SPDialog.showDefault(
+        context,
+        children: [
+          BlocProvider(
+            create: (_) => GetIt.instance.get<AddConsultationResponseBloc>(),
+            child: ConsultationAddResponse(
+              consultationId: id,
+              onSuccess: () =>
+                  BlocProvider.of<GetConsultationDetailBloc>(context).add(
+                GetConsultationDetailEvent(id: id),
+              ),
+            ),
+          ),
+        ],
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +136,7 @@ class _ConsultationDetailPageBody extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.only(top: 16),
                     child: SPElevatedButton(
-                      onPressed: () => {},
+                      onPressed: () => _addResponseDialog(context),
                       text: 'Tambah Tanggapan',
                     ),
                   ),

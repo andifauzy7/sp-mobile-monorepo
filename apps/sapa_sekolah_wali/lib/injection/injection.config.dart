@@ -14,6 +14,8 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:sapa_core/sapa_core.dart' as _i3;
 import 'package:sapa_sekolah_wali/bloc/add_consultation/add_consultation_bloc.dart'
     as _i26;
+import 'package:sapa_sekolah_wali/bloc/add_consultation_response/add_consultation_response_bloc.dart'
+    as _i27;
 import 'package:sapa_sekolah_wali/bloc/change_password/change_password_bloc.dart'
     as _i10;
 import 'package:sapa_sekolah_wali/bloc/get_attendances/get_attendances_bloc.dart'
@@ -23,18 +25,18 @@ import 'package:sapa_sekolah_wali/bloc/get_consultation_detail/get_consultation_
 import 'package:sapa_sekolah_wali/bloc/get_consultations/get_consultations_bloc.dart'
     as _i14;
 import 'package:sapa_sekolah_wali/bloc/get_daily_report_detail/get_daily_report_detail_bloc.dart'
-    as _i27;
-import 'package:sapa_sekolah_wali/bloc/get_daily_reports/get_daily_reports_bloc.dart'
     as _i28;
-import 'package:sapa_sekolah_wali/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart'
+import 'package:sapa_sekolah_wali/bloc/get_daily_reports/get_daily_reports_bloc.dart'
     as _i29;
-import 'package:sapa_sekolah_wali/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
+import 'package:sapa_sekolah_wali/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart'
     as _i30;
+import 'package:sapa_sekolah_wali/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
+    as _i31;
 import 'package:sapa_sekolah_wali/bloc/get_news/get_news_bloc.dart' as _i15;
 import 'package:sapa_sekolah_wali/bloc/get_payment_detail/get_payment_detail_bloc.dart'
-    as _i31;
-import 'package:sapa_sekolah_wali/bloc/get_payments/get_payments_bloc.dart'
     as _i32;
+import 'package:sapa_sekolah_wali/bloc/get_payments/get_payments_bloc.dart'
+    as _i33;
 import 'package:sapa_sekolah_wali/bloc/get_student_detail/get_student_detail_bloc.dart'
     as _i16;
 import 'package:sapa_sekolah_wali/bloc/get_students/get_students_bloc.dart'
@@ -58,7 +60,7 @@ import 'package:sapa_sekolah_wali/repositories/payment_repository.dart' as _i23;
 import 'package:sapa_sekolah_wali/repositories/report_repository.dart' as _i24;
 import 'package:sapa_sekolah_wali/repositories/student_repository.dart' as _i6;
 import 'package:sapa_sekolah_wali/repositories/teacher_repository.dart' as _i7;
-import 'package:sapa_sekolah_wali/shared/core/core_module.dart' as _i33;
+import 'package:sapa_sekolah_wali/shared/core/core_module.dart' as _i34;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -143,21 +145,24 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i25.SplashCubit(authRepository: gh<_i9.AuthRepository>()));
     gh.factory<_i26.AddConsultationBloc>(() => _i26.AddConsultationBloc(
         consultationRepository: gh<_i11.ConsultationRepository>()));
-    gh.factory<_i27.GetDailyReportDetailBloc>(() =>
-        _i27.GetDailyReportDetailBloc(
+    gh.factory<_i27.AddConsultationResponseBloc>(() =>
+        _i27.AddConsultationResponseBloc(
+            consultationRepository: gh<_i11.ConsultationRepository>()));
+    gh.factory<_i28.GetDailyReportDetailBloc>(() =>
+        _i28.GetDailyReportDetailBloc(
             reportRepository: gh<_i24.ReportRepository>()));
-    gh.factory<_i28.GetDailyReportsBloc>(() => _i28.GetDailyReportsBloc(
+    gh.factory<_i29.GetDailyReportsBloc>(() => _i29.GetDailyReportsBloc(
         reportRepository: gh<_i24.ReportRepository>()));
-    gh.factory<_i29.GetLessonPlanDetailBloc>(() => _i29.GetLessonPlanDetailBloc(
+    gh.factory<_i30.GetLessonPlanDetailBloc>(() => _i30.GetLessonPlanDetailBloc(
         lessonRepository: gh<_i20.LessonRepository>()));
-    gh.factory<_i30.GetLessonPlansBloc>(() =>
-        _i30.GetLessonPlansBloc(lessonRepository: gh<_i20.LessonRepository>()));
-    gh.factory<_i31.GetPaymentDetailBloc>(() => _i31.GetPaymentDetailBloc(
+    gh.factory<_i31.GetLessonPlansBloc>(() =>
+        _i31.GetLessonPlansBloc(lessonRepository: gh<_i20.LessonRepository>()));
+    gh.factory<_i32.GetPaymentDetailBloc>(() => _i32.GetPaymentDetailBloc(
         paymentRepository: gh<_i23.PaymentRepository>()));
-    gh.factory<_i32.GetPaymentsBloc>(() =>
-        _i32.GetPaymentsBloc(paymentRepository: gh<_i23.PaymentRepository>()));
+    gh.factory<_i33.GetPaymentsBloc>(() =>
+        _i33.GetPaymentsBloc(paymentRepository: gh<_i23.PaymentRepository>()));
     return this;
   }
 }
 
-class _$CoreModule extends _i33.CoreModule {}
+class _$CoreModule extends _i34.CoreModule {}

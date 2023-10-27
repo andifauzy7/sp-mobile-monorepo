@@ -3,6 +3,7 @@ import 'package:sapa_core/failure/server_failure.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/model/daily_report_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/model/daily_reports_response_model.dart';
+import 'package:sapa_sekolah_guru/model/monthly_report_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/model/monthly_reports_response_model.dart';
 import 'package:sapa_sekolah_guru/model/update_daily_report_response_model.dart';
 import 'package:sapa_sekolah_guru/repositories/auth_repository.dart';
@@ -25,6 +26,10 @@ abstract class ReportRepository {
     String improvement,
   );
   Future<Either<Failure, List<MonthlyReportModel>>> getMonthlyReports(
+    String studentId,
+  );
+  Future<Either<Failure, MonthlyReportDetailModel>> getMonthlyReportDetail(
+    String reportId,
     String studentId,
   );
 }
@@ -178,6 +183,43 @@ class ReportRepositoryImpl implements ReportRepository {
         final result = MonthlyReportsResponseModel.fromJson(response.data);
         if (result.success ?? false) {
           return Right(result.data ?? []);
+        } else {
+          return Left(
+            ServerFailure(message: result.message),
+          );
+        }
+      } else {
+        return Left(
+          ServerFailure(message: response.data['message']),
+        );
+      }
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, MonthlyReportDetailModel>> getMonthlyReportDetail(
+    String reportId,
+    String studentId,
+  ) async {
+    final token = sharedPreferences.getString(keyToken);
+    final userId = sharedPreferences.getString(keyUserId);
+    final data = FormData.fromMap({
+      "token": token,
+      "user_id": userId,
+      "report_monthly_id": reportId,
+      "student_id": studentId,
+    });
+    try {
+      final response = await dio.post(
+        'reportmonthlydetail.php',
+        data: data,
+      );
+      if (response.statusCode == 200) {
+        final result = MonthlyReportDetailResponseModel.fromJson(response.data);
+        if ((result.success == true)) {
+          return Right(result.data!);
         } else {
           return Left(
             ServerFailure(message: result.message),

@@ -9,6 +9,7 @@ import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_monthly_reports/get_monthly_reports_bloc.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
+import 'package:sapa_sekolah_guru/presentation/report_monthly_detail/report_monthly_detail_page.dart';
 
 class ReportMonthly extends StatelessWidget {
   final StudentModel student;
@@ -16,6 +17,21 @@ class ReportMonthly extends StatelessWidget {
     super.key,
     required this.student,
   });
+
+  void _navigateToReportMonthlyDetailPage(
+    BuildContext context, {
+    required String reportId,
+    required String studentId,
+  }) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => ReportMonthlyDetailPage(
+            reportId: reportId,
+            studentId: studentId,
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +62,12 @@ class ReportMonthly extends StatelessWidget {
                       height: 12,
                     ),
                     itemBuilder: (context, index) => GestureDetector(
-                      onTap: () => {},
+                      onTap: () => _navigateToReportMonthlyDetailPage(
+                        context,
+                        reportId:
+                            state.reports[index].reportMonthlyId.toString(),
+                        studentId: student.studentId.toString(),
+                      ),
                       child: Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(

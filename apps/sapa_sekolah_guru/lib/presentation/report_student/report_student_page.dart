@@ -7,6 +7,7 @@ import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
+import 'package:sapa_sekolah_guru/bloc/delete_monthly_report/delete_monthly_report_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_monthly_reports/get_monthly_reports_bloc.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
@@ -128,14 +129,23 @@ class _ReportStudentPageState extends State<ReportStudentPage>
                           student: widget.student,
                         ),
                       ),
-                      BlocProvider(
-                        create: (context) => GetIt.instance
-                            .get<GetMonthlyReportsBloc>()
-                          ..add(
-                            GetMonthlyReportsEvent(
-                              studentId: widget.student.studentId.toString(),
-                            ),
+                      MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) =>
+                                GetIt.instance.get<GetMonthlyReportsBloc>()
+                                  ..add(
+                                    GetMonthlyReportsEvent(
+                                      studentId:
+                                          widget.student.studentId.toString(),
+                                    ),
+                                  ),
                           ),
+                          BlocProvider(
+                            create: (context) =>
+                                GetIt.instance.get<DeleteMonthlyReportBloc>(),
+                          ),
+                        ],
                         child: ReportMonthly(
                           student: widget.student,
                         ),

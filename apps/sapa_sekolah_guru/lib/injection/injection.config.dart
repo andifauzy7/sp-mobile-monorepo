@@ -24,30 +24,32 @@ import 'package:sapa_sekolah_guru/bloc/change_password/change_password_bloc.dart
     as _i8;
 import 'package:sapa_sekolah_guru/bloc/delete_lesson_plan/delete_lesson_plan_bloc.dart'
     as _i28;
-import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/delete_monthly_report/delete_monthly_report_bloc.dart'
     as _i29;
+import 'package:sapa_sekolah_guru/bloc/get_activities/get_activities_bloc.dart'
+    as _i30;
 import 'package:sapa_sekolah_guru/bloc/get_consultation_detail/get_consultation_detail_bloc.dart'
     as _i10;
 import 'package:sapa_sekolah_guru/bloc/get_consultations/get_consultations_bloc.dart'
     as _i11;
 import 'package:sapa_sekolah_guru/bloc/get_daily_report_detail/get_daily_report_detail_bloc.dart'
-    as _i30;
-import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart'
     as _i31;
-import 'package:sapa_sekolah_guru/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart'
     as _i32;
-import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_lesson_plan_detail/get_lesson_plan_detail_bloc.dart'
     as _i33;
-import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_lesson_plans/get_lesson_plans_bloc.dart'
     as _i34;
-import 'package:sapa_sekolah_guru/bloc/get_monthly_report_detail/get_monthly_report_detail_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_lessons/get_lessons_bloc.dart'
     as _i35;
-import 'package:sapa_sekolah_guru/bloc/get_monthly_reports/get_monthly_reports_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_monthly_report_detail/get_monthly_report_detail_bloc.dart'
     as _i36;
-import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_monthly_reports/get_monthly_reports_bloc.dart'
     as _i37;
-import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart'
+import 'package:sapa_sekolah_guru/bloc/get_permit_type/get_permit_type_bloc.dart'
     as _i38;
+import 'package:sapa_sekolah_guru/bloc/get_student_permits/get_student_permits_bloc.dart'
+    as _i39;
 import 'package:sapa_sekolah_guru/bloc/get_students/get_students_bloc.dart'
     as _i13;
 import 'package:sapa_sekolah_guru/bloc/get_students_attendance/get_students_attendance_bloc.dart'
@@ -71,7 +73,7 @@ import 'package:sapa_sekolah_guru/repositories/lesson_repository.dart' as _i15;
 import 'package:sapa_sekolah_guru/repositories/permit_repository.dart' as _i18;
 import 'package:sapa_sekolah_guru/repositories/report_repository.dart' as _i19;
 import 'package:sapa_sekolah_guru/repositories/student_repository.dart' as _i5;
-import 'package:sapa_sekolah_guru/shared/core/core_module.dart' as _i39;
+import 'package:sapa_sekolah_guru/shared/core/core_module.dart' as _i40;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -161,30 +163,32 @@ extension GetItInjectableX on _i1.GetIt {
         _i27.AddPermitBloc(permitRepository: gh<_i18.PermitRepository>()));
     gh.factory<_i28.DeleteLessonPlanBloc>(() => _i28.DeleteLessonPlanBloc(
         lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i29.GetActivitiesBloc>(() =>
-        _i29.GetActivitiesBloc(lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i30.GetDailyReportDetailBloc>(() =>
-        _i30.GetDailyReportDetailBloc(
-            reportRepository: gh<_i19.ReportRepository>()));
-    gh.factory<_i31.GetDailyReportsBloc>(() => _i31.GetDailyReportsBloc(
+    gh.factory<_i29.DeleteMonthlyReportBloc>(() => _i29.DeleteMonthlyReportBloc(
         reportRepository: gh<_i19.ReportRepository>()));
-    gh.factory<_i32.GetLessonPlanDetailBloc>(() => _i32.GetLessonPlanDetailBloc(
+    gh.factory<_i30.GetActivitiesBloc>(() =>
+        _i30.GetActivitiesBloc(lessonRepository: gh<_i15.LessonRepository>()));
+    gh.factory<_i31.GetDailyReportDetailBloc>(() =>
+        _i31.GetDailyReportDetailBloc(
+            reportRepository: gh<_i19.ReportRepository>()));
+    gh.factory<_i32.GetDailyReportsBloc>(() => _i32.GetDailyReportsBloc(
+        reportRepository: gh<_i19.ReportRepository>()));
+    gh.factory<_i33.GetLessonPlanDetailBloc>(() => _i33.GetLessonPlanDetailBloc(
         lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i33.GetLessonPlansBloc>(() =>
-        _i33.GetLessonPlansBloc(lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i34.GetLessonsBloc>(() =>
-        _i34.GetLessonsBloc(lessonRepository: gh<_i15.LessonRepository>()));
-    gh.factory<_i35.GetMonthlyReportDetailBloc>(() =>
-        _i35.GetMonthlyReportDetailBloc(
+    gh.factory<_i34.GetLessonPlansBloc>(() =>
+        _i34.GetLessonPlansBloc(lessonRepository: gh<_i15.LessonRepository>()));
+    gh.factory<_i35.GetLessonsBloc>(() =>
+        _i35.GetLessonsBloc(lessonRepository: gh<_i15.LessonRepository>()));
+    gh.factory<_i36.GetMonthlyReportDetailBloc>(() =>
+        _i36.GetMonthlyReportDetailBloc(
             reportRepository: gh<_i19.ReportRepository>()));
-    gh.factory<_i36.GetMonthlyReportsBloc>(() => _i36.GetMonthlyReportsBloc(
+    gh.factory<_i37.GetMonthlyReportsBloc>(() => _i37.GetMonthlyReportsBloc(
         reportRepository: gh<_i19.ReportRepository>()));
-    gh.factory<_i37.GetPermitTypeBloc>(() =>
-        _i37.GetPermitTypeBloc(permitRepository: gh<_i18.PermitRepository>()));
-    gh.factory<_i38.GetStudentPermitsBloc>(() => _i38.GetStudentPermitsBloc(
+    gh.factory<_i38.GetPermitTypeBloc>(() =>
+        _i38.GetPermitTypeBloc(permitRepository: gh<_i18.PermitRepository>()));
+    gh.factory<_i39.GetStudentPermitsBloc>(() => _i39.GetStudentPermitsBloc(
         permitRepository: gh<_i18.PermitRepository>()));
     return this;
   }
 }
 
-class _$CoreModule extends _i39.CoreModule {}
+class _$CoreModule extends _i40.CoreModule {}

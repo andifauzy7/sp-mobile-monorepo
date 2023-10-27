@@ -9,9 +9,7 @@ class SPColors {
   static Color colorB3B3B3 = const Color(0xffB3B3B3);
   static Color colorFFE5C0 = const Color(0xFFFFE5C0);
   static Color color808080 = const Color(0xff808080);
-  static Color color6FCF97 = const Color(0xff6fcf97);
   static Color colorE3E3E3 = const Color(0xffe3e3e3);
-  static Color colorEB5757 = const Color(0xffEB5757);
   static Color colorEAD2E0 = const Color(0xffEAD2E0);
   static Color colorC7A7D9 = const Color(0xffC7A7D9);
   static Color colorC8A8DA = const Color(0xffC8A8DA);
@@ -20,4 +18,8 @@ class SPColors {
   static Color colorECC94B = const Color(0xffECC94B);
   static Color colorCBD5E0 = const Color(0xffCBD5E0);
   static Color colorF56565 = const Color(0xffF56565);
+  static Color color8CC2F0 = const Color(0xff8CC2F0);
+  static Color color6FCF97 = const Color(0xff6FCF97);
+  static Color colorEB5757 = const Color(0xffEB5757);
+  static Color colorF942A5 = const Color(0xffF942A5);
 }

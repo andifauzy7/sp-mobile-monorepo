@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/card/card_report.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
-import 'package:sapa_component/sapa_component.dart';
-import 'package:sapa_component/styles/sp_shadow.dart';
-import 'package:sapa_component/styles/sp_text_styles.dart';
-import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_daily_reports/get_daily_reports_bloc.dart';
 import 'package:sapa_sekolah_wali/model/students_response_model.dart';
@@ -63,31 +59,8 @@ class ReportDaily extends StatelessWidget {
                         context,
                         reportId: state.reports[index].reportDailyId.toString(),
                       ),
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(16),
-                          ),
-                          boxShadow: SPShadow.shadowGrey,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              DateFormat('EEEE, d MMMM y', 'id_ID').format(
-                                DateTime.parse(
-                                    state.reports[index].reportDate ?? ''),
-                              ),
-                              style: SPTextStyles.text12W400303030,
-                            ),
-                            SvgPicture.asset(
-                              SPAssets.icon.arrowRight.path,
-                              package: spComponentPackage,
-                            ),
-                          ],
-                        ),
+                      child: CardReport(
+                        reportDate: state.reports[index].reportDate ?? '',
                       ),
                     ),
                   );

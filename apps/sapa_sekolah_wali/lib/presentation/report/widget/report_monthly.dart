@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/card/card_report.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
-import 'package:sapa_component/sapa_component.dart';
-import 'package:sapa_component/styles/sp_shadow.dart';
-import 'package:sapa_component/styles/sp_text_styles.dart';
-import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_wali/bloc/get_monthly_reports/get_monthly_reports_bloc.dart';
 import 'package:sapa_sekolah_wali/model/students_response_model.dart';
+import 'package:sapa_sekolah_wali/presentation/report_monthly_detail/report_monthly_detail_page.dart';
 
 class ReportMonthly extends StatelessWidget {
   final StudentModel student;
@@ -16,12 +13,27 @@ class ReportMonthly extends StatelessWidget {
     required this.student,
   });
 
+  void _navigateToReportMonthlyDetailPage(
+    BuildContext context, {
+    required String reportId,
+    required String studentId,
+  }) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => ReportMonthlyDetailPage(
+            reportId: reportId,
+            studentId: studentId,
+          ),
+        ),
+      );
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () {
         BlocProvider.of<GetMonthlyReportsBloc>(context).add(
-          GetMonthlyReportsEvent(studentId: student.studentId.toString()),
+          GetMonthlyReportsEvent(studentId: "30"),
         );
         return Future.value(null);
       },
@@ -45,32 +57,14 @@ class ReportMonthly extends StatelessWidget {
                       height: 12,
                     ),
                     itemBuilder: (context, index) => GestureDetector(
-                      onTap: () => {},
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(16),
-                          ),
-                          boxShadow: SPShadow.shadowGrey,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              DateFormat('EEEE, d MMMM y', 'id_ID').format(
-                                DateTime.parse(
-                                    state.reports[index].reportDate ?? ''),
-                              ),
-                              style: SPTextStyles.text12W400303030,
-                            ),
-                            SvgPicture.asset(
-                              SPAssets.icon.arrowRight.path,
-                              package: spComponentPackage,
-                            ),
-                          ],
-                        ),
+                      onTap: () => _navigateToReportMonthlyDetailPage(
+                        context,
+                        reportId:
+                            state.reports[index].reportMonthlyId.toString(),
+                        studentId: student.studentId.toString(),
+                      ),
+                      child: CardReport(
+                        reportDate: state.reports[index].reportDate ?? '',
                       ),
                     ),
                   );

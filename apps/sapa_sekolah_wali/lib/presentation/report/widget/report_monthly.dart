@@ -33,7 +33,7 @@ class ReportMonthly extends StatelessWidget {
     return RefreshIndicator(
       onRefresh: () {
         BlocProvider.of<GetMonthlyReportsBloc>(context).add(
-          GetMonthlyReportsEvent(studentId: "30"),
+          GetMonthlyReportsEvent(studentId: student.studentId.toString()),
         );
         return Future.value(null);
       },

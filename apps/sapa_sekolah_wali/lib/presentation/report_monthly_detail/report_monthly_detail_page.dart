@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sapa_component/animation/sp_switcher_animation.dart';
 import 'package:sapa_component/app_bar/sp_app_bar.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
+import 'package:sapa_component/dialog/sp_dialog.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/other/sp_failure_widget.dart';
@@ -11,7 +12,10 @@ import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
+import 'package:sapa_sekolah_wali/bloc/add_monthly_report_response/add_monthly_report_response_bloc.dart';
 import 'package:sapa_sekolah_wali/bloc/get_monthly_report_detail/get_monthly_report_detail_bloc.dart';
+
+import 'widget/report_monthly_add_response.dart';
 
 class ReportMonthlyDetailPage extends StatelessWidget {
   final String reportId;
@@ -48,6 +52,21 @@ class _ReportMonthlyDetailPageBody extends StatelessWidget {
     SPColors.colorEB5757,
     SPColors.colorF942A5,
   ];
+
+  void _addResponseDialog(BuildContext context) async =>
+      await SPDialog.showDefault(
+        context,
+        children: [
+          BlocProvider(
+            create: (_) => GetIt.instance.get<AddMonthlyReportResponseBloc>(),
+            child: ReportMonthlyAddResponse(
+              reportId: reportId,
+              studentId: studentId,
+              onSuccess: () => {},
+            ),
+          ),
+        ],
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +203,7 @@ class _ReportMonthlyDetailPageBody extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.only(top: 12),
                     child: SPElevatedButton(
-                      onPressed: () => {},
+                      onPressed: () => _addResponseDialog(context),
                       text: 'Tambah Pendapat Orang Tua',
                     ),
                   ),

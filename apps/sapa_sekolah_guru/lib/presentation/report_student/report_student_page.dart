@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_component/app_bar/sp_app_bar.dart';
+import 'package:sapa_component/card/card_name.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
@@ -7,9 +8,12 @@ import 'package:sapa_component/styles/sp_shadow.dart';
 import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
+import 'package:sapa_sekolah_guru/bloc/delete_monthly_report/delete_monthly_report_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_daily_reports/get_daily_reports_bloc.dart';
+import 'package:sapa_sekolah_guru/bloc/get_monthly_reports/get_monthly_reports_bloc.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
 import 'package:sapa_sekolah_guru/presentation/report_student/widget/report_daily.dart';
+import 'package:sapa_sekolah_guru/presentation/report_student/widget/report_monthly.dart';
 
 class ReportStudentPage extends StatefulWidget {
   final StudentModel student;
@@ -82,32 +86,8 @@ class _ReportStudentPageState extends State<ReportStudentPage>
                   ),
                 ),
                 const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(16),
-                    ),
-                    boxShadow: SPShadow.shadowGrey,
-                  ),
-                  child: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Nama',
-                            style: SPTextStyles.text12W400B3B3B3,
-                          ),
-                          Text(
-                            widget.student.studentName ?? '-',
-                            style: SPTextStyles.text14W400303030,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                CardName(
+                  name: widget.student.studentName ?? '-',
                 ),
                 const SizedBox(height: 16),
                 Expanded(
@@ -126,10 +106,25 @@ class _ReportStudentPageState extends State<ReportStudentPage>
                           student: widget.student,
                         ),
                       ),
-                      const Center(
-                        child: Text(
-                          'Laporan Bulanan\nAkan Datang',
-                          textAlign: TextAlign.center,
+                      MultiBlocProvider(
+                        providers: [
+                          BlocProvider(
+                            create: (context) =>
+                                GetIt.instance.get<GetMonthlyReportsBloc>()
+                                  ..add(
+                                    GetMonthlyReportsEvent(
+                                      studentId:
+                                          widget.student.studentId.toString(),
+                                    ),
+                                  ),
+                          ),
+                          BlocProvider(
+                            create: (context) =>
+                                GetIt.instance.get<DeleteMonthlyReportBloc>(),
+                          ),
+                        ],
+                        child: ReportMonthly(
+                          student: widget.student,
                         ),
                       ),
                       const Center(

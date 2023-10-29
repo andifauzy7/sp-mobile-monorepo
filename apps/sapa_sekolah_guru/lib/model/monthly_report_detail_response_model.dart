@@ -61,18 +61,21 @@ class MonthlyReportDetailModel {
 }
 
 class ReportDetailModel {
+  int? componentId;
   String? headerReport;
   String? reportDetail;
 
   ReportDetailModel({this.headerReport, this.reportDetail});
 
   ReportDetailModel.fromJson(Map<String, dynamic> json) {
+    componentId = json['component_id'];
     headerReport = json['header_report'];
     reportDetail = json['report_detail'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['component_id'] = componentId;
     data['header_report'] = headerReport;
     data['report_detail'] = reportDetail;
     return data;

@@ -12,6 +12,7 @@ import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/delete_monthly_report/delete_monthly_report_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/get_monthly_reports/get_monthly_reports_bloc.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
+import 'package:sapa_sekolah_guru/presentation/add_monthly_report/add_monthly_report_page.dart';
 import 'package:sapa_sekolah_guru/presentation/report_monthly_detail/report_monthly_detail_page.dart';
 
 class ReportMonthly extends StatelessWidget {
@@ -32,6 +33,19 @@ class ReportMonthly extends StatelessWidget {
           builder: (BuildContext context) => ReportMonthlyDetailPage(
             reportId: reportId,
             studentId: studentId,
+          ),
+        ),
+      );
+
+  void _navigateToAddMonthlyReportPage(
+    BuildContext context, {
+    required StudentModel studentModel,
+  }) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => AddMonthlyReportPage(
+            student: studentModel,
           ),
         ),
       );
@@ -208,7 +222,10 @@ class ReportMonthly extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.only(top: 12),
               child: SPElevatedButton(
-                onPressed: () => {},
+                onPressed: () => _navigateToAddMonthlyReportPage(
+                  context,
+                  studentModel: student,
+                ),
                 text: 'Buat Laporan Bulanan',
               ),
             ),

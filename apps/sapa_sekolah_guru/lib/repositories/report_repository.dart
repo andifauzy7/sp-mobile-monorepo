@@ -4,6 +4,7 @@ import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/model/daily_report_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/model/daily_reports_response_model.dart';
 import 'package:sapa_sekolah_guru/model/delete_monthly_report_response_model.dart';
+import 'package:sapa_sekolah_guru/model/monthly_report_component_response_model.dart';
 import 'package:sapa_sekolah_guru/model/monthly_report_detail_response_model.dart';
 import 'package:sapa_sekolah_guru/model/monthly_reports_response_model.dart';
 import 'package:sapa_sekolah_guru/model/update_daily_report_response_model.dart';
@@ -36,6 +37,8 @@ abstract class ReportRepository {
   Future<Either<Failure, bool>> deleteMonthlyReport(
     String reportMonthlyId,
   );
+  Future<Either<Failure, List<MonthlyReportComponentModel>>>
+      getMonthlyReportComponent();
 }
 
 @LazySingleton(as: ReportRepository)
@@ -261,6 +264,34 @@ class ReportRepositoryImpl implements ReportRepository {
         );
         if (result.success ?? false) {
           return const Right(true);
+        } else {
+          return Left(
+            ServerFailure(message: result.message),
+          );
+        }
+      } else {
+        return Left(
+          ServerFailure(message: response.data['message']),
+        );
+      }
+    } catch (e) {
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MonthlyReportComponentModel>>>
+      getMonthlyReportComponent() async {
+    try {
+      final response = await dio.post(
+        'reportmonthlycomponent.php',
+      );
+      if (response.statusCode == 200) {
+        final result = MonthlyReportComponentResponseModel.fromJson(
+          response.data,
+        );
+        if (result.success ?? false) {
+          return Right(result.data ?? []);
         } else {
           return Left(
             ServerFailure(message: result.message),

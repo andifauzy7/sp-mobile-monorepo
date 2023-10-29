@@ -14,6 +14,7 @@ import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_component/utils/utils.dart';
 import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_monthly_report_component/get_monthly_report_component_bloc.dart';
+import 'package:sapa_sekolah_guru/bloc/update_monthly_report/update_monthly_report_bloc.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
 
 class AddMonthlyReportPage extends StatelessWidget {
@@ -22,11 +23,19 @@ class AddMonthlyReportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => GetIt.instance.get<GetMonthlyReportComponentBloc>()
-        ..add(
-          GetMonthlyReportComponentEvent(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              GetIt.instance.get<GetMonthlyReportComponentBloc>()
+                ..add(
+                  GetMonthlyReportComponentEvent(),
+                ),
         ),
+        BlocProvider(
+          create: (context) => GetIt.instance.get<UpdateMonthlyReportBloc>(),
+        ),
+      ],
       child: _AddMonthlyReportPageBody(student),
     );
   }
@@ -55,6 +64,7 @@ class _AddMonthlyReportPageBodyState extends State<_AddMonthlyReportPageBody> {
     BuildContext context, {
     required String studentId,
     required String reportDate,
+    required List<Map<String, String>> reportMonthly,
   }) async {
     await SPDialog.showDefault(
       context,
@@ -81,6 +91,13 @@ class _AddMonthlyReportPageBodyState extends State<_AddMonthlyReportPageBody> {
               child: SPElevatedButton(
                 text: 'Yakin',
                 onPressed: () {
+                  BlocProvider.of<UpdateMonthlyReportBloc>(context).add(
+                    UpdateMonthlyReportEvent(
+                      reportDate: reportDate,
+                      studentId: studentId,
+                      reportMonthly: reportMonthly,
+                    ),
+                  );
                   Navigator.pop(context);
                 },
               ),
@@ -93,121 +110,61 @@ class _AddMonthlyReportPageBodyState extends State<_AddMonthlyReportPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: SPColors.colorFAFAFA,
-      body: SPContainerImage(
-        imageUrl: SPAssets.images.circleBackground.path,
-        package: spComponentPackage,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                const SPAppBar(title: 'Laporan Bulanan'),
-                const SizedBox(height: 16),
-                Expanded(
-                  child: BlocBuilder<GetMonthlyReportComponentBloc,
-                      GetMonthlyReportComponentState>(
-                    builder: (context, state) {
-                      Widget renderWidget = const Center(
-                        child: CircularProgressIndicator(),
-                      );
+    return BlocListener<UpdateMonthlyReportBloc, UpdateMonthlyReportState>(
+      listener: (context, state) async {
+        if (state is UpdateMonthlyReportLoading) {
+          SPDialog.showDefaultLoading(context);
+        }
 
-                      if (state is GetMonthlyReportComponentSuccess) {
-                        for (int i = 0; i < state.components.length; i++) {
-                          controllers.add(TextEditingController());
-                        }
+        if (state is UpdateMonthlyReportError) {
+          Navigator.pop(context);
+          SPDialog.showFailure(
+            context,
+            message: state.message,
+          );
+        }
 
-                        renderWidget = ListView(
-                          physics: const BouncingScrollPhysics(
-                            parent: AlwaysScrollableScrollPhysics(),
-                          ),
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(16),
-                                ),
-                                boxShadow: SPShadow.shadowGrey,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Nama',
-                                    style: SPTextStyles.text12W400B3B3B3,
-                                  ),
-                                  Text(
-                                    widget.student.studentName ?? '-',
-                                    style: SPTextStyles.text14W400303030,
-                                  ),
-                                ],
-                              ),
+        if (state is UpdateMonthlyReportSuccess) {
+          Navigator.pop(context);
+          await SPDialog.showSuccess(
+            context,
+            message: 'Yeay! Anda berhasil membuat laporan bulanan',
+          ).then(
+            (value) => Navigator.pop(context, true),
+          );
+        }
+      },
+      child: Scaffold(
+        backgroundColor: SPColors.colorFAFAFA,
+        body: SPContainerImage(
+          imageUrl: SPAssets.images.circleBackground.path,
+          package: spComponentPackage,
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  const SPAppBar(title: 'Laporan Bulanan'),
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: BlocBuilder<GetMonthlyReportComponentBloc,
+                        GetMonthlyReportComponentState>(
+                      builder: (context, state) {
+                        Widget renderWidget = const Center(
+                          child: CircularProgressIndicator(),
+                        );
+
+                        if (state is GetMonthlyReportComponentSuccess) {
+                          for (int i = 0; i < state.components.length; i++) {
+                            controllers.add(TextEditingController());
+                          }
+
+                          renderWidget = ListView(
+                            physics: const BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics(),
                             ),
-                            const SizedBox(height: 16),
-                            Container(
-                              padding: const EdgeInsets.all(16),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(16),
-                                ),
-                                boxShadow: SPShadow.shadowGrey,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Tanggal',
-                                    style: SPTextStyles.text12W400B3B3B3,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () async {
-                                      DateTime? result = await showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime.utc(2010, 10, 16),
-                                        lastDate: DateTime.now(),
-                                      );
-
-                                      if (result != null) {
-                                        setState(() {
-                                          dateTime = result;
-                                        });
-                                      }
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          DateFormat('d MMMM y', 'id_ID')
-                                              .format(
-                                            dateTime,
-                                          ),
-                                          style: SPTextStyles.text14W400303030,
-                                        ),
-                                        SvgPicture.asset(
-                                          SPAssets.icon.calendarPicker.path,
-                                          package: spComponentPackage,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            ListView.separated(
-                              shrinkWrap: true,
-                              primary: false,
-                              itemCount: state.components.length,
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(height: 12),
-                              itemBuilder: (context, index) => Container(
+                            children: [
+                              Container(
                                 padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
@@ -220,54 +177,163 @@ class _AddMonthlyReportPageBodyState extends State<_AddMonthlyReportPageBody> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      state.components[index]
-                                              .reportMonthlyDetail ??
-                                          '-',
-                                      style: SPTextStyles.text12W400B3B3B3
-                                          .copyWith(
-                                        color: colors[index % colors.length],
-                                      ),
+                                      'Nama',
+                                      style: SPTextStyles.text12W400B3B3B3,
                                     ),
-                                    const SizedBox(height: 12),
-                                    SPTextField(
-                                      controller: controllers[index],
-                                      hintText: 'Tulis penilaian ...',
-                                      maxLines: 4,
-                                      onChanged: (value) => {},
+                                    Text(
+                                      widget.student.studentName ?? '-',
+                                      style: SPTextStyles.text14W400303030,
                                     ),
                                   ],
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                          ],
+                              const SizedBox(height: 16),
+                              Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(16),
+                                  ),
+                                  boxShadow: SPShadow.shadowGrey,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Tanggal',
+                                      style: SPTextStyles.text12W400B3B3B3,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () async {
+                                        DateTime? result = await showDatePicker(
+                                          context: context,
+                                          initialDate: DateTime.now(),
+                                          firstDate: DateTime.utc(2010, 10, 16),
+                                          lastDate: DateTime.now(),
+                                        );
+
+                                        if (result != null) {
+                                          setState(() {
+                                            dateTime = result;
+                                          });
+                                        }
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            DateFormat('d MMMM y', 'id_ID')
+                                                .format(
+                                              dateTime,
+                                            ),
+                                            style:
+                                                SPTextStyles.text14W400303030,
+                                          ),
+                                          SvgPicture.asset(
+                                            SPAssets.icon.calendarPicker.path,
+                                            package: spComponentPackage,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              ListView.separated(
+                                shrinkWrap: true,
+                                primary: false,
+                                itemCount: state.components.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 12),
+                                itemBuilder: (context, index) => Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(16),
+                                    ),
+                                    boxShadow: SPShadow.shadowGrey,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        state.components[index]
+                                                .reportMonthlyDetail ??
+                                            '-',
+                                        style: SPTextStyles.text12W400B3B3B3
+                                            .copyWith(
+                                          color: colors[index % colors.length],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 12),
+                                      SPTextField(
+                                        controller: controllers[index],
+                                        hintText: 'Tulis penilaian ...',
+                                        onChanged: (value) => {},
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                            ],
+                          );
+                        }
+
+                        if (state is GetMonthlyReportComponentError) {
+                          renderWidget = SPFailureWidget(
+                            message: state.message,
+                          );
+                        }
+                        return SPSwitcherAnimation(child: renderWidget);
+                      },
+                    ),
+                  ),
+                  BlocBuilder<GetMonthlyReportComponentBloc,
+                      GetMonthlyReportComponentState>(
+                    builder: (context, state) {
+                      if (state is GetMonthlyReportComponentSuccess) {
+                        return Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.only(top: 12),
+                          child: SPElevatedButton(
+                            onPressed: () {
+                              List<Map<String, String>> reportMonthly = [];
+
+                              for (int i = 0; i < controllers.length; i++) {
+                                reportMonthly.add(
+                                  {
+                                    "component_id": state
+                                        .components[i].cfgreportMonthlyId
+                                        .toString(),
+                                    "report_text": controllers[i].text,
+                                  },
+                                );
+                              }
+
+                              _confirmCreate(
+                                context,
+                                studentId: widget.student.studentId.toString(),
+                                reportDate:
+                                    DateFormat("yyyy-MM-dd").format(dateTime),
+                                reportMonthly: reportMonthly,
+                              );
+                            },
+                            text: 'Buat Laporan',
+                          ),
                         );
                       }
 
-                      if (state is GetMonthlyReportComponentError) {
-                        renderWidget = SPFailureWidget(
-                          message: state.message,
-                        );
-                      }
-                      return SPSwitcherAnimation(child: renderWidget);
+                      return const SizedBox.shrink();
                     },
                   ),
-                ),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.only(top: 12),
-                  child: SPElevatedButton(
-                    onPressed: () {
-                      _confirmCreate(
-                        context,
-                        studentId: widget.student.studentId.toString(),
-                        reportDate: DateFormat("yyyy-MM-dd").format(dateTime),
-                      );
-                    },
-                    text: 'Buat Laporan',
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

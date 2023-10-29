@@ -40,15 +40,23 @@ class ReportMonthly extends StatelessWidget {
   void _navigateToAddMonthlyReportPage(
     BuildContext context, {
     required StudentModel studentModel,
-  }) =>
-      Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          builder: (BuildContext context) => AddMonthlyReportPage(
-            student: studentModel,
-          ),
+  }) async {
+    var result = await Navigator.push(
+      context,
+      MaterialPageRoute<bool>(
+        builder: (BuildContext context) => AddMonthlyReportPage(
+          student: studentModel,
         ),
+      ),
+    );
+
+    if (result == true) {
+      // ignore: use_build_context_synchronously
+      BlocProvider.of<GetMonthlyReportsBloc>(context).add(
+        GetMonthlyReportsEvent(studentId: student.studentId.toString()),
       );
+    }
+  }
 
   Future<void> _confirmDelete(
     BuildContext context, {

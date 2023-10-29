@@ -261,6 +261,7 @@ class _ReportMonthlyDetailPageBodyState
                                         ),
                                         const SizedBox(height: 12),
                                         SPTextField(
+                                          maxLines: 3,
                                           initialValue: state
                                               .report
                                               .reportDetail?[index]

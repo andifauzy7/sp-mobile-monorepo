@@ -272,6 +272,7 @@ class _AddMonthlyReportPageBodyState extends State<_AddMonthlyReportPageBody> {
                                       ),
                                       const SizedBox(height: 12),
                                       SPTextField(
+                                        maxLines: 3,
                                         controller: controllers[index],
                                         hintText: 'Tulis penilaian ...',
                                         onChanged: (value) => {},

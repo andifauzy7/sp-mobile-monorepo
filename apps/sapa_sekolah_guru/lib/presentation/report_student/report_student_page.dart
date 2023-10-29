@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sapa_component/app_bar/sp_app_bar.dart';
+import 'package:sapa_component/card/card_name.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
 import 'package:sapa_component/other/sp_container_image.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
@@ -85,32 +86,8 @@ class _ReportStudentPageState extends State<ReportStudentPage>
                   ),
                 ),
                 const SizedBox(height: 16),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(16),
-                    ),
-                    boxShadow: SPShadow.shadowGrey,
-                  ),
-                  child: Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Nama',
-                            style: SPTextStyles.text12W400B3B3B3,
-                          ),
-                          Text(
-                            widget.student.studentName ?? '-',
-                            style: SPTextStyles.text14W400303030,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                CardName(
+                  name: widget.student.studentName ?? '-',
                 ),
                 const SizedBox(height: 16),
                 Expanded(

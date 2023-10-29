@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sapa_component/animation/sp_switcher_animation.dart';
 import 'package:sapa_component/app_bar/sp_app_bar.dart';
 import 'package:sapa_component/button/sp_elevated_button.dart';
+import 'package:sapa_component/card/card_name.dart';
 import 'package:sapa_component/dialog/sp_dialog.dart';
 import 'package:sapa_component/form/sp_text_field.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
@@ -164,28 +165,8 @@ class _AddMonthlyReportPageBodyState extends State<_AddMonthlyReportPageBody> {
                               parent: AlwaysScrollableScrollPhysics(),
                             ),
                             children: [
-                              Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(16),
-                                  ),
-                                  boxShadow: SPShadow.shadowGrey,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Nama',
-                                      style: SPTextStyles.text12W400B3B3B3,
-                                    ),
-                                    Text(
-                                      widget.student.studentName ?? '-',
-                                      style: SPTextStyles.text14W400303030,
-                                    ),
-                                  ],
-                                ),
+                              CardName(
+                                name: widget.student.studentName ?? '-',
                               ),
                               const SizedBox(height: 16),
                               Container(

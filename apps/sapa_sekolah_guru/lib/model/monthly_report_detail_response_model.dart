@@ -28,18 +28,21 @@ class MonthlyReportDetailModel {
   int? reportMonthlyId;
   String? studentName;
   String? reportDate;
+  String? parentNotes;
   List<ReportDetailModel>? reportDetail;
 
   MonthlyReportDetailModel(
       {this.reportMonthlyId,
       this.studentName,
       this.reportDate,
+      this.parentNotes,
       this.reportDetail});
 
   MonthlyReportDetailModel.fromJson(Map<String, dynamic> json) {
     reportMonthlyId = json['report_monthly_id'];
     studentName = json['student_name'];
     reportDate = json['report_date'];
+    parentNotes = json['parent_notes'];
     if (json['report_detail'] != null) {
       reportDetail = <ReportDetailModel>[];
       json['report_detail'].forEach((v) {
@@ -53,6 +56,7 @@ class MonthlyReportDetailModel {
     data['report_monthly_id'] = reportMonthlyId;
     data['student_name'] = studentName;
     data['report_date'] = reportDate;
+    data['parent_notes'] = parentNotes;
     if (reportDetail != null) {
       data['report_detail'] = reportDetail!.map((v) => v.toJson()).toList();
     }

@@ -186,6 +186,26 @@ class _ReportMonthlyDetailPageBody extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
+                              Text(
+                                'Pendapat Orang Tua',
+                                style: SPTextStyles.text12W400303030,
+                              ),
+                              const SizedBox(height: 16),
+                              Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(16),
+                                  ),
+                                  boxShadow: SPShadow.shadowGrey,
+                                ),
+                                child: Text(
+                                  state.report.parentNotes ?? '-',
+                                  style: SPTextStyles.text10W400B3B3B3,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
                             ],
                           );
                         }

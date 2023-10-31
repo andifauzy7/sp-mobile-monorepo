@@ -17,6 +17,7 @@ import 'package:sapa_core/sapa_core.dart';
 import 'package:sapa_sekolah_guru/bloc/get_monthly_report_component/get_monthly_report_component_bloc.dart';
 import 'package:sapa_sekolah_guru/bloc/update_monthly_report/update_monthly_report_bloc.dart';
 import 'package:sapa_sekolah_guru/model/students_response_model.dart';
+import 'package:sapa_sekolah_guru/shared/component/sp_date_field.dart';
 
 class AddMonthlyReportPage extends StatelessWidget {
   final StudentModel student;
@@ -169,59 +170,9 @@ class _AddMonthlyReportPageBodyState extends State<_AddMonthlyReportPageBody> {
                                 name: widget.student.studentName ?? '-',
                               ),
                               const SizedBox(height: 16),
-                              Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(16),
-                                  ),
-                                  boxShadow: SPShadow.shadowGrey,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Tanggal',
-                                      style: SPTextStyles.text12W400B3B3B3,
-                                    ),
-                                    GestureDetector(
-                                      onTap: () async {
-                                        DateTime? result = await showDatePicker(
-                                          context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime.utc(2010, 10, 16),
-                                          lastDate: DateTime.now(),
-                                        );
-
-                                        if (result != null) {
-                                          setState(() {
-                                            dateTime = result;
-                                          });
-                                        }
-                                      },
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            DateFormat('d MMMM y', 'id_ID')
-                                                .format(
-                                              dateTime,
-                                            ),
-                                            style:
-                                                SPTextStyles.text14W400303030,
-                                          ),
-                                          SvgPicture.asset(
-                                            SPAssets.icon.calendarPicker.path,
-                                            package: spComponentPackage,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              SPDateField(onChanged: (value) {
+                                dateTime = value;
+                              }),
                               const SizedBox(height: 16),
                               ListView.separated(
                                 shrinkWrap: true,

@@ -31,15 +31,13 @@ class NewsModel {
   int? id;
   String? newsImage;
   String? newsTitle;
-  String? news;
 
-  NewsModel({this.id, this.newsImage, this.newsTitle, this.news});
+  NewsModel({this.id, this.newsImage, this.newsTitle});
 
   NewsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     newsImage = json['news_image'];
     newsTitle = json['news_title'];
-    news = json['news'];
   }
 
   Map<String, dynamic> toJson() {
@@ -47,7 +45,6 @@ class NewsModel {
     data['id'] = id;
     data['news_image'] = newsImage;
     data['news_title'] = newsTitle;
-    data['news'] = news;
     return data;
   }
 }

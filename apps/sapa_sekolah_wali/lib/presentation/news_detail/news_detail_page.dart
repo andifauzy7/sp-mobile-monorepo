@@ -66,7 +66,7 @@ class NewsDetailPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                news.news ?? '-',
+                                '-',
                                 style: SPTextStyles.text12W400B3B3B3,
                                 textAlign: TextAlign.justify,
                               ),

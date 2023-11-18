@@ -183,7 +183,6 @@ class _HomePageBody extends StatelessWidget {
                               return GestureDetector(
                                 onTap: () => onDetail(state.news[index]),
                                 child: NewsCard(
-                                  news: state.news[index].news,
                                   newsTitle: state.news[index].newsTitle,
                                   imageUrl: state.news[index].newsImage,
                                 ),

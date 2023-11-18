@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sapa_component/dialog/sp_dialog.dart';
 import 'package:sapa_component/gen/assets.gen.dart';
+import 'package:sapa_component/image/sp_cached_network_image.dart';
 import 'package:sapa_component/sapa_component.dart';
 import 'package:sapa_component/styles/sp_colors.dart';
+import 'package:sapa_component/styles/sp_text_styles.dart';
 import 'package:sapa_sekolah_wali/model/news_response_model.dart';
 import 'package:sapa_sekolah_wali/presentation/consultations/consultations_page.dart';
 import 'package:sapa_sekolah_wali/presentation/forgot_password/forgot_password_page.dart';
@@ -101,6 +104,38 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  Future<void> _showNewsDetail(
+    BuildContext context, {
+    required NewsModel news,
+  }) async {
+    SPDialog.showDefault(
+      context,
+      children: [
+        Text(
+          'Detail Informasi',
+          style: SPTextStyles.text14W400636363,
+        ),
+        const SizedBox(height: 16),
+        SPCachedNetworkImage(
+          imageUrl: news.newsImage ?? '',
+          width: double.infinity,
+          height: MediaQuery.of(context).size.width * 0.3,
+        ),
+        const SizedBox(height: 16),
+        Text(
+          news.newsTitle ?? '-',
+          style: SPTextStyles.text12W400303030,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "-",
+          style: SPTextStyles.text12W400B3B3B3,
+          textAlign: TextAlign.justify,
+        ),
+      ],
+    );
+  }
+
   void _navigateToConsultation(
     BuildContext context,
   ) =>
@@ -123,7 +158,7 @@ class _MainPageState extends State<MainPage> {
               context,
               news: news,
             ),
-            onDetail: (news) => _navigateToNewsDetail(
+            onDetail: (news) => _showNewsDetail(
               context,
               news: news,
             ),

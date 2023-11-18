@@ -62,7 +62,6 @@ class NewsPage extends StatelessWidget {
                           news: news[index],
                         ),
                         child: NewsCard(
-                          news: news[index].news,
                           newsTitle: news[index].newsTitle,
                           imageUrl: news[index].newsImage,
                         ),

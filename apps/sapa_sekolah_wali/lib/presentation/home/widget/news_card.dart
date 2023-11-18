@@ -6,12 +6,10 @@ import 'package:sapa_component/styles/sp_text_styles.dart';
 class NewsCard extends StatelessWidget {
   final String? imageUrl;
   final String? newsTitle;
-  final String? news;
   const NewsCard({
     super.key,
     this.imageUrl,
     this.newsTitle,
-    this.news,
   });
 
   @override
@@ -41,12 +39,13 @@ class NewsCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
+          /*
           Text(
             news ?? '-',
             style: SPTextStyles.text12W400303030,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-          ),
+          ),*/
         ],
       ),
     );
